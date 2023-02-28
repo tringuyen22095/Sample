@@ -29,6 +29,7 @@ hs_err_pid*
 **/*.iml
 **/.idea/
 **/.factorypath
+**/target
 
 # dependencies
 **/node_modules

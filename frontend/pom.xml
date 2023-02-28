@@ -32,26 +32,9 @@
 			<build>
 				<plugins>
 					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>validate</phase>
-								<configuration>
-									<target>
-										<replace token="DATE_TO_REPLACE" value="${build.time}" dir="src/environments">
-											<include name="**/*.ts" />
-										</replace>
-									</target>
-								</configuration>
-								<goals>
-									<goal>run</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
 						<executions>
 							<execution>
 								<id>npm install (initialize)</id>

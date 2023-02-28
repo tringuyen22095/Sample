@@ -18,6 +18,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>eureka</module>
+		<module>frontend</module>
 		<module>backend</module>
 	</modules>
 
@@ -39,6 +41,8 @@
 
 		<org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
 		<jsonwebtoken.version>0.9.1</jsonwebtoken.version>
+		<srpingcloud.version>2.2.9.RELEASE</srpingcloud.version>
+		<jodatime.version>2.12.2</jodatime.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -54,12 +58,14 @@
 			</dependency>
 
 			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-config</artifactId>
+			    <groupId>org.springframework.cloud</groupId>
+			    <artifactId>spring-cloud-starter</artifactId>
+			    <version>${srpingcloud.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			    <groupId>org.springframework.cloud</groupId>
+			    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			    <version>${srpingcloud.version}</version>
 			</dependency>
 
 			<dependency>
@@ -70,9 +76,14 @@
 			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
-				<version>2.12.2</version>
+				<version>${jodatime.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>com.personal.frontend</groupId>
+				<artifactId>frontend</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>
