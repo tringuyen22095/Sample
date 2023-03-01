@@ -1,16 +1,54 @@
 pipeline {
     agent any
-    parameters {
-        booleanParam(defaultValue: false, description: "Do you want to ignore test case? (not recommend)", name: "IS_SKIP_TEST")
-        string(name: "BRANCH_NAME", defaultValue: "master", description: "Which branch is used to deploy?")
-		choice(name: "SERVICE_NAME", description: "Empty to deploy all services", choices: ["eureka", "backend"])
+
+    environment {
+		HOME = "."
+        DEFAULT_MAVEN = "Maven"
+		DEFAULT_NODE="NodeJS"
+		CREDENTIAL_ID="HOME_PC"
+		
+		GIT_URL="git@github.com:tringuyen22095/Sample.git"
+		SCM_URL="ssh://${GIT_URL}"
     }
+
+    parameters {
+		choice(name:"BRANCH", choices:["main"])
+		choice(name: "SERVICE_NAME", description: "Empty to deploy all services", choices: ["eureka", "backend"])
+        booleanParam (defaultValue: false, description: "Do you want to ignore test case? (not recommend)", name: "IS_SKIP_TEST")
+    }
+    
     stages {
-        stage('Test') {
+        stage('clean') {
             steps {
-                echo params.BRANCH_NAME
-                echo "${params.IS_SKIP_TEST}"
+                cleanWs()
             }
+        }
+        stage('fetch') {
+            steps {
+				checkout([$class: 'GitSCM',
+						userRemoteConfigs: [[credentialsId: "${env.CREDENTIAL_ID}", url: "${env.GIT_URL}"]],
+						branches: [[name: "${params.BRANCH}"]],
+						doGenerateSubmoduleConfigurations: false,
+						extensions: [],
+						submoduleCfg: []])
+            }
+        }
+        stage('Build') {
+            steps {
+				withMaven(maven: "${env.DEFAULT_MAVEN}") {
+    				nodejs(nodeJSInstallationName: "${env.DEFAULT_NODE}") {
+    					sh("node -v")
+    					sh("mvn -v")
+    					sh("java --version")
+    					//sh("mvn clean package -DskipTest=${params.IS_SKIP_TEST} -s=settings.xml")
+    				}
+				}
+            }
+		}
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 }
