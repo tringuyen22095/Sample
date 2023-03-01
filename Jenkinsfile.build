@@ -1,19 +1,14 @@
-def mapServices = [:] // Initialize empty map
-
 pipeline{
-	agent { 
-		node { 
-			label 'DEVLINSLAVES'			
-		} 
-	}
-    environment{
+	agent any
+	
+    environment {
 		HOME = '.'
         DEFAULT_MAVEN = 'Maven 3.6.0'
-		DEFAULT_JDK='openjdk_11-hotspot' 
+		DEFAULT_JDK='openjdk_11-hotspot'
 		MAVEN_SETTINGS = 'NBS-Maven-Settings'
 		TRUSTED_USER = 'dtruser'
 		DTRUSTED_USER_CREDENTIALS = credentials("${TRUSTED_USER}")
-		harborRepoCredential = 'HARBOR_ROBOT' 
+		harborRepoCredential = 'HARBOR_ROBOT'
 		MAVEN_REPO = '/opt/maven/.repository'
 		SCM_URL='tfshub.crifnet.com:8443/CRIF/CreditFlow_Delivery/_git/cff-nbs-core'
         SCM_CREDENTIALS_ID='tfsbuild'
@@ -29,17 +24,13 @@ pipeline{
     }
 
     parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-		booleanParam(name: 'SKIP_TESTS', defaultValue: false, description: 'Do you want to skip junit tests?')
-		string(name: 'SERVICES', description: 'Select Docker Service: Select Docker Service: cff-brk-nbs-appdecision, cff-home-forwarder, cff-brk-nbs-frontend, cff-brk-nbs-redirect')
-		string(name: 'TAG_NAME', description: 'Select TAG for docker-registry (only for production releases): ex. nbs-prd-*')
-		//booleanParam(name: 'FORTIFY_SCAN', defaultValue: false, description: 'Do you want to perform a Fortify scan?')
-		//string(name: 'FFY_REQUESTOR', defaultValue: 'cd435antscog', description: 'domain name of the requestor (must be enabled in SCA portal)')
-		booleanParam(name: 'SONAR', defaultValue: false, description: 'Do you want to perform a SonarQube scan?')
-        /*choice(name: 'BRICK_NAME', choices: [
-            'cff-nbs-appdecision-brk','cff-nbs-redirect-brk','cff-home-forwarder','cff-nbs-frontend-brk'])*/
+		choice(name: 'BRANCH_NAME', defaultValue: 'master', choices: ['master'], description: 'Branch name to build?')
+		booleanParam(name: 'SKIP_TESTS', defaultValue: false, choices: [true, false], description: 'Do you want to skip junit tests?')
+		string(name: 'SERVICES', description: 'Select Docker Service: Select Docker Service: backend, eureka')
+		string(name: 'TAG_NAME', description: 'Select TAG for docker-registry (only for production releases): ex. prd-*')
     }
-    stages {		
+
+    stages {
 		stage('Init') {
 			steps {
 				cleanWs()
