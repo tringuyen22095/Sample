@@ -1,21 +1,14 @@
 pipeline {
     agent any
     parameters {
-        extendedChoice(
-            name: 'ArchitecturesCh',
-            defaultValue: "${env.BUILD_ARCHS}",
-            multiSelectDelimiter: ',',
-            type: 'PT_CHECKBOX',
-            value: 'linux-x86_64,android-x86_64,android-arm,android-arm64,ios-arm64,Win32,Win64'
-        )
-        string(name: 'ArchitecturesStr', defaultValue: "${env.BUILD_ARCHS}", description: "")
+        booleanParam(defaultValue: true, description: "Do deploy after build", name: "IS_SKIP_TEST")
+        string(name: "BRANCH_NAME", defaultValue: "master", description: "")
     }
     stages {
         stage('Test') {
             steps {
-                echo params.ArchitecturesCh
-                echo params.ArchitecturesStr
-                echo "${env.BUILD_ARCHS}"
+                echo params.BRANCH_NAME
+                echo params.IS_SKIP_TEST
             }
         }
     }
