@@ -15,7 +15,7 @@ pipeline {
 		choice (name: "BRANCH", description: "Choose branch to deploy", choices: ["main"])
 		choice (name: "SERVICE_NAME", description: "Empty to deploy all services", choices: ["eureka", "backend", "gateway"])
         booleanParam (name: "IS_SKIP_TEST", defaultValue: false, description: "Do you want to ignore test case? (not recommend)")
-		string (name: "TAG", )
+		string (name: "TAG", description: "Release tag")
     }
     
     stages {
