@@ -30,6 +30,7 @@ hs_err_pid*
 **/.idea/
 **/.factorypath
 **/target
+**/pom.xml.versionsBackup
 
 # dependencies
 **/node_modules
