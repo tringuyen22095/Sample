@@ -10,6 +10,11 @@
 		<version>2.7.6</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+	
+	<scm>
+		<connection>scm:git:ssh://github.com/tringuyen22095/Sample</connection>
+		<tag>HEAD</tag>
+	</scm>
 
 	<groupId>com.personal</groupId>
 	<artifactId>personal-service-parent</artifactId>
