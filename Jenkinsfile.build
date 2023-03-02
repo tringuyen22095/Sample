@@ -5,16 +5,17 @@ pipeline {
 		HOME = "."
         DEFAULT_MAVEN = "Maven"
 		DEFAULT_NODE="NodeJS"
+		DEFAULT_DOCKER="Docker"
 		CREDENTIAL_ID="HOME_PC"
 		
 		GIT_URL="git@github.com:tringuyen22095/Sample.git"
-		SCM_URL="ssh://${GIT_URL}"
     }
 
     parameters {
-		choice(name:"BRANCH", choices:["main"])
-		choice(name: "SERVICE_NAME", description: "Empty to deploy all services", choices: ["eureka", "backend"])
-        booleanParam (defaultValue: false, description: "Do you want to ignore test case? (not recommend)", name: "IS_SKIP_TEST")
+		choice (name: "BRANCH", description: "Choose branch to deploy", choices: ["main"])
+		choice (name: "SERVICE_NAME", description: "Empty to deploy all services", choices: ["eureka", "backend", "gateway"])
+        booleanParam (name: "IS_SKIP_TEST", defaultValue: false, description: "Do you want to ignore test case? (not recommend)")
+		string (name: "TAG", )
     }
     
     stages {
@@ -31,16 +32,17 @@ pipeline {
 						doGenerateSubmoduleConfigurations: false,
 						extensions: [],
 						submoduleCfg: []])
+				sh("ls -a")
             }
         }
         stage('Build') {
             steps {
 				withMaven(maven: "${env.DEFAULT_MAVEN}") {
     				nodejs(nodeJSInstallationName: "${env.DEFAULT_NODE}") {
-    					sh("node -v")
-    					sh("mvn -v")
-    					sh("java --version")
-    					//sh("mvn clean package -DskipTest=${params.IS_SKIP_TEST} -s=settings.xml")
+    					//sh("node -v")
+    					//sh("mvn -v")
+    					//sh("java --version")
+    					sh("mvn clean package -DskipTest=${params.IS_SKIP_TEST} -s=settings.xml")
     				}
 				}
             }
