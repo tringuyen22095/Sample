@@ -8,49 +8,87 @@ pipeline {
 		DEFAULT_DOCKER="Docker"
 		CREDENTIAL_ID="HOME_PC"
 		
+		GITHUB_KEY=""
 		GIT_URL="git@github.com:tringuyen22095/Sample.git"
     }
 
     parameters {
 		choice (name: "BRANCH", description: "Choose branch to deploy", choices: ["main"])
-		choice (name: "SERVICE_NAME", description: "Empty to deploy all services", choices: ["eureka", "backend", "gateway"])
-        booleanParam (name: "IS_SKIP_TEST", defaultValue: false, description: "Do you want to ignore test case? (not recommend)")
-		string (name: "TAG", description: "Release tag")
+        string (name: "SERVICE_NAME", description: "Empty to deploy all services")
+		booleanParam (name: "IS_RELEASE", defaultValue: false)
+		booleanParam (name: "IS_SKIP_TEST", defaultValue: false, description: "Do you want to ignore test case? (not recommend)")
     }
     
     stages {
-        stage('clean') {
+        stage('Fetch sources') {
             steps {
-                cleanWs()
+                dir('source') {
+					checkout([$class: 'GitSCM',
+    						userRemoteConfigs: [[credentialsId: "${env.CREDENTIAL_ID}", url: "${env.GIT_URL}"]],
+    						branches: [[name: "${params.BRANCH}"]],
+    						doGenerateSubmoduleConfigurations: false,
+    						extensions: [],
+    						submoduleCfg: []])
+                }
             }
         }
-        stage('fetch') {
+        stage('Prepare variables') {
             steps {
-				checkout([$class: 'GitSCM',
-						userRemoteConfigs: [[credentialsId: "${env.CREDENTIAL_ID}", url: "${env.GIT_URL}"]],
-						branches: [[name: "${params.BRANCH}"]],
-						doGenerateSubmoduleConfigurations: false,
-						extensions: [],
-						submoduleCfg: []])
-				sh("ls -a")
+                dir("source") {
+                    script {
+                        currentBuild.displayName = "#${currentBuild.id} | ${!params.SERVICE_NAME ? 'All' : params.SERVICE_NAME} [${params.BRANCH}]"
+                        MAVEN_OPTION = "-DremoveSnapshot"
+                        sh ("git checkout ${params.BRANCH}")
+                    }
+                }
             }
         }
-        stage('Build') {
+        stage('Release & Build') {
             steps {
-				withMaven(maven: "${env.DEFAULT_MAVEN}") {
-    				nodejs(nodeJSInstallationName: "${env.DEFAULT_NODE}") {
-    					//sh("node -v")
-    					//sh("mvn -v")
-    					//sh("java --version")
-    					sh("mvn clean package -DskipTest=${params.IS_SKIP_TEST} -s=settings.xml")
-    				}
-				}
+                dir("source") {
+                    script {
+                        withMaven(maven: "${env.DEFAULT_MAVEN}") {
+							nodejs(nodeJSInstallationName: "${env.DEFAULT_NODE}") {
+							    if (params.IS_RELEASE)
+								    sh ("mvn -B versions:set -U -DremoveSnapshot -s settings.xml")
+								// sh ("mvn clean package -DskipTest=${params.IS_SKIP_TEST} -s settings.xml")
+							}
+                        }
+                    }
+                }
+            }
+        }
+        stage('Is release?') {
+            when {
+                expression { params.IS_RELEASE }
+            }
+            steps {
+                dir("source") {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'HOME_PC', keyFileVariable: 'GITHUB_KEY')]) {
+                        withEnv(["GIT_SSH_COMMAND=ssh -i $GITHUB_KEY -o StrictHostKeyChecking=no"]) {
+							withMaven(maven: "${env.DEFAULT_MAVEN}") {
+								sh("""
+									mvn versions:set -U -DnextSnapshot -s settings.xml
+									git config user.email "pipeline@jenkin.com"
+                                    git config user.name "Jenkin_Pipeline"
+									git commit pom.xml **/pom.xml -m 'Jenkin open next snapshot'
+									git push
+								""")
+							}
+        				}
+                    }
+                }
             }
 		}
     }
     post {
         always {
-            cleanWs()
+            dir('source') {
+                withMaven(maven: "${env.DEFAULT_MAVEN}") {
+                    sh("mvn clean")
+                }
+                deleteDir()
+            }
         }
     }
 }
