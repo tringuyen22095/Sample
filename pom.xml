@@ -3,54 +3,72 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.6</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
-	
-	<scm>
-		<connection>scm:git:ssh://github.com/tringuyen22095/Sample</connection>
-		<tag>HEAD</tag>
-	</scm>
-
-	<groupId>com.personal</groupId>
-	<artifactId>personal-service-parent</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
-
+	<!-- Project information -->
+	<groupId>project.personal</groupId>
+	<artifactId>tringuyen</artifactId>
+	<version>${revision}</version>
+	<name>Parent</name>
 	<packaging>pom</packaging>
-
+	<!-- List module -->
 	<modules>
 		<module>eureka</module>
-		<module>frontend</module>
+		<module>shared-common</module>
+		<module>resource</module>
 		<module>backend</module>
+		<module>gateway</module>
 	</modules>
-
+	<!-- List properties -->
 	<properties>
+		<revision>0.0.1-SNAPSHOT</revision>
 		<java.version>11</java.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
-
-		<docker-skipPush>false</docker-skipPush>
-		<docker-registry>docker-registry.crifnet.com</docker-registry>
-		<docker-repository-parent>${docker-registry}/aslom</docker-repository-parent>
-		<docker-repository>${docker-repository-parent}/${project.artifactId}</docker-repository>
-
-		<docker-skipBuild>false</docker-skipBuild>
-		<docker-image-name>cff-tcb-brk-customer360</docker-image-name>
-		<docker-base-image-name>library/openjdk</docker-base-image-name>
-		<docker-base-image-version>8openj9-jre-alpine</docker-base-image-version>
-		<dockerfile-maven-version>1.4.13</dockerfile-maven-version>
-
-		<org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
+		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
 		<jsonwebtoken.version>0.9.1</jsonwebtoken.version>
 		<srpingcloud.version>2.2.9.RELEASE</srpingcloud.version>
 		<jodatime.version>2.12.2</jodatime.version>
+		<commons.version>3.12.0</commons.version>
+		<commons.collections.version>4.4</commons.collections.version>
+		<lombok.version>1.18.28</lombok.version>
+		<spring.version>2.6.15</spring.version>
+		<flyway.version>8.2.2</flyway.version>
+		<spring.version>2.6.6</spring.version>
+		<spring-cloud-dependencies.version>2020.0.0</spring-cloud-dependencies.version>
+		<logging.version>1.7.16</logging.version>
+		<jackson.version>2.11.3</jackson.version>
+		<spring-boot-maven-plugin.version>2.4.1</spring-boot-maven-plugin.version>
 	</properties>
+	<!-- Dependency version manage -->
 	<dependencyManagement>
 		<dependencies>
+			<!-- Spring Core -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-validation</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-jpa</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.awspring.cloud</groupId>
+				<artifactId>spring-cloud-starter-aws-secrets-manager-config</artifactId>
+				<version>2.3.2</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework.cloud</groupId>
+						<artifactId>spring-cloud-context</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- Mapstruct -->
 			<dependency>
 				<groupId>org.mapstruct</groupId>
 				<artifactId>mapstruct</artifactId>
@@ -61,34 +79,57 @@
 				<artifactId>mapstruct-processor</artifactId>
 				<version>${org.mapstruct.version}</version>
 			</dependency>
-
-			<dependency>
-			    <groupId>org.springframework.cloud</groupId>
-			    <artifactId>spring-cloud-starter</artifactId>
-			    <version>${srpingcloud.version}</version>
-			</dependency>
-			<dependency>
-			    <groupId>org.springframework.cloud</groupId>
-			    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-			    <version>${srpingcloud.version}</version>
-			</dependency>
-
+			<!-- JWT -->
 			<dependency>
 				<groupId>io.jsonwebtoken</groupId>
 				<artifactId>jjwt</artifactId>
 				<version>${jsonwebtoken.version}</version>
+			</dependency>
+			<!-- Lombok -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+			<!-- Common -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${commons.collections.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>${jodatime.version}</version>
 			</dependency>
-
+			<!-- Flyway -->
 			<dependency>
-				<groupId>com.personal.frontend</groupId>
-				<artifactId>frontend</artifactId>
-				<version>${project.version}</version>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>${flyway.version}</version>
+			</dependency>
+			<!-- Logging -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${logging.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot-maven-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>

@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: resource
+          uri: http://localhost:8001/resource/
+          predicates:
+          - Path=/r/**
+        - id: backend
+          uri: http://localhost:8000/backend/
+          predicates:
+          - Path=/b/**
