@@ -9,17 +9,27 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import project.personal.shared.common.config.GlobalExceptionHandler;
 
 @SpringBootApplication
 @EnableEurekaClient
 @ComponentScan(basePackages = {
 		"project.personal.social.network"
 })
+@RestControllerAdvice(basePackageClasses = {
+		GlobalExceptionHandler.class
+})
 public class ResourceApplication {
+	
+	@Value("${HOME_DIR:./}")
+	private static String HOME_DIR;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ResourceApplication.class, args);
@@ -37,8 +47,8 @@ public class ResourceApplication {
 			PublicKey publicKey = kp.getPublic();
 			PrivateKey privateKey = kp.getPrivate();
 
-			File publicKeyFile = createKeyFile(new File("C:/keys/publicKey.rsa"));
-			File privateKeyFile = createKeyFile(new File("C:/keys/privateKey.rsa"));
+			File publicKeyFile = createKeyFile(new File(HOME_DIR + "publicKey.rsa"));
+			File privateKeyFile = createKeyFile(new File(HOME_DIR + "privateKey.rsa"));
 
 			FileOutputStream fos = new FileOutputStream(publicKeyFile);
 			fos.write(publicKey.getEncoded());

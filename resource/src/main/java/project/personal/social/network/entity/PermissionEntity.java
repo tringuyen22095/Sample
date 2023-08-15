@@ -1,5 +1,7 @@
 package project.personal.social.network.entity;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +19,7 @@ public class PermissionEntity {
 
 	@Id
 	@Column(name = "ID")
-	private String id;
+	private UUID id;
 
 	@Column(name = "PERMISSION")
 	private String permission;

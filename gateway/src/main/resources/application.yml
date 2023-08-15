@@ -1,12 +1,23 @@
+server:
+  port: 3231
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
 spring:
+  application:
+    name: gateway
   cloud:
     gateway:
       routes:
         - id: resource
           uri: http://localhost:8001/resource/
           predicates:
-          - Path=/r/**
+          - Path=/resource/**
         - id: backend
           uri: http://localhost:8000/backend/
           predicates:
-          - Path=/b/**
+          - Path=/backend/**
