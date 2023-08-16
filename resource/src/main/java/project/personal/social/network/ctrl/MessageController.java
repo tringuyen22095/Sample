@@ -18,44 +18,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 import project.personal.shared.common.exception.EntityNotFoundException;
-import project.personal.shared.common.model.req.RoomReq;
-import project.personal.shared.common.model.res.RoomDetailRes;
-import project.personal.shared.common.model.res.RoomRes;
-import project.personal.social.network.service.RoomService;
+import project.personal.shared.common.model.req.MessageReq;
+import project.personal.shared.common.model.res.MessageRes;
+import project.personal.social.network.service.MessageService;
 
 @RestController
-@RequestMapping("/room")
+@RequestMapping("/message")
 @AllArgsConstructor
 @Validated
-public class RoomController {
+public class MessageController {
 
-	private final RoomService roomService;
+	private final MessageService messageService;
 
-	@GetMapping
-	public ResponseEntity<List<RoomRes>> getRooms() {
-		return ResponseEntity.ok(this.roomService.getRooms());
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<RoomDetailRes> getRoomDetail(@PathVariable("id") UUID id) throws EntityNotFoundException {
-		return ResponseEntity.ok(this.roomService.getRoomDetailById(id));
+	@GetMapping("/{roomId}")
+	public ResponseEntity<List<MessageRes>> getMessage(@PathVariable("roomId") UUID roomId) {
+		return ResponseEntity.ok(this.messageService.getMessages(roomId));
 	}
 
 	@PostMapping
-	public ResponseEntity<RoomRes> createRoom(@Valid @RequestBody RoomReq req) {
-		return ResponseEntity.ok(this.roomService.createRoom(req));
+	public ResponseEntity<MessageRes> createMessage(@Valid @RequestBody MessageReq req) {
+		return ResponseEntity.ok(this.messageService.createMessage(req));
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteRoom(@PathVariable("id") UUID id) throws EntityNotFoundException {
-		this.roomService.deleteRoom(id);
+	public ResponseEntity<Void> deleteMessage(@PathVariable("id") UUID id) throws EntityNotFoundException {
+		this.messageService.deleteMessage(id);
 		return ResponseEntity.accepted().build();
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> updateRoom(@PathVariable("id") UUID id, @Valid @RequestBody RoomReq req)
+	public ResponseEntity<Void> updateRoom(@PathVariable("id") UUID id, @Valid @RequestBody MessageReq req)
 			throws EntityNotFoundException {
-		this.roomService.updateRoom(id, req);
+		this.messageService.updateMessage(id, req);
 		return ResponseEntity.accepted().build();
 	}
 

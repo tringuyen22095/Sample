@@ -14,7 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.context.annotation.Import;
 
 import project.personal.shared.common.config.GlobalExceptionHandler;
 
@@ -23,9 +23,7 @@ import project.personal.shared.common.config.GlobalExceptionHandler;
 @ComponentScan(basePackages = {
 		"project.personal.social.network"
 })
-@RestControllerAdvice(basePackageClasses = {
-		GlobalExceptionHandler.class
-})
+@Import(GlobalExceptionHandler.class)
 public class ResourceApplication {
 	
 	@Value("${HOME_DIR:./}")
