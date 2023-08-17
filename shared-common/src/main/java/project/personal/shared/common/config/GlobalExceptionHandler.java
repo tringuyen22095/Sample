@@ -18,6 +18,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import project.personal.shared.common.exception.EntityNotFoundException;
+import project.personal.shared.common.exception.FileStorageException;
+import project.personal.shared.common.exception.FileStorageNotFoundException;
 import project.personal.shared.common.model.res.ErrorResponse;
 
 @RestControllerAdvice
@@ -43,10 +45,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(value = {
-			EntityNotFoundException.class
+			EntityNotFoundException.class,
+			FileStorageException.class,
+			FileStorageNotFoundException.class
 	})
 	public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request) {
-		_log.error("Entity not found", ex);
+		_log.error("Execute fail", ex);
 		ErrorResponse res = ErrorResponse.builder().errorCode(ex.getStatus().value()).errorMsg(ex.getMessage()).build();
 		return ResponseEntity.status(ex.getStatus()).body(res);
 	}
