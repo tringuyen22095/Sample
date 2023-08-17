@@ -37,6 +37,7 @@
 		<logging.version>1.7.16</logging.version>
 		<jackson.version>2.11.3</jackson.version>
 		<spring-boot-maven-plugin.version>2.4.1</spring-boot-maven-plugin.version>
+		<spring-cloud-sleuth.version>3.1.0</spring-cloud-sleuth.version>
 	</properties>
 	<!-- Dependency version manage -->
 	<dependencyManagement>
@@ -118,6 +119,14 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${logging.version}</version>
+			</dependency>
+			<!-- Sleuth -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-sleuth</artifactId>
+				<version>${spring-cloud-sleuth.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

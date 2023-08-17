@@ -11,6 +11,8 @@ import project.personal.shared.common.model.res.RoomRes;
 public interface RoomService {
 
 	List<RoomRes> getRooms();
+	
+	RoomRes getRoom(UUID id) throws EntityNotFoundException;
 
 	RoomDetailRes getRoomDetailById(UUID id) throws EntityNotFoundException;
 

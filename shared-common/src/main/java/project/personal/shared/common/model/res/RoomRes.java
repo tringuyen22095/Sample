@@ -1,12 +1,20 @@
 package project.personal.shared.common.model.res;
 
 import java.util.Date;
+import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@JsonInclude(value = Include.NON_NULL)
 public class RoomRes {
 
 	@JsonProperty("id")
@@ -19,12 +27,12 @@ public class RoomRes {
 	private Date createdOn;
 
 	@JsonProperty("createdBy")
-	private String createdBy;
+	private UUID createdBy;
 
 	@JsonProperty("updatedOn")
 	private Date updatedOn;
 
 	@JsonProperty("updatedBy")
-	private String updatedBy;
+	private UUID updatedBy;
 
 }

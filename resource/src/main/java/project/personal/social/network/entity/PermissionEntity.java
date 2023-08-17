@@ -15,11 +15,15 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "PERMISSION")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class PermissionEntity {
 
 	@Id

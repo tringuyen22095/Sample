@@ -19,7 +19,10 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import project.personal.shared.common.constant.MessageType;
 import project.personal.social.network.entity.base.BaseEntity;
 import project.personal.social.network.entity.base.EntityToPersistListener;
@@ -27,14 +30,17 @@ import project.personal.social.network.entity.base.EntityToPersistListener;
 @Entity
 @EntityListeners(EntityToPersistListener.class)
 @Table(name = "MESSAGE")
-@Data
 @Where(clause = "IS_DELETED = 0")
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString(exclude = { "bData", "room" })
 public class MessageEntity extends BaseEntity {
 
 	@Id
 	@Column(name = "ID")
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@JsonProperty("id")
 	private UUID id;
 
@@ -50,10 +56,11 @@ public class MessageEntity extends BaseEntity {
 	@Column(name = "TYPE")
 	@JsonProperty("type")
 	private MessageType type;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ROOM_ID")
 	@JsonProperty("room")
+	@Where(clause = "1 = 1")
 	private RoomEntity room;
 
 }

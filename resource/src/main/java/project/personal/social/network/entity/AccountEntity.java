@@ -20,12 +20,16 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "ACCOUNT")
-@Data
 @Where(clause = "IS_DELETED = 0")
+@Getter
+@Setter
+@NoArgsConstructor
 public class AccountEntity {
 
 	@Id

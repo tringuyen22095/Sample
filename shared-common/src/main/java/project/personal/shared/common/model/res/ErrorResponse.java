@@ -1,18 +1,23 @@
 package project.personal.shared.common.model.res;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(value = Include.NON_NULL)
 public class ErrorResponse implements Serializable {
 
@@ -23,9 +28,6 @@ public class ErrorResponse implements Serializable {
 
 	@JsonProperty("errorMsg")
 	private String errorMsg;
-
-	@JsonProperty("errorMsgs")
-	private List<String> errorMsgs;
 
 	@JsonProperty("invalidFields")
 	private Map<String, String> invalidFields;

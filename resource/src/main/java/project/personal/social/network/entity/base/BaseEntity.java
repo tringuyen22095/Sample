@@ -1,6 +1,7 @@
 package project.personal.social.network.entity.base;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -10,10 +11,14 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @MappedSuperclass
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class BaseEntity {
 
 	@Column(name = "IS_DELETED", nullable = false)
@@ -28,7 +33,7 @@ public class BaseEntity {
 
 	@Column(name = "CREATED_BY")
 	@JsonProperty("createdBy")
-	private String createdBy;
+	private UUID createdBy;
 
 	@Column(name = "UPDATED_ON")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -38,5 +43,5 @@ public class BaseEntity {
 
 	@Column(name = "UPDATED_BY")
 	@JsonProperty("updatedBy")
-	private String updatedBy;
+	private UUID updatedBy;
 }

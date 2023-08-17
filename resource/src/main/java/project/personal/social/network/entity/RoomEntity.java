@@ -22,15 +22,21 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import project.personal.social.network.entity.base.BaseEntity;
 import project.personal.social.network.entity.base.EntityToPersistListener;
 
 @Entity
 @EntityListeners(EntityToPersistListener.class)
 @Table(name = "ROOM")
-@Data
 @Where(clause = "IS_DELETED = 0")
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString(exclude = { "messages", "accounts" })
 public class RoomEntity extends BaseEntity {
 
 	@Id
