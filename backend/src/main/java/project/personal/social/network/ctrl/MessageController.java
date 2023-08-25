@@ -1,13 +1,12 @@
 package project.personal.social.network.ctrl;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,19 +35,27 @@ public class MessageController {
 	private static final Logger _log = LoggerFactory.getLogger(MessageController.class);
 	
 	private final FileService fileService;
+    
+	private final ApplicationEventPublisher applicationEventPublisher;
 
-	@PostMapping
+	@PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 	@ResponseStatus(value = HttpStatus.ACCEPTED)
 	public void uploadFiles(@RequestParam("files") MultipartFile[] files) throws FileStorageException {
 		for (MultipartFile file : files) {
+			_log.info("Upload file {}", file.getOriginalFilename());
 			this.fileService.storeFile(file);
 		}
 	}
 	
-	@PostMapping("/async")
+	@PostMapping(value = "/async")
 	@ResponseStatus(value = HttpStatus.ACCEPTED)
-	public void uploadAsyncFile(@RequestParam("chunk") MultipartFile chunk, @RequestParam("chunkIndex") String chunkIndex) throws FileStorageException {
-		_log.info("Upload chunkIndex {}", chunkIndex);
+	public void uploadAsyncFile(@RequestParam("chunk") final MultipartFile chunk,
+			@RequestParam("chunkIndex") final Integer chunkIndex,
+			@RequestHeader(name = "File-Name") final String fileName) throws FileStorageException {
+		final long fileSize = chunk.getSize();
+		_log.info("Upload chunkIndex {} for file name {} with size {} bytes", chunkIndex, fileName, fileSize);
+		this.fileService.storeFile(chunk, String.format("(%d)%s", chunkIndex, fileName));
+		applicationEventPublisher.publishEvent(new FileCombineEvent(this, fileName, chunkIndex, fileSize));
 	}
 
 	@GetMapping("/download/{fileName}")

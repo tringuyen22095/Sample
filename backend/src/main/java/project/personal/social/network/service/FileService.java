@@ -8,7 +8,7 @@ import project.personal.shared.common.exception.FileStorageNotFoundException;
 
 public interface FileService {
 
-	String storeFile(MultipartFile file) throws FileStorageException;
+	String storeFile(MultipartFile file, String... customName) throws FileStorageException;
 
 	Resource loadFileAsResource(String fileName) throws FileStorageNotFoundException;
 

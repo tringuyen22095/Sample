@@ -28,9 +28,9 @@ public class FileServiceImpl implements FileService {
 		this.fileStorageLocation = Paths.get("./").toAbsolutePath().normalize();
 	}
 
-	public String storeFile(MultipartFile file) throws FileStorageException {
+	public String storeFile(MultipartFile file, String... customName) throws FileStorageException {
 		// Normalize file name
-		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		String fileName = customName == null || customName.length == 0 ? StringUtils.cleanPath(file.getOriginalFilename()) : customName[0];
 
 		try {
 			// Check if the file's name contains invalid characters
