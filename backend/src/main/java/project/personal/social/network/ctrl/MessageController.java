@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.AllArgsConstructor;
 import project.personal.shared.common.exception.FileStorageException;
 import project.personal.shared.common.exception.FileStorageNotFoundException;
+import project.personal.social.network.model.FileCombineEvent;
 import project.personal.social.network.service.FileService;
 
 @RestController
@@ -54,12 +55,12 @@ public class MessageController {
 			@RequestHeader(name = "File-Name") final String fileName) throws FileStorageException {
 		final long fileSize = chunk.getSize();
 		_log.info("Upload chunkIndex {} for file name {} with size {} bytes", chunkIndex, fileName, fileSize);
-		this.fileService.storeFile(chunk, String.format("(%d)%s", chunkIndex, fileName));
-		applicationEventPublisher.publishEvent(new FileCombineEvent(this, fileName, chunkIndex, fileSize));
+//		this.fileService.storeFile(chunk, String.format("(%d)%s", chunkIndex, fileName));
+		this.applicationEventPublisher.publishEvent(new FileCombineEvent(this, fileName, chunkIndex, fileSize));
 	}
 
 	@GetMapping("/download/{fileName}")
-	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) throws FileStorageNotFoundException {
+	public ResponseEntity<Resource> downloadFile(@PathVariable("fileName") String fileName, HttpServletRequest request) throws FileStorageNotFoundException {
 		// Load file as Resource
         Resource resource = this.fileService.loadFileAsResource(fileName);
 
@@ -80,4 +81,5 @@ public class MessageController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
 				.body(resource);
 	}
+
 }

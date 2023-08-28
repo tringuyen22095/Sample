@@ -1,0 +1,65 @@
+fileList: FileList;
+
+  fileChange(event: any) {
+    this.fileList = event.target.files;
+  }
+
+  async call() {
+    const length = this.fileList.length;
+    if (!length) {
+      alert('choose please');
+      return;
+    }
+    const chunkSize = 100 * 1024; // Set the desired chunk size (100KB in this example)
+    const formData: FormData = new FormData();
+    const lstSplit: {
+      chunk: Blob,
+      chunkIndex: number,
+      fileName: string,
+      fileExtension: string
+    }[] = [];
+
+    for (let i = 0; i < length; i++) {
+      const file: File = this.fileList[i];
+      if (file.size / 1024 > 100) { // check file size as KB
+        const totalChunks = Math.ceil(file.size / chunkSize);
+
+        // Iterate over the chunks and upload them sequentially
+        for (let chunkIndex = 0; chunkIndex < totalChunks; chunkIndex++) {
+            const start: number = chunkIndex * chunkSize;
+            const end: number = Math.min(start + chunkSize, file.size);
+            const chunk = file.slice(start, end);
+            lstSplit.push({
+              chunk,
+              chunkIndex,
+              fileName: file.name,
+              fileExtension: file.type
+            });
+        }
+      } else {
+        formData.append('files', file);
+      }
+    }
+    if (formData.has('files'))
+      this.singleFile(formData);
+    for (const data of lstSplit) {
+      this.asyncFile(data);
+    }
+  }
+  async singleFile(data: FormData) {
+    await this.http.post(`backend/message`, data).toPromise();
+  }
+  async asyncFile (data: {
+    chunk: Blob,
+    chunkIndex: number,
+    fileName: string,
+    fileExtension: string
+  }) {
+    const formData = new FormData();
+    formData.append("chunk", data.chunk);
+    formData.append("chunkIndex", `${data.chunkIndex}`);
+    await this.http.post(`backend/message/async`, formData, { headers: {
+      'File-Name': data.fileName,
+      'File-Extension': data.fileExtension
+    } }).toPromise();
+  }

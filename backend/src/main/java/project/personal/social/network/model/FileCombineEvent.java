@@ -1,4 +1,4 @@
-package project.personal.social.network.ctrl;
+package project.personal.social.network.model;
 
 import org.springframework.context.ApplicationEvent;
 
