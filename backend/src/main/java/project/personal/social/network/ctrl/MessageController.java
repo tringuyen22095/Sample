@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -51,35 +52,23 @@ public class MessageController {
 	@PostMapping(value = "/async")
 	@ResponseStatus(value = HttpStatus.ACCEPTED)
 	public void uploadAsyncFile(@RequestParam("chunk") final MultipartFile chunk,
-			@RequestParam("chunkIndex") final Integer chunkIndex,
-			@RequestHeader(name = "File-Name") final String fileName) throws FileStorageException {
+			@RequestParam("chunkIndex") final Long chunkIndex,
+			@RequestParam("totalChunks") final Long totalChunks,
+			@RequestHeader(name = "File-Name") final String fileName) {
 		final long fileSize = chunk.getSize();
 		_log.info("Upload chunkIndex {} for file name {} with size {} bytes", chunkIndex, fileName, fileSize);
-//		this.fileService.storeFile(chunk, String.format("(%d)%s", chunkIndex, fileName));
-		this.applicationEventPublisher.publishEvent(new FileCombineEvent(this, fileName, chunkIndex, fileSize));
+		this.applicationEventPublisher.publishEvent(new FileCombineEvent(chunk, fileName, chunkIndex, fileSize, totalChunks));
 	}
 
 	@GetMapping("/download/{fileName}")
-	public ResponseEntity<Resource> downloadFile(@PathVariable("fileName") String fileName, HttpServletRequest request) throws FileStorageNotFoundException {
+	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable("fileName") String fileName, HttpServletRequest request) throws FileStorageNotFoundException {
 		// Load file as Resource
-        Resource resource = this.fileService.loadFileAsResource(fileName);
+//        Resource resource = this.fileService.loadFileAsResource(fileName);
 
-		// Try to determine file's content type
-		String contentType = null;
-		try {
-			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-		} catch (IOException ex) {
-			_log.info("Could not determine file type.");
-		}
-
-		// Fallback to the default content type if type could not be determined
-		if (contentType == null) {
-			contentType = "application/octet-stream";
-		}
-
-		return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-				.body(resource);
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+				.body(new ByteArrayResource(new byte[] {}));
 	}
 
 }
