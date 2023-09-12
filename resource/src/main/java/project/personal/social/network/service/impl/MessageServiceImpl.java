@@ -73,7 +73,7 @@ public class MessageServiceImpl implements MessageService {
 
 		MessageEntity entity = this.findById(id);
 
-		this.mapper.fromRequestToEntity(entity, req);
+		this.mapper.fromRequestToExistEntity(entity, req);
 		_log.info("Update message with body: {}", entity);
 		this.messageRepository.saveAndFlush(entity);
 	}

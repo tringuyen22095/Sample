@@ -1,6 +1,6 @@
 package project.personal.shared.common.model.req;
 
-import java.sql.Blob;
+import java.util.List;
 import java.util.UUID;
 
 import javax.validation.constraints.NotNull;
@@ -23,8 +23,8 @@ public class MessageReq {
 	@JsonProperty("content")
 	private String content;
 	
-	@JsonProperty("bData")
-	private Blob bData;
+	@JsonProperty("documents")
+	private List<DocumentReq> documents;
 
 	@JsonProperty("type")
 	@NotNull(message = "Type can't be empty.")

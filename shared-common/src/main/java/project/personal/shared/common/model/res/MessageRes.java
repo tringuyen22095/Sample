@@ -1,7 +1,7 @@
 package project.personal.shared.common.model.res;
 
-import java.sql.Blob;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,9 +25,6 @@ public class MessageRes {
 	@JsonProperty("content")
 	private String content;
 
-	@JsonProperty("bData")
-	private Blob bData;
-
 	@JsonProperty("type")
 	private MessageType type;
 
@@ -42,5 +39,8 @@ public class MessageRes {
 
 	@JsonProperty("updatedBy")
 	private UUID updatedBy;
+
+	@JsonProperty("documents")
+	private List<DocumentRes> documents;
 
 }

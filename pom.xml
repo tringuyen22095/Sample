@@ -13,6 +13,7 @@
 	<modules>
 		<module>eureka</module>
 		<module>shared-common</module>
+		<module>shared-client</module>
 		<module>resource</module>
 		<module>backend</module>
 		<module>gateway</module>
@@ -38,6 +39,7 @@
 		<jackson.version>2.11.3</jackson.version>
 		<spring-boot-maven-plugin.version>2.4.1</spring-boot-maven-plugin.version>
 		<spring-cloud-sleuth.version>3.1.0</spring-cloud-sleuth.version>
+		<spring-data-common.version>2.4.2</spring-data-common.version>
 	</properties>
 	<!-- Dependency version manage -->
 	<dependencyManagement>

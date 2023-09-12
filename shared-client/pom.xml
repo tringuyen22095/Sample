@@ -10,12 +10,12 @@
 		<version>${revision}</version>
 	</parent>
 
-	<artifactId>backend</artifactId>
+	<artifactId>shared-client</artifactId>
 
 	<properties>
 		<java.version>11</java.version>
+		<spring-boot.repackage.skip>true</spring-boot.repackage.skip>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>project.personal</groupId>
@@ -23,31 +23,15 @@
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>project.personal</groupId>
-			<artifactId>shared-client</artifactId>
-			<version>${revision}</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+			<version>${spring-data-common.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+	    <dependency>
+	        <groupId>org.springframework.cloud</groupId>
+	        <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+	    </dependency>
 	</dependencies>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-parent</artifactId>
-				<version>${spring-cloud-dependencies.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<plugins>

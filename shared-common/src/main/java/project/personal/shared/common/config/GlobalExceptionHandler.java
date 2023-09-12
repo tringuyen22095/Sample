@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import feign.FeignException;
 import project.personal.shared.common.exception.EntityNotFoundException;
 import project.personal.shared.common.exception.FileStorageException;
 import project.personal.shared.common.exception.FileStorageNotFoundException;
@@ -62,5 +63,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 				.errorMsg(ex.getMessage()).build();
 		return ResponseEntity.internalServerError().body(res);
 	}
+	
+	@ExceptionHandler(FeignException.class)
+	public ResponseEntity<Object> handleFeignException(FeignException ex, WebRequest request) {
+		_log.error("Execute fail", ex);
+		ErrorResponse res = ErrorResponse.builder().errorCode(ex.status())
+				.errorMsg(ex.getMessage()).build();
+		return ResponseEntity.status(HttpStatus.valueOf(ex.status())).body(res);
+	}
+	
+	
 
 }

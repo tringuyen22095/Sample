@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import project.personal.shared.common.constant.MessageType;
@@ -28,15 +29,15 @@ public class MessageValidator implements ConstraintValidator<MessageValidation, 
 	@Override
 	public boolean isValid(MessageReq req, ConstraintValidatorContext context) {
 		context.disableDefaultConstraintViolation();
-		if (req.getBData() == null && StringUtils.isBlank(req.getContent())) {
-			context.buildConstraintViolationWithTemplate("Both content & bData can't not be blank.").addConstraintViolation();
+		if (CollectionUtils.isEmpty(req.getDocuments()) && StringUtils.isBlank(req.getContent())) {
+			context.buildConstraintViolationWithTemplate("Both content & document can't not be blank.").addConstraintViolation();
 			return false;
 		} else if (valueList.contains(req.getType())) {
 			if (MessageType.TEXT.equals(MessageType.valueOf(req.getType())) && StringUtils.isBlank(req.getContent())) {
 				context.buildConstraintViolationWithTemplate("Content can't not be blank.").addConstraintViolation();
 				return false;
-			} else if (!MessageType.TEXT.equals(MessageType.valueOf(req.getType())) && req.getBData() == null) {
-				context.buildConstraintViolationWithTemplate("bData can't not be blank.").addConstraintViolation();
+			} else if (!MessageType.TEXT.equals(MessageType.valueOf(req.getType())) && CollectionUtils.isEmpty(req.getDocuments())) {
+				context.buildConstraintViolationWithTemplate("Document can't not be empty.").addConstraintViolation();
 				return false;
 			}
 		}

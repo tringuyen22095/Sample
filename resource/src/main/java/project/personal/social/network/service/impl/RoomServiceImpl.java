@@ -48,7 +48,7 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public RoomRes createRoom(RoomReq req) {
-		RoomEntity entity = this.mapper.fromRequestToEntity(req);
+		RoomEntity entity = this.mapper.fromRequestToExistEntity(req);
 		_log.info("Create room with body: {}", entity);
 		entity = this.roomRepository.saveAndFlush(entity);
 		return this.mapper.fromEntityToResponse(entity);

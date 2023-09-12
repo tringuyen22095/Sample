@@ -1,5 +1,6 @@
 package project.personal.social.network.entity;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,9 +12,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -25,19 +25,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import project.personal.shared.common.constant.MessageType;
 import project.personal.social.network.entity.base.BaseEntity;
 import project.personal.social.network.entity.base.EntityToPersistListener;
 
 @Entity
 @EntityListeners(EntityToPersistListener.class)
-@Table(name = "MESSAGE")
+@Table(name = "DOCUMENT")
 @Where(clause = "IS_DELETED = 0")
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(exclude = { "room", "documents" })
-public class MessageEntity extends BaseEntity {
+@ToString(exclude = { "messages" })
+public class DocumentEntity extends BaseEntity {
 
 	@Id
 	@Column(name = "ID")
@@ -46,22 +45,21 @@ public class MessageEntity extends BaseEntity {
 	@JsonProperty("id")
 	private UUID id;
 
-	@Column(name = "CONTENT")
-	@JsonProperty("content")
-	private String content;
+	@Column(name = "BDATA")
+	@JsonProperty("bData")
+	@Lob
+	private Blob bData;
 
-	@Column(name = "TYPE")
-	@JsonProperty("type")
-	private MessageType type;
+	@Column(name = "FILE_TYPE")
+	@JsonProperty("fileType")
+	private String fileType;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ROOM_ID")
-	@JsonProperty("room")
-	@Where(clause = "1 = 1")
-	private RoomEntity room;
+	@Column(name = "FILE_NAME")
+	@JsonProperty("fileName")
+	private String fileName;
 
-	@ManyToMany(mappedBy = "messages", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = DocumentEntity.class)
-	@JsonProperty("documents")
-	private List<DocumentEntity> documents = new ArrayList<DocumentEntity>();
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonProperty("messages")
+	private List<MessageEntity> messages = new ArrayList<MessageEntity>();
 
 }
