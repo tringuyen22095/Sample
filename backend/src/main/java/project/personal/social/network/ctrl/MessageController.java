@@ -38,6 +38,7 @@ import project.personal.shared.common.model.req.MessageReq;
 import project.personal.shared.common.model.res.MessageRes;
 import project.personal.social.network.model.FileCombineEvent;
 import project.personal.social.network.service.FileService;
+import project.personal.social.network.service.MessageService;
 
 @RestController
 @RequestMapping("/message")
@@ -47,7 +48,7 @@ public class MessageController {
 
 	private static final Logger _log = LoggerFactory.getLogger(MessageController.class);
 
-	private final MessageFeignClient messageFeignClient;
+	private final MessageService messageService;
 
 	private final FileService fileService;
 
@@ -92,26 +93,26 @@ public class MessageController {
 			@RequestParam(name = "properties", defaultValue = "updatedOn, createdOn") String... properties)
 			throws EntityNotFoundException {
 		_log.info("Api getMessage was called");
-		return this.messageFeignClient.getMessage(roomId, page, size, direction, properties);
+		return this.messageService.getMessage(roomId, page, size, direction, properties);
 	}
 
 	@PostMapping
 	public ResponseEntity<MessageRes> createMessage(@Valid @RequestBody MessageReq req) throws EntityNotFoundException {
 		_log.info("Api createMessage was called");
-		return this.messageFeignClient.createMessage(req);
+		return this.messageService.createMessage(req);
 	}
 
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> deleteMessage(@PathVariable("id") UUID id) throws EntityNotFoundException {
 		_log.info("Api deleteMessage was called");
-		return this.messageFeignClient.deleteMessage(id);
+		return this.messageService.deleteMessage(id);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> updateRoom(@PathVariable("id") UUID id, @Valid @RequestBody MessageReq req)
 			throws EntityNotFoundException {
 		_log.info("Api updateRoom was called");
-		return this.messageFeignClient.updateRoom(id, req);
+		return this.messageService.updateRoom(id, req);
 	}
 
 }
