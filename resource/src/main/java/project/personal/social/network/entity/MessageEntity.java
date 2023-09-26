@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -60,7 +61,10 @@ public class MessageEntity extends BaseEntity {
 	@Where(clause = "1 = 1")
 	private RoomEntity room;
 
-	@ManyToMany(mappedBy = "messages", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = DocumentEntity.class)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = DocumentEntity.class)
+	@JoinTable(name = "document_messages", 
+			  joinColumns = @JoinColumn(name = "MESSAGES_ID"), 
+			  inverseJoinColumns = @JoinColumn(name = "DOCUMENTS_ID"))
 	@JsonProperty("documents")
 	private List<DocumentEntity> documents = new ArrayList<DocumentEntity>();
 

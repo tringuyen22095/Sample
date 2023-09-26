@@ -15,7 +15,7 @@ public interface MessageService {
 	ResponseEntity<Page<MessageRes>> getMessage(UUID roomId, int page, int size, Direction direction,
 			String... properties) throws EntityNotFoundException;
 
-	ResponseEntity<MessageRes> createMessage(MessageReq req) throws EntityNotFoundException;
+	ResponseEntity<MessageRes> createMessage(MessageReq req) throws EntityNotFoundException, InterruptedException;
 
 	ResponseEntity<Void> deleteMessage(UUID id) throws EntityNotFoundException;
 

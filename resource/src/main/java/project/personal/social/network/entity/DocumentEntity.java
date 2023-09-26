@@ -58,7 +58,7 @@ public class DocumentEntity extends BaseEntity {
 	@JsonProperty("fileName")
 	private String fileName;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "documents", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonProperty("messages")
 	private List<MessageEntity> messages = new ArrayList<MessageEntity>();
 

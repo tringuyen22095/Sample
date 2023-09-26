@@ -12,6 +12,6 @@ import project.personal.social.network.entity.MessageEntity;
 public interface MessageRepository extends JpaRepository<MessageEntity, UUID> {
 
 	@Query(value = "select m from MessageEntity m where m.room.id = ?1")
-	Page<MessageEntity> findAllByRoomId(UUID roomId, Pageable pageable);
+	Page<MessageEntity> pagingByRoomId(UUID roomId, Pageable pageable);
 
 }

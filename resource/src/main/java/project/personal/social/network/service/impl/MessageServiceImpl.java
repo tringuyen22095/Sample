@@ -40,7 +40,7 @@ public class MessageServiceImpl implements MessageService {
 		this.roomService.getRoom(roomId);
 
 		_log.info("Get message as paging");
-		Page<MessageEntity> paging = this.messageRepository.findAllByRoomId(roomId, pageable);
+		Page<MessageEntity> paging = this.messageRepository.pagingByRoomId(roomId, pageable);
 		List<MessageRes> lstMsg = paging.getContent().stream().map(mapper::fromEntityToResponse)
 				.collect(Collectors.toList());
 		return new PageImpl<MessageRes>(lstMsg, pageable, paging.getTotalElements());

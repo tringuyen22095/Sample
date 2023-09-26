@@ -49,14 +49,14 @@ public class RoomController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteRoom(@PathVariable("id") UUID id) throws EntityNotFoundException {
 		this.roomService.deleteRoom(id);
-		return ResponseEntity.accepted().build();
+		return ResponseEntity.noContent().build();
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> updateRoom(@PathVariable("id") UUID id, @Valid @RequestBody RoomReq req)
 			throws EntityNotFoundException {
 		this.roomService.updateRoom(id, req);
-		return ResponseEntity.accepted().build();
+		return ResponseEntity.noContent().build();
 	}
 
 }

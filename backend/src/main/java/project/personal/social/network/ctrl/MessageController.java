@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
-import project.personal.shared.client.resource.MessageFeignClient;
 import project.personal.shared.common.exception.EntityNotFoundException;
 import project.personal.shared.common.exception.FileStorageException;
 import project.personal.shared.common.exception.FileStorageNotFoundException;
@@ -55,7 +54,7 @@ public class MessageController {
 	private final ApplicationEventPublisher applicationEventPublisher;
 
 	@PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE }, value = "/non-async")
-	@ResponseStatus(value = HttpStatus.ACCEPTED)
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void uploadFiles(@RequestParam("files") MultipartFile[] files) throws FileStorageException {
 		for (MultipartFile file : files) {
 			_log.info("Upload file {}", file.getOriginalFilename());
@@ -63,23 +62,9 @@ public class MessageController {
 		}
 	}
 
-	@PostMapping(value = "/async")
-	@ResponseStatus(value = HttpStatus.ACCEPTED)
-	public void uploadAsyncFile(@RequestParam("chunk") final MultipartFile chunk,
-			@RequestParam("chunkIndex") final Long chunkIndex, @RequestParam("totalChunks") final Long totalChunks,
-			@RequestHeader(name = "File-Name") final String fileName) {
-		final long fileSize = chunk.getSize();
-		_log.info("Upload chunkIndex {} for file name {} with size {} bytes", chunkIndex, fileName, fileSize);
-		this.applicationEventPublisher
-				.publishEvent(new FileCombineEvent(chunk, fileName, chunkIndex, fileSize, totalChunks));
-	}
-
 	@GetMapping("/download/{fileName}")
 	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable("fileName") String fileName,
 			HttpServletRequest request) throws FileStorageNotFoundException {
-//		Load file as Resource
-//        Resource resource = this.fileService.loadFileAsResource(fileName);
-
 		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
 				.body(new ByteArrayResource(new byte[] {}));
@@ -97,9 +82,23 @@ public class MessageController {
 	}
 
 	@PostMapping
-	public ResponseEntity<MessageRes> createMessage(@Valid @RequestBody MessageReq req) throws EntityNotFoundException {
+	public ResponseEntity<MessageRes> createMessage(@Valid @RequestBody MessageReq req) throws EntityNotFoundException, InterruptedException {
 		_log.info("Api createMessage was called");
 		return this.messageService.createMessage(req);
+	}
+
+	@PostMapping(value = "/async")
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void uploadAsyncFile(@RequestParam("chunk") final MultipartFile chunk,
+			@RequestParam("chunkIndex") final Long chunkIndex,
+			@RequestParam("totalChunks") final Long totalChunks,
+			@RequestParam("roomId") final UUID roomId,
+			@RequestHeader(name = "File-Name") final String fileName,
+			@RequestHeader(name = "File-Type") final String fileType) {
+		final long fileSize = chunk.getSize();
+		_log.info("Upload chunkIndex {} for file name {} with size {} bytes", chunkIndex, fileName, fileSize);
+		this.applicationEventPublisher
+				.publishEvent(new FileCombineEvent(chunk, fileName, chunkIndex, fileSize, totalChunks, fileType, roomId));
 	}
 
 	@DeleteMapping("{id}")

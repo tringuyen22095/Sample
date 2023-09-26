@@ -2,7 +2,6 @@ package project.personal.social.network.service.impl;
 
 import java.util.UUID;
 
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Direction;
@@ -14,7 +13,6 @@ import project.personal.shared.client.resource.MessageFeignClient;
 import project.personal.shared.common.exception.EntityNotFoundException;
 import project.personal.shared.common.model.req.MessageReq;
 import project.personal.shared.common.model.res.MessageRes;
-import project.personal.social.network.service.FileService;
 import project.personal.social.network.service.MessageService;
 
 @Service
@@ -24,10 +22,6 @@ public class MessageServiceImpl implements MessageService {
 
 	private final MessageFeignClient messageFeignClient;
 
-	private final FileService fileService;
-
-	private final ApplicationEventPublisher applicationEventPublisher;
-
 	@Override
 	public ResponseEntity<Page<MessageRes>> getMessage(UUID roomId, int page, int size, Direction direction,
 			String... properties) throws EntityNotFoundException {
@@ -35,8 +29,10 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public ResponseEntity<MessageRes> createMessage(MessageReq req) throws EntityNotFoundException {
-		return this.messageFeignClient.createMessage(req);
+	public ResponseEntity<MessageRes> createMessage(MessageReq req)
+			throws EntityNotFoundException, InterruptedException {
+		ResponseEntity<MessageRes> response = this.messageFeignClient.createMessage(req);
+		return response;
 	}
 
 	@Override

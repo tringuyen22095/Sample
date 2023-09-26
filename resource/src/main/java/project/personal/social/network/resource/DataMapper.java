@@ -77,6 +77,17 @@ public interface DataMapper {
 
 	/* Document */
 
+	@Mapping(target = "fileType", ignore = true)
+	@Mapping(target = "fileName", ignore = true)
+	@Mapping(target = "messages", ignore = true)
+	@Mapping(target = "deleted", ignore = true)
+	@Mapping(target = "createdBy", ignore = true)
+	@Mapping(target = "createdOn", ignore = true)
+	@Mapping(target = "updatedBy", ignore = true)
+	@Mapping(target = "updatedOn", ignore = true)
+	@Mapping(target = "id", ignore = true)
+	void fromRequestToExistEntity(@MappingTarget DocumentEntity entity, DocumentReq req);
+
 	@Mapping(target = "deleted", ignore = true)
 	@Mapping(target = "createdBy", ignore = true)
 	@Mapping(target = "createdOn", ignore = true)
