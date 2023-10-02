@@ -1,7 +1,5 @@
 package project.personal.shared.common.model.req;
 
-import java.sql.Blob;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -24,7 +22,7 @@ public class DocumentReq {
 
 	@JsonProperty("bData")
 	@NotNull(message = "Data can't be empty.")
-	private Blob bData;
+	private byte[] bData;
 
 	@JsonProperty("fileType")
 	@NotEmpty(message = "File type can't be empty.")

@@ -1,8 +1,13 @@
 package project.personal.social.network.resource;
 
+import java.sql.Blob;
+
+import javax.sql.rowset.serial.SerialBlob;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
@@ -86,6 +91,7 @@ public interface DataMapper {
 	@Mapping(target = "updatedBy", ignore = true)
 	@Mapping(target = "updatedOn", ignore = true)
 	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "BData", source = "BData", qualifiedByName = "byteArrayToBlob", conditionExpression = ("java(req.getBData() != null)"))
 	void fromRequestToExistEntity(@MappingTarget DocumentEntity entity, DocumentReq req);
 
 	@Mapping(target = "deleted", ignore = true)
@@ -95,10 +101,16 @@ public interface DataMapper {
 	@Mapping(target = "updatedOn", ignore = true)
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "messages", ignore = true)
+	@Mapping(target = "BData", source = "BData", qualifiedByName = "byteArrayToBlob", conditionExpression = ("java(req.getBData() != null)"))
 	DocumentEntity fromRequestToEntity(DocumentReq req);
 
 	DocumentRes fromEntityToResponse(DocumentEntity req);
 
 	/* Document */
+	
+	@Named("byteArrayToBlob") 
+    public static Blob byteArrayToBlob(byte[] by) throws Exception { 
+        return new SerialBlob(by); 
+    }
 
 }

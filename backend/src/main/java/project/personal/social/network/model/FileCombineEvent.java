@@ -14,14 +14,13 @@ public class FileCombineEvent extends ApplicationEvent {
 	private static final long serialVersionUID = 3893269436003097118L;
 
 	public FileCombineEvent(Object source, String fileName, Long chunkIndex, Long fileSize, Long totalChunks,
-			String fileType, UUID roomId) {
+			UUID docId) {
 		super(source);
 		this.fileName = fileName;
 		this.chunkIndex = chunkIndex;
 		this.fileSize = fileSize;
 		this.totalChunks = totalChunks;
-		this.fileType = fileType;
-		this.roomId = roomId;
+		this.docId = docId;
 	}
 
 	private String fileName;
@@ -32,8 +31,6 @@ public class FileCombineEvent extends ApplicationEvent {
 
 	private Long totalChunks;
 
-	private String fileType;
-
-	private UUID roomId;
+	private UUID docId;
 
 }

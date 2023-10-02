@@ -45,9 +45,9 @@ public class DocumentController {
 
 	@PutMapping("/{docId}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void updateDocument(@PathVariable("docId") UUID id, @RequestBody DocumentReq req)
+	public void updateDocument(@PathVariable("docId") UUID docId, @RequestBody DocumentReq req)
 			throws EntityNotFoundException {
-		this.documentService.updateDocument(id, req);
+		this.documentService.updateDocument(docId, req);
 	}
 
 }

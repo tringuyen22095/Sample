@@ -2,7 +2,6 @@ package project.personal.social.network.service.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -14,12 +13,12 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 import java.util.stream.LongStream;
 
 import javax.annotation.PostConstruct;
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.io.Resource;
@@ -27,7 +26,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.Setter;
 import project.personal.shared.client.resource.DocumentFeignClient;
 import project.personal.shared.common.exception.EntityNotFoundException;
 import project.personal.shared.common.exception.FileStorageException;
@@ -50,7 +48,7 @@ public class FileServiceImpl implements FileService {
 
 	private WriteLock writeLock;
 
-	@Setter
+	@Autowired
 	private DocumentFeignClient documentFeignClient;
 
 	@PostConstruct
@@ -74,14 +72,13 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Async
-	@EventListener(condition = "#event.fileName != null && #event.fileName.length != 0 && #event.chunkIndex >= 0 && #event.fileSize > 0")
+	@EventListener(condition = "#event.fileName != null && #event.fileName.length != 0 && #event.chunkIndex >= 0 && #event.fileSize > 0 && #event.docId != null")
 	public void fileCombineEventListener(final FileCombineEvent event)
 			throws InterruptedException, FileStorageException, FileStorageNotFoundException, IOException {
 		final MultipartFile source = (MultipartFile) event.getSource();
-		final UUID roomId = event.getRoomId();
-		final String fileType = event.getFileType();
-		final String key = event.getFileName() + roomId.toString();
-		final Long value = event.getChunkIndex();
+		final UUID docId = event.getDocId();
+		final String key = event.getFileName() + docId.toString();
+		final Long value = event.getChunkIndex() - 1;
 		final long totalChunksCount = event.getTotalChunks();
 		_log.info("Event listening compine file with file name {}, index [{}]", key, value);
 		_log.info("totalChunks {}", totalChunksCount);
@@ -91,11 +88,12 @@ public class FileServiceImpl implements FileService {
 			this.concurrentMap.compute(key, (k, v) -> {
 				try {
 					if (v == null) {
-						List<byte[]> newLst = new ArrayList<byte[]>((int) totalChunksCount);
+						List<byte[]> newLst = new ArrayList<byte[]>();
+						LongStream.range(0, totalChunksCount).forEach(i -> newLst.add(null));
 						newLst.set(value.intValue(), source.getBytes());
 						return newLst;
 					}
-					v.add(source.getBytes());
+					v.set(value.intValue(), source.getBytes());
 					return v;
 				} catch (IOException e) {
 					return null;
@@ -109,30 +107,23 @@ public class FileServiceImpl implements FileService {
 			this.readLock.lock();
 			if (this.concurrentMap.containsKey(key) &&
 					CollectionUtils.isNotEmpty(this.concurrentMap.get(key)) &&
-					IterableUtils.matchesAny(this.concurrentMap.get(key), (ele) -> ele != null) &&
+					!IterableUtils.matchesAny(this.concurrentMap.get(key), (ele) -> ele == null) &&
 					this.concurrentMap.get(key).size() == totalChunksCount) {
 				List<byte[]> arr = this.concurrentMap.get(key);
+				this.concurrentMap.remove(key);
 				ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 				for (byte[] b : arr) byteArrayOutputStream.write(b);
 
-				SerialBlob lob = new SerialBlob(byteArrayOutputStream.toByteArray());
 				DocumentReq docReq = DocumentReq.builder()
-						.bData(lob)
-						.fileName(key)
-						.fileType(fileType)
+						.bData(byteArrayOutputStream.toByteArray())
 						.build();
-				this.documentFeignClient.updateDocument(roomId, docReq);
-				this.concurrentMap.remove(key);
+				this.documentFeignClient.updateDocument(docId, docReq);
 			}
-		} catch (SQLException e) {
-			_log.info("Combine error for {}", key, e);
-			this.concurrentMap.remove(key);
 		} catch (EntityNotFoundException e) {
 			_log.info("Feign client executed error for {}", key, e);
 			this.concurrentMap.remove(key);
 		} finally {
 			this.readLock.unlock();
-			this.notifyAll();
 		}
 	}
 

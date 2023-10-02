@@ -92,13 +92,12 @@ public class MessageController {
 	public void uploadAsyncFile(@RequestParam("chunk") final MultipartFile chunk,
 			@RequestParam("chunkIndex") final Long chunkIndex,
 			@RequestParam("totalChunks") final Long totalChunks,
-			@RequestParam("roomId") final UUID roomId,
-			@RequestHeader(name = "File-Name") final String fileName,
-			@RequestHeader(name = "File-Type") final String fileType) {
+			@RequestParam("docId") final UUID docId,
+			@RequestHeader(name = "File-Name") final String fileName) {
 		final long fileSize = chunk.getSize();
 		_log.info("Upload chunkIndex {} for file name {} with size {} bytes", chunkIndex, fileName, fileSize);
 		this.applicationEventPublisher
-				.publishEvent(new FileCombineEvent(chunk, fileName, chunkIndex, fileSize, totalChunks, fileType, roomId));
+				.publishEvent(new FileCombineEvent(chunk, fileName, chunkIndex, fileSize, totalChunks, docId));
 	}
 
 	@DeleteMapping("{id}")
