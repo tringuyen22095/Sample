@@ -78,7 +78,7 @@ public class FileServiceImpl implements FileService {
 		final MultipartFile source = (MultipartFile) event.getSource();
 		final UUID docId = event.getDocId();
 		final String key = event.getFileName() + docId.toString();
-		final Long value = event.getChunkIndex() - 1;
+		final Long value = event.getChunkIndex();
 		final long totalChunksCount = event.getTotalChunks();
 		_log.info("Event listening compine file with file name {}, index [{}]", key, value);
 		_log.info("totalChunks {}", totalChunksCount);

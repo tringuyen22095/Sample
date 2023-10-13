@@ -104,13 +104,19 @@ public interface DataMapper {
 	@Mapping(target = "BData", source = "BData", qualifiedByName = "byteArrayToBlob", conditionExpression = ("java(req.getBData() != null)"))
 	DocumentEntity fromRequestToEntity(DocumentReq req);
 
+	@Mapping(target = "BData", source = "BData", qualifiedByName = "blobToByteArray", conditionExpression = ("java(req.getBData() != null)"))
 	DocumentRes fromEntityToResponse(DocumentEntity req);
 
 	/* Document */
-	
-	@Named("byteArrayToBlob") 
-    public static Blob byteArrayToBlob(byte[] by) throws Exception { 
-        return new SerialBlob(by); 
+
+	@Named("byteArrayToBlob")
+	public static Blob byteArrayToBlob(byte[] by) throws Exception {
+		return new SerialBlob(by);
+	}
+
+	@Named("blobToByteArray") 
+    public static byte[] byteArrayToBlob(Blob blob) throws Exception {
+        return blob.getBinaryStream().readAllBytes();
     }
 
 }

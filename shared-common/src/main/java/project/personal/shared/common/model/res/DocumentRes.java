@@ -1,6 +1,5 @@
 package project.personal.shared.common.model.res;
 
-import java.sql.Blob;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -21,7 +20,7 @@ public class DocumentRes {
 	private UUID id;
 
 	@JsonProperty("bData")
-	private Blob bData;
+	private byte[] bData;
 
 	@JsonProperty("fileType")
 	private String fileType;
