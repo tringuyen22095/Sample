@@ -1,13 +1,10 @@
-import { MyPage } from '@/shared/layout/types'
+import React from 'react';
 import './page.scss'
 
-const LoginPage: MyPage = () => {
+export default function LoginPage() {
   return (
     <>
       <a href='/login'>login</a>
     </>
   );
 }
-
-export default LoginPage;
-LoginPage.LayoutKey = "Anonymous";

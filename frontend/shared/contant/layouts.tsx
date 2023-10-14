@@ -1,7 +1,7 @@
 // components/common/Layouts.tsx
-import AdminLayout from "./admin-layout";
-import AnonymousLayout from "./anonymous-layout";
-import AuthenticationLayout from "./authentication-layout";
+import AdminLayout from "../layout/admin-layout";
+import AnonymousLayout from "../layout/anonymous-layout";
+import AuthenticationLayout from "../layout/authentication-layout";
 
 export const Layouts = {
   Admin: AdminLayout,
