@@ -1,0 +1,28 @@
+@mixin material-shadow() {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+}
+
+$module-font-size: 14px;
+$bezier: cubic-bezier(.25, .8, .25, 1);
+
+.anonymous-layout {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  min-height: 100vh;
+  padding: unset !important;
+
+  .left-container {
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .right-container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+}
