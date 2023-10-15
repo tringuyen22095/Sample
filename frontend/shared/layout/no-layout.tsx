@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 
-const EmptyLayout: React.FC<PropsWithChildren> = ({ children }) => {
+const NoLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
         no
@@ -9,4 +9,4 @@ const EmptyLayout: React.FC<PropsWithChildren> = ({ children }) => {
   )
 }
 
-export default EmptyLayout;
+export default NoLayout;

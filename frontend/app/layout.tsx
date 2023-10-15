@@ -1,15 +1,16 @@
+import { MyAppProps } from "@/shared/layout/types";
 import "../style/globals.css";
 import React from "react";
-import EmptyLayout from "@/shared/layout/empty-layout";
-import { AppProps } from "next/app";
+import { Layouts } from "@/shared/layout/layouts";
+import NoLayout from "@/shared/layout/no-layout";
 
 export const metadata = {
   title: 'ixxhaianh',
   description: 'Private project'
 }
 
-export default function RootLayout({ Component, pageProps }: AppProps) {
-  const Layout = Component || EmptyLayout;
+const RootLayout: React.FC<MyAppProps> = ({ children, LayoutKey }) => {
+  const Layout = Layouts[LayoutKey] || NoLayout;
   return (
     <html lang="en">
       <head>
@@ -25,9 +26,10 @@ export default function RootLayout({ Component, pageProps }: AppProps) {
       </head>
       <body>
         <Layout>
-          <Component {...pageProps} />
+          {children}
         </Layout>
       </body>
     </html>
   )
 }
+export default RootLayout;
