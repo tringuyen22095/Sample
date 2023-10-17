@@ -1,4 +1,4 @@
-import AnonymousLayout from "@/shared/layout/anonymous-layout";
+import AnonymousLayout from "@/shared/layout/anonymous-layout/anonymous-layout";
 import React from "react";
 
 export const metadata = {
