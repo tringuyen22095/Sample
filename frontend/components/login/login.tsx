@@ -1,44 +1,55 @@
-// "use client";
+import React, { useState, useEffect } from 'react';
+import * as Yup from "yup";
+import "./login.scss";
 
-// import React, { useState, useEffect } from 'react';
-// import "./login.scss";
+const validationSchema = Yup.object({
+  username: Yup.string().required("Username is required."),
+  password: Yup.string().required("Password is required.")
+});
 
+const formGroupBuilder = {
+  username: '',
+  password: ''
+}
 
-// const Login: React.FC = () => {
-//   const [formFields, setFormFields] = useState([]);
+const Login: React.FC = () => {
+  const [formGroup, setFormGroup] = useState(formGroupBuilder);
 
-//   useEffect(() => {
+  useEffect(() => {
 
-//   }, []);
+  }, []);
 
-//   const addField = () => {
-//     const newField = {
-//       type: 'text',
-//       label: 'New Field',
-//     };
-//     setFormFields([...formFields, newField]);
-//   };
+  function onChange(event: React.BaseSyntheticEvent) {
+    console.log(event)
+  }
 
-//   const removeField = (index: number) => {
-//     const updatedFields = [...formFields];
-//     updatedFields.splice(index, 1);
-//     setFormFields(updatedFields);
-//   };
+  function onSubmit() {
+    console.log(formGroup);
+  }
 
-//   const renderFields = () => {
-//     return formFields.map((field: any, index: number) => (
-//       <div key={index}>
-//         <input type={field.type} placeholder={field.label} />
-//         <button onClick={() => removeField(index)}>Remove</button>
-//       </div>
-//     ));
-//   };
+  return (
+    <div className='login'>
+      <div className='row'>
+        <div className='col-12'>
+          <label htmlFor='username'>Username</label>
+          <br/>
+          <input type='text' id='username' name='username' onChange={onChange}/>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='col-12'>
+          <label htmlFor='password'>Password</label>
+          <br/>
+          <input type='password' id='password' name='password' onChange={onChange}/>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='col-12 d-flex justify-content-center align-content-center'>
+          <button type='button' onClick={onSubmit}>Submit</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-//   return (
-//     <div className='login'>
-
-//     </div>
-//   );
-// };
-
-// export default Login;
+export default Login;
