@@ -1,12 +1,10 @@
-"use client";
-
-import Login from '@/components/login/login'
 import './page.scss'
+import LoginForm from '@/components/login/login-form';
 
 const LoginPage: React.FC = () => {
   return (
     <>
-      <Login/>
+      <LoginForm />
     </>
   );
 }

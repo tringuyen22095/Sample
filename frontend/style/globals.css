@@ -93,6 +93,15 @@ body {
   min-width: 100%;
   background-color: #ffffff;
 }
+.error-msg {
+  font-size: 12px;
+  color: #FE3E42;
+}
+
+.warning-mgs {
+  font-size: 12px;
+  color: #FEC23E;
+}
 
 @media (prefers-color-scheme: dark) {
   html {
