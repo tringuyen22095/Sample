@@ -1,3 +1,5 @@
+'use client';
+
 import React, { PropsWithChildren } from "react";
 import "./anonymous-layout.scss";
 import Slider from "@/components/slider/slider";

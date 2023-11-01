@@ -1,3 +1,5 @@
+'use client';
+
 import './page.scss'
 import LoginForm from '@/components/login/login-form';
 
