@@ -1,4 +1,6 @@
 import axios, { AxiosError } from 'axios';
+import { Envs } from '../utils/utils';
+import { toast } from 'react-toastify';
 
 interface ErrorResponse {
     error: string
@@ -9,18 +11,18 @@ interface ErrorResponse {
 
 export default function baseAxios() {
     const config = axios.create({
-        baseURL: `http://nbs.int.crif.com:80/`
+        baseURL: Envs.BASE_URL
     });
     config.interceptors.request.use(function (config) {
         config.headers.Authorization = `Bearer ${''}`;
         return config;
     }, null, { synchronous: true });
     config.interceptors.response.use(function (config) {
-        console.log("Called successful");
+        toast.success('Action executed successful!', {});
         return config;
     }, function (config: AxiosError<ErrorResponse, any>) {
         if (config.isAxiosError) {
-            console.log("Called error");
+            toast.error('Action executed failure!', {});
         }
     }, { synchronous: true });
     return config;

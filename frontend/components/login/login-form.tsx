@@ -9,6 +9,7 @@ import { show, hide } from "@/shared/common/loading/loading-slice";
 import { useAppDispatch } from '@/shared/redux/store';
 import { useRouter } from "next/navigation";
 import * as authService from "@/shared/service/authentication.service";
+import { Envs } from "@/shared/utils/utils";
 
 const schema = Yup.object().shape({
   username: Yup.string().required('Username is required.'),
@@ -16,14 +17,13 @@ const schema = Yup.object().shape({
   rememberMe: Yup.boolean().optional()
 });
 
-const form = {
-  username: process.env.USERNAME || '',
-  password: process.env.PASSWORD || '',
+const initFormValues = {
+  username: Envs.USERNAME || '',
+  password: Envs.PASSWORD || '',
   rememberMe: false
 };
 
-interface Props {
-}
+interface Props {}
 
 const LoginForm = (props: Props) => {
   const dispatch = useAppDispatch();
@@ -31,7 +31,7 @@ const LoginForm = (props: Props) => {
 
   const { register, handleSubmit, reset, setError, watch, setFocus, getValues, trigger, setValue, formState: { errors, isDirty, isSubmitted, isValid } } = useForm({
     mode: 'all',
-    defaultValues: form,
+    defaultValues: initFormValues,
     criteriaMode: 'all',
     resolver: yupResolver(schema)
   });

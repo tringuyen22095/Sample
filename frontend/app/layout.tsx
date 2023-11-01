@@ -1,5 +1,6 @@
 import '../style/globals.css';
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata = {
   title: 'ixxhaianh',
@@ -25,6 +26,7 @@ const RootLayout = (props: React.PropsWithChildren) => {
       <body>
         <main>
           {props.children}
+          <ToastContainer/>
         </main>
       </body>
     </html>
