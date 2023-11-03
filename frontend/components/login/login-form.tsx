@@ -1,10 +1,10 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import './login-form.scss';
 import { useForm } from 'react-hook-form';
 import { Login } from "@mui/icons-material";
-import { OutlinedInput, InputLabel, FormControl, Button, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
+import { Button, Checkbox, FormGroup, FormControlLabel, TextField, FormHelperText } from '@mui/material';
 import { show, hide } from "@/shared/common/loading/loading-slice";
 import { useAppDispatch } from '@/shared/redux/store';
 import { useRouter } from "next/navigation";
@@ -23,7 +23,7 @@ const initFormValues = {
   rememberMe: false
 };
 
-interface Props {}
+interface Props { }
 
 const LoginForm = (props: Props) => {
   const dispatch = useAppDispatch();
@@ -35,6 +35,8 @@ const LoginForm = (props: Props) => {
     criteriaMode: 'all',
     resolver: yupResolver(schema)
   });
+
+  useEffect(() => { });
 
   const onSubmit = async (data) => {
     try {
@@ -59,30 +61,32 @@ const LoginForm = (props: Props) => {
         </div>
         <div className='row'>
           <div className='col-12'>
-            <FormControl variant="outlined">
-              <InputLabel htmlFor='username'>Username</InputLabel>
-              <OutlinedInput type='text'
-                label='Username'
-                id='username'
-                name='username'
-                {...register('username')}
-                error={errors.username?.message ? true : false} />
-              <span className='error-msg'>{errors.username?.message}</span>
-            </FormControl>
+            <TextField type='text'
+              label='Username'
+              id='username'
+              name='username'
+              {...register('username')}
+              error={errors.username?.message ? true : false} />
+            <FormHelperText className='error-msg'
+              sx={{ position: 'absolute' }}
+              error={errors.password?.message ? true : false}>
+              {errors.username?.message}
+            </FormHelperText>
           </div>
         </div>
         <div className='row'>
           <div className='col-12'>
-            <FormControl variant="outlined">
-              <InputLabel htmlFor='password'>Password</InputLabel>
-              <OutlinedInput type='password'
-                label='Password'
-                id='password'
-                name='password'
-                {...register('password')}
-                error={errors.password?.message ? true : false} />
-              <span className='error-msg'>{errors.password?.message}</span>
-            </FormControl>
+            <TextField type='password'
+              label='Password'
+              id='password'
+              name='password'
+              {...register('password')}
+              error={errors.password?.message ? true : false} />
+            <FormHelperText className='error-msg'
+              sx={{ position: 'absolute' }}
+              error={errors.password?.message ? true : false}>
+              {errors.password?.message}
+            </FormHelperText>
           </div>
         </div>
         <div className='row'>

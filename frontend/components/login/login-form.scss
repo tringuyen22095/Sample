@@ -6,18 +6,18 @@
     >form {
 
         >.row {
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
 
             &:first-child {
-                margin-bottom: 4rem;
+                margin-bottom: 2.5rem;
             }
 
             &:last-child {
-                margin-top: 2rem;
                 margin-bottom: unset;
             }
 
             >.col-12 {
+
                 >div {
                     min-width: 100%;
                 }

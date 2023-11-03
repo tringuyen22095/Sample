@@ -1,10 +1,7 @@
-import DashboardLayout from "@/shared/layout/dashboard-layout/dashboard-layout";
-import React from "react";
+'use client';
 
-export const metadata = {
-  title: 'ixxhaianh',
-  description: 'Private project'
-}
+import DashboardLayout from '@/shared/layout/dashboard-layout/dashboard-layout';
+import React from 'react';
 
 const RootLayout: React.FC<any> = ({ children }) => {
   return (
