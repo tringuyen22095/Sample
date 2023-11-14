@@ -22,7 +22,11 @@ export default function baseAxios() {
         return config;
     }, function (config: AxiosError<ErrorResponse, any>) {
         if (config.isAxiosError) {
-            toast.error('Action executed failure!', {});
+            if (config.response.status === 401) {
+                toast.error('Authentication failed!', {});
+            } else {
+                toast.error('Action executed failure!', {});
+            }
         }
     }, { synchronous: true });
     return config;
