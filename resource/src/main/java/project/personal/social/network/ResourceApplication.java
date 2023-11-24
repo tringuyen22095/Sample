@@ -7,7 +7,7 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.SecureRandom;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -20,12 +20,10 @@ import project.personal.shared.common.config.GlobalExceptionHandler;
 
 @SpringBootApplication
 @EnableEurekaClient
-@ComponentScan(basePackages = {
-		"project.personal.social.network"
-})
+@ComponentScan(basePackages = { "project.personal.social.network" })
 @Import(GlobalExceptionHandler.class)
 public class ResourceApplication {
-	
+
 	@Value("${HOME_DIR:./}")
 	private static String HOME_DIR;
 
@@ -37,23 +35,22 @@ public class ResourceApplication {
 	@SuppressWarnings("unused")
 	private static void generateKey() {
 		try {
-			SecureRandom sr = new SecureRandom();
 			KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-			kpg.initialize(1024, sr);
+			kpg.initialize(2048);
 
-			KeyPair kp = kpg.genKeyPair();
+			KeyPair kp = kpg.generateKeyPair();
 			PublicKey publicKey = kp.getPublic();
 			PrivateKey privateKey = kp.getPrivate();
 
-			File publicKeyFile = createKeyFile(new File(HOME_DIR + "publicKey.rsa"));
-			File privateKeyFile = createKeyFile(new File(HOME_DIR + "privateKey.rsa"));
+			File publicKeyFile = createKeyFile(new File("publicKey.key"));
+			File privateKeyFile = createKeyFile(new File("privateKey.key"));
 
 			FileOutputStream fos = new FileOutputStream(publicKeyFile);
-			fos.write(publicKey.getEncoded());
+			fos.write(Base64.getEncoder().encodeToString(publicKey.getEncoded()).getBytes());
 			fos.close();
 
 			fos = new FileOutputStream(privateKeyFile);
-			fos.write(privateKey.getEncoded());
+			fos.write(Base64.getEncoder().encodeToString(privateKey.getEncoded()).getBytes());
 			fos.close();
 		} catch (Exception e) {
 			e.printStackTrace();

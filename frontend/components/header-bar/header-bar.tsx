@@ -14,6 +14,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { Tooltip } from '@mui/material';
+import { Logout } from '@mui/icons-material';
 
 // xs: 0px, sm: 600px, md: 900px, lg: 1200px, xl: 1536px
 
@@ -75,7 +77,12 @@ export default function HeaderBar(props: Props) {
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        handleMobileMenuClose();
+    };
+
+    const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -83,13 +90,12 @@ export default function HeaderBar(props: Props) {
         setMobileMoreAnchorEl(null);
     };
 
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        handleMobileMenuClose();
-    };
-
     const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const handleLogOut = (event: React.MouseEvent<HTMLElement>) => {
+        
     };
 
     const menuId = 'primary-search-account-menu';
@@ -108,7 +114,7 @@ export default function HeaderBar(props: Props) {
             open={isMenuOpen}
             onClose={handleMenuClose}>
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleLogOut && handleMenuClose}>Log Out</MenuItem>
         </Menu>
     );
 
@@ -129,7 +135,6 @@ export default function HeaderBar(props: Props) {
             onClose={handleMobileMenuClose}>
             <MenuItem>
                 <IconButton size='large'
-                    aria-label='show 4 new mails'
                     color='inherit'>
                     <Badge badgeContent={4}
                         color='error'>
@@ -140,7 +145,6 @@ export default function HeaderBar(props: Props) {
             </MenuItem>
             <MenuItem>
                 <IconButton size='large'
-                    aria-label='show 17 new notifications'
                     color='inherit'>
                     <Badge badgeContent={17}
                         color='error'>
@@ -149,15 +153,19 @@ export default function HeaderBar(props: Props) {
                 </IconButton>
                 <p>Notifications</p>
             </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
+            <MenuItem onClick={()=>{}}>
                 <IconButton size='large'
-                    aria-label='account of current user'
-                    aria-controls='primary-search-account-menu'
-                    aria-haspopup='true'
                     color='inherit'>
                     <AccountCircle />
                 </IconButton>
                 <p>Profile</p>
+            </MenuItem>
+            <MenuItem onClick={handleLogOut}>
+                <IconButton size='large'
+                    color='inherit'>
+                    <Logout />
+                </IconButton>
+                <p>Log Out</p>
             </MenuItem>
         </Menu>
     );
@@ -175,13 +183,14 @@ export default function HeaderBar(props: Props) {
         <Box sx={{ flexGrow: 1 }} ref={ref}>
             <AppBar position='static' sx={{ boxShadow: 'unset' }}>
                 <Toolbar>
-                    <IconButton size='large'
-                        edge='start'
-                        color='inherit'
-                        onClick={() => props.setCollapse()}
-                        aria-label='open drawer'>
-                        <MenuIcon />
-                    </IconButton>
+                    <Tooltip title="Open Menu">
+                        <IconButton size='large'
+                            edge='start'
+                            color='inherit'
+                            onClick={() => props.setCollapse()}>
+                            <MenuIcon />
+                        </IconButton>
+                    </Tooltip>
                     <DivContainer>
                         <Search>
                             <SearchIconWrapper>
@@ -213,7 +222,7 @@ export default function HeaderBar(props: Props) {
                             aria-label='account of current user'
                             aria-controls={menuId}
                             aria-haspopup='true'
-                            onClick={handleProfileMenuOpen}
+                            onClick={handleMenuOpen}
                             color='inherit'>
                             <AccountCircle />
                         </IconButton>

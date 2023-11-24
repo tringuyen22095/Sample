@@ -1,7 +1,6 @@
 import * as React from 'react';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
@@ -21,12 +20,15 @@ export default function LeftNav(props: Props) {
     return props.lstRoom.map((item, index) => {
       return (
         <React.Fragment key={item.id}>
-          <ListItemButton alignItems='flex-start'>
+          <ListItemButton alignItems='center'
+            sx={{
+              height: { md: '90px'}
+            }}>
             <ListItemAvatar>
-              <Avatar alt={item.name.toUpperCase()} src='/static/images/avatar/1.jpg' />
+              <Avatar alt={item.name.toUpperCase()} src={null} />
             </ListItemAvatar>
             <Grid2 container>
-              <Grid2 xs={12} lg={12} md={12} sm={12} xl={12}>
+              <Grid2 xs={12}>
                 <Typography component='div'
                   variant='body2'
                   color='text.primary'
@@ -40,7 +42,7 @@ export default function LeftNav(props: Props) {
                   {item.name}
                 </Typography>
               </Grid2>
-              <Grid2 xs={12} sm={12} md={12} lg={12} xl={12}>
+              <Grid2 xs={12}>
                 <Box component='div'
                   sx={{
                     textOverflow: 'ellipsis',
@@ -66,7 +68,7 @@ export default function LeftNav(props: Props) {
 
   return (
     <Box sx={{
-      width: { xs: '10px', sm: '100px', md: '500px' },
+      width: { xs: '250px', sm: '350px', md: '500px'},
       bgcolor: 'background.paper',
       minHeight: `calc(100vh - ${props.headerHeight}px)`,
       boxShadow: '#BEBFC0 1px 0 3px 0'

@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import './login-form.scss';
 import { useForm } from 'react-hook-form';
-import { Login } from "@mui/icons-material";
-import { Button, Checkbox, FormGroup, FormControlLabel, TextField, FormHelperText } from '@mui/material';
+import { Login, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Button, Checkbox, FormGroup, FormControlLabel, TextField, FormHelperText, IconButton } from '@mui/material';
 import { show, hide } from "@/shared/common/loading/loading-slice";
 import { useAppDispatch } from '@/shared/redux/store';
 import { useRouter } from "next/navigation";
@@ -29,12 +29,20 @@ const LoginForm = (props: Props) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const { register, handleSubmit, reset, setError, watch, setFocus, getValues, trigger, setValue, formState: { errors, isDirty, isSubmitted, isValid } } = useForm({
     mode: 'all',
     defaultValues: initFormValues,
     criteriaMode: 'all',
     resolver: yupResolver(schema)
   });
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
 
   useEffect(() => { });
 
@@ -76,10 +84,18 @@ const LoginForm = (props: Props) => {
         </div>
         <div className='row'>
           <div className='col-12'>
-            <TextField type='password'
+            <TextField type={showPassword ? 'text' : 'password'}
               label='Password'
               id='password'
               name='password'
+              InputProps={{
+                endAdornment: (<IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end">
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>)
+              }}
               {...register('password')}
               error={errors.password?.message ? true : false} />
             <FormHelperText className='error-msg'

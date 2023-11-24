@@ -17,6 +17,7 @@
     "@mui/material": "^5.14.14",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.0",
+    "jsencrypt": "^3.3.2",
     "moment": "^2.29.4",
     "next": "13.5.4",
     "react": "^18",

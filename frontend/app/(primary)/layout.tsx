@@ -8,12 +8,12 @@ import { Provider } from 'react-redux';
 
 const RootLayout: React.FC<any> = ({ children }) => {
   return (
-    <AnonymousLayout>
-      <Provider store={store}>
+    <Provider store={store}>
+      <AnonymousLayout>
         <Loading />
         {children}
-      </Provider>
-    </AnonymousLayout>
+      </AnonymousLayout>
+    </Provider>
   )
 }
 export default RootLayout;

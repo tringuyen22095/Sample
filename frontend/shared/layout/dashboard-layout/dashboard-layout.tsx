@@ -1,15 +1,9 @@
 import React, { PropsWithChildren, Suspense, useCallback, useEffect, useState } from 'react';
 import HeaderBar from '@/components/header-bar/header-bar';
-import { Collapse, styled } from '@mui/material';
+import { Box, Collapse, styled } from '@mui/material';
 import LeftNav from '@/components/left-nav/left-nav';
 import * as RoomService from '@/shared/service/room.service';
 import { RoomItem } from '@/shared/models/model';
-
-const DivContainer = styled('div')(({ theme }) => ({
-  width: '100%',
-  display: 'flex',
-  flex: 'row'
-}));
 
 const DashboardLayout: React.FC<PropsWithChildren> = ({ children }) => {
   const [collapse, setCollapse] = useState<boolean>(true);
@@ -32,14 +26,18 @@ const DashboardLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className='dashboard'>
       <HeaderBar setCollapse={menuHit} setDimensions={setDimensions}></HeaderBar>
-      <DivContainer>
-        <Collapse orientation='horizontal' in={collapse}>
-          <LeftNav headerHeight={dimensions.height} lstRoom={lstRoom} />
-        </Collapse>
-        <Suspense fallback={<p>Loading</p>}>
-          {children}
-        </Suspense>
-      </DivContainer>
+      <Box component='div'
+        sx={{
+          display: 'flex',
+          flexDirection: 'row'
+        }}>
+        <Box component='div'>
+          <Collapse orientation='horizontal' in={collapse} sx={{minWidth: 'unset'}}>
+            <LeftNav headerHeight={dimensions.height} lstRoom={lstRoom} />
+          </Collapse>
+        </Box>
+        {children}
+      </Box>
     </div>
   )
 }
