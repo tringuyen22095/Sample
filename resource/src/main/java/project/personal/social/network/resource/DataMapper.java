@@ -4,6 +4,7 @@ import java.sql.Blob;
 
 import javax.sql.rowset.serial.SerialBlob;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -36,7 +37,7 @@ public interface DataMapper {
 	@Mapping(target = "accounts", ignore = true)
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "messages", ignore = true)
-	void fromRequestToEntity(@MappingTarget RoomEntity entity, RoomReq req);
+	abstract void fromRequestToEntity(@MappingTarget RoomEntity entity, RoomReq req);
 
 	@Mapping(target = "deleted", ignore = true)
 	@Mapping(target = "createdBy", ignore = true)
@@ -46,11 +47,11 @@ public interface DataMapper {
 	@Mapping(target = "accounts", ignore = true)
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "messages", ignore = true)
-	RoomEntity fromRequestToExistEntity(RoomReq req);
+	abstract RoomEntity fromRequestToExistEntity(RoomReq req);
 
-	RoomRes fromEntityToResponse(RoomEntity entity);
+	abstract RoomRes fromEntityToResponse(RoomEntity entity);
 
-	RoomDetailRes fromEntityToResponseDetail(RoomEntity entity);
+	abstract RoomDetailRes fromEntityToResponseDetail(RoomEntity entity);
 
 	/* Room */
 
@@ -64,7 +65,7 @@ public interface DataMapper {
 	@Mapping(target = "updatedOn", ignore = true)
 	@Mapping(target = "documents", ignore = true)
 	@Mapping(target = "id", ignore = true)
-	void fromRequestToExistEntity(@MappingTarget MessageEntity entity, MessageReq req);
+	abstract void fromRequestToExistEntity(@MappingTarget MessageEntity entity, MessageReq req);
 
 	@Mapping(source = "roomId", target = "room.id")
 	@Mapping(target = "deleted", ignore = true)
@@ -73,10 +74,10 @@ public interface DataMapper {
 	@Mapping(target = "updatedBy", ignore = true)
 	@Mapping(target = "updatedOn", ignore = true)
 	@Mapping(target = "id", ignore = true)
-	MessageEntity fromRequestToEntity(MessageReq req);
+	abstract MessageEntity fromRequestToEntity(MessageReq req);
 
 	@Mapping(conditionExpression = "java(!MessageType.TEXT.equals(entity.getType()))", target = "documents")
-	MessageRes fromEntityToResponse(MessageEntity entity);
+	abstract MessageRes fromEntityToResponse(MessageEntity entity);
 
 	/* Message */
 
@@ -92,7 +93,7 @@ public interface DataMapper {
 	@Mapping(target = "updatedOn", ignore = true)
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "BData", source = "BData", qualifiedByName = "byteArrayToBlob", conditionExpression = ("java(req.getBData() != null)"))
-	void fromRequestToExistEntity(@MappingTarget DocumentEntity entity, DocumentReq req);
+	abstract void fromRequestToExistEntity(@MappingTarget DocumentEntity entity, DocumentReq req);
 
 	@Mapping(target = "deleted", ignore = true)
 	@Mapping(target = "createdBy", ignore = true)
@@ -102,10 +103,10 @@ public interface DataMapper {
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "messages", ignore = true)
 	@Mapping(target = "BData", source = "BData", qualifiedByName = "byteArrayToBlob", conditionExpression = ("java(req.getBData() != null)"))
-	DocumentEntity fromRequestToEntity(DocumentReq req);
+	abstract DocumentEntity fromRequestToEntity(DocumentReq req);
 
 	@Mapping(target = "BData", source = "BData", qualifiedByName = "blobToByteArray", conditionExpression = ("java(req.getBData() != null)"))
-	DocumentRes fromEntityToResponse(DocumentEntity req);
+	abstract DocumentRes fromEntityToResponse(DocumentEntity req);
 
 	/* Document */
 
@@ -114,9 +115,33 @@ public interface DataMapper {
 		return new SerialBlob(by);
 	}
 
-	@Named("blobToByteArray") 
-    public static byte[] byteArrayToBlob(Blob blob) throws Exception {
-        return blob.getBinaryStream().readAllBytes();
+	@Named("blobToByteArray")
+	public static byte[] byteArrayToBlob(Blob blob) throws Exception {
+		return blob.getBinaryStream().readAllBytes();
+	}
+
+	@AfterMapping
+    default void afterMapping(MessageReq dto, @MappingTarget RoomEntity toUpdate) {
     }
+
+//	protected static class MappingContext {
+//		private final RoomEntity room;
+//
+//		public MappingContext(RoomEntity room) {
+//			this.room = room;
+//		}
+//
+//		@ObjectFactory
+//		public List<MessageEntity> get10LatestMessage() {
+//			if (CollectionUtils.isNotEmpty(this.room.getMessages())) {
+//				return new ArrayList<MessageEntity>();
+//			}
+//			return this.room.getMessages().stream().sorted((m1, m2) -> {
+//				Date d1 = m1.getUpdatedOn() == null ? m1.getUpdatedOn() : m1.getCreatedOn();
+//				Date d2 = m2.getUpdatedOn() == null ? m2.getUpdatedOn() : m2.getCreatedOn();
+//				return d1.compareTo(d2);
+//			}).limit(10).collect(Collectors.toList());
+//		}
+//	}
 
 }
