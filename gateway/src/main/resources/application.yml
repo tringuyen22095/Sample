@@ -10,6 +10,9 @@ eureka:
 spring:
   application:
     name: gateway
+  autoconfigure:
+    exclude:
+    - 
   cloud:
     gateway:
       routes:

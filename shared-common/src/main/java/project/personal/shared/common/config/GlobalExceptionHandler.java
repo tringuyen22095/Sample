@@ -61,7 +61,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		_log.error("Execute fail", ex);
 		ErrorResponse res = ErrorResponse.builder().errorCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
 				.errorMsg(ex.getMessage()).build();
-		return ResponseEntity.internalServerError().body(res);
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
 	}
 	
 	@ExceptionHandler(FeignException.class)

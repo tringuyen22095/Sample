@@ -10,31 +10,13 @@
 		<version>${revision}</version>
 	</parent>
 
-	<artifactId>backend</artifactId>
+	<artifactId>config-cloud</artifactId>
 
 	<properties>
 		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>project.personal</groupId>
-			<artifactId>shared-common</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>project.personal</groupId>
-			<artifactId>shared-client</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -43,8 +25,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>
-						project.personal.social.network.BackEndApplication</mainClass>
+					<mainClass>project.personal.social.network.GatewayApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>
