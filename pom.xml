@@ -3,47 +3,51 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<!-- Project information -->
 	<groupId>project.personal</groupId>
 	<artifactId>tringuyen</artifactId>
 	<version>${revision}</version>
 	<name>Parent</name>
 	<packaging>pom</packaging>
+
 	<!-- List module -->
 	<modules>
 		<module>eureka</module>
+		<module>config-cloud</module>
 		<module>shared-common</module>
 		<module>shared-client</module>
-		<module>config-cloud</module>
 		<module>gateway</module>
 		<module>resource</module>
-		<module>backend</module>
+		<!--
+		<module>backend</module>-->
 	</modules>
+
 	<!-- List properties -->
 	<properties>
 		<revision>0.0.1-SNAPSHOT</revision>
-		<java.version>11</java.version>
-		<maven.compiler.target>11</maven.compiler.target>
-		<maven.compiler.source>11</maven.compiler.source>
+
+		<java.version>17</java.version>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
 		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
-		<srpingcloud.version>2.2.9.RELEASE</srpingcloud.version>
 		<jodatime.version>2.12.2</jodatime.version>
 		<commons.version>3.12.0</commons.version>
 		<commons.collections.version>4.4</commons.collections.version>
 		<lombok.version>1.18.28</lombok.version>
 		<flyway.version>8.2.2</flyway.version>
-		<logging.version>1.7.16</logging.version>
-		<jackson.version>2.11.3</jackson.version>
-		<awspring.cloud.version>2.3.2</awspring.cloud.version>
-		<spring.version>3.1.5</spring.version>
-		<spring-boot-maven-plugin.version>2.4.1</spring-boot-maven-plugin.version>
-		<spring-cloud-sleuth.version>3.1.0</spring-cloud-sleuth.version>
-		<spring-data-common.version>2.4.2</spring-data-common.version>
-		<spring-cloud-dependencies.version>2020.0.0</spring-cloud-dependencies.version>
+		<jackson.version>2.15.4</jackson.version>
+
+		<spring-boot-dependencies.version>3.2.4</spring-boot-dependencies.version>
+		<spring-cloud-dependencies.version>2023.0.1</spring-cloud-dependencies.version>
 		<springdoc-openapi-ui.version>1.6.7</springdoc-openapi-ui.version>
-		<jersey-apache-client4.version>1.19.4</jersey-apache-client4.version>
-		<!-- <spring-cloud.version>Finchley.M2</spring-cloud.version> -->
+		<mysql.version>8.0.30</mysql.version>
 	</properties>
+
 	<!-- Dependency version manage -->
 	<dependencyManagement>
 		<dependencies>
@@ -51,36 +55,27 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring.version}</version>
+				<version>${spring-boot-dependencies.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
 			<!-- Spring Cloud -->
 			<dependency>
-				<groupId>io.awspring.cloud</groupId>
-				<artifactId>spring-cloud-starter-aws-secrets-manager-config</artifactId>
-				<version>${awspring.cloud.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.springframework.cloud</groupId>
-						<artifactId>spring-cloud-context</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-parent</artifactId>
+				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>${spring-cloud-dependencies.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			
+			<!-- OpenAPI -->
 			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-sleuth</artifactId>
-				<version>${spring-cloud-sleuth.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-ui</artifactId>
+				<version>${springdoc-openapi-ui.version}</version>
 			</dependency>
+
 			<!-- Mapstruct -->
 			<dependency>
 				<groupId>org.mapstruct</groupId>
@@ -92,12 +87,14 @@
 				<artifactId>mapstruct-processor</artifactId>
 				<version>${org.mapstruct.version}</version>
 			</dependency>
+			
 			<!-- Lombok -->
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<version>${lombok.version}</version>
 			</dependency>
+			
 			<!-- Common -->
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -114,43 +111,32 @@
 				<artifactId>joda-time</artifactId>
 				<version>${jodatime.version}</version>
 			</dependency>
+
 			<!-- Flyway -->
 			<dependency>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<version>${flyway.version}</version>
 			</dependency>
-			<!-- Logging -->
 			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${logging.version}</version>
-			</dependency>
-			<!-- OpenAPI -->
-			<dependency>
-				<groupId>org.springdoc</groupId>
-				<artifactId>springdoc-openapi-ui</artifactId>
-				<version>${springdoc-openapi-ui.version}</version>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
+				<artifactId>jackson-core</artifactId>
 				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.jersey.contribs</groupId>
-				<artifactId>jersey-apache-client4</artifactId>
-				<version>${jersey-apache-client4.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<build>
 		<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
-					<version>${spring-boot-maven-plugin.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
