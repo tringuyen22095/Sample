@@ -3,9 +3,8 @@ package project.personal.shared.common.validator;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import project.personal.shared.common.validation.EnumValidation;
 
 public class EnumValidator implements ConstraintValidator<EnumValidation, String> {

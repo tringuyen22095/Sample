@@ -25,7 +25,6 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-commons</artifactId>
-			<version>${spring-data-common.version}</version>
 		</dependency>
 	    <dependency>
 	        <groupId>org.springframework.cloud</groupId>

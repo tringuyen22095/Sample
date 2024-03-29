@@ -17,6 +17,10 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -25,7 +29,8 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>project.personal.social.network.GatewayApplication</mainClass>
+					<mainClass>
+						project.personal.social.network.GatewayApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>

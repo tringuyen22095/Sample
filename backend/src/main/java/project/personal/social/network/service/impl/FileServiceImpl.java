@@ -12,20 +12,19 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 import java.util.stream.LongStream;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.io.Resource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.annotation.PostConstruct;
 import project.personal.shared.client.resource.DocumentFeignClient;
 import project.personal.shared.common.exception.EntityNotFoundException;
 import project.personal.shared.common.exception.FileStorageException;
@@ -35,7 +34,7 @@ import project.personal.social.network.model.FileCombineEvent;
 import project.personal.social.network.service.FileService;
 
 @Service
-@Primary
+@Profile("!dev")
 public class FileServiceImpl implements FileService {
 
 	private static final Logger _log = LoggerFactory.getLogger(FileServiceImpl.class);

@@ -2,8 +2,6 @@ package project.personal.shared.client.resource;
 
 import java.util.UUID;
 
-import javax.validation.Valid;
-
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.validation.Valid;
 import project.personal.shared.client.config.FeignConfiguration;
 import project.personal.shared.client.config.LoadBalancerConfiguration;
 import project.personal.shared.common.exception.EntityNotFoundException;

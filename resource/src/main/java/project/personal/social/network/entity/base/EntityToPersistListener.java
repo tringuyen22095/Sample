@@ -3,10 +3,10 @@ package project.personal.social.network.entity.base;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-
 import org.springframework.stereotype.Component;
+
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 
 @Component
 public class EntityToPersistListener<E> {

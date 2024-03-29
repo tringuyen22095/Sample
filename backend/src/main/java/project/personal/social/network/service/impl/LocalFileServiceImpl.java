@@ -7,19 +7,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import javax.annotation.PostConstruct;
-
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.annotation.PostConstruct;
 import project.personal.shared.common.exception.FileStorageException;
 import project.personal.shared.common.exception.FileStorageNotFoundException;
 import project.personal.social.network.service.FileService;
 
 @Service("LocalFileService")
+@Profile("dev")
 public class LocalFileServiceImpl implements FileService {
 
 	private Path fileStorageLocation;

@@ -31,41 +31,35 @@
 		<commons.version>3.12.0</commons.version>
 		<commons.collections.version>4.4</commons.collections.version>
 		<lombok.version>1.18.28</lombok.version>
-		<spring.version>2.6.15</spring.version>
 		<flyway.version>8.2.2</flyway.version>
-		<spring.version>2.6.6</spring.version>
 		<logging.version>1.7.16</logging.version>
 		<jackson.version>2.11.3</jackson.version>
+		<awspring.cloud.version>2.3.2</awspring.cloud.version>
+		<spring.version>3.1.5</spring.version>
 		<spring-boot-maven-plugin.version>2.4.1</spring-boot-maven-plugin.version>
 		<spring-cloud-sleuth.version>3.1.0</spring-cloud-sleuth.version>
 		<spring-data-common.version>2.4.2</spring-data-common.version>
 		<spring-cloud-dependencies.version>2020.0.0</spring-cloud-dependencies.version>
 		<springdoc-openapi-ui.version>1.6.7</springdoc-openapi-ui.version>
+		<jersey-apache-client4.version>1.19.4</jersey-apache-client4.version>
 		<!-- <spring-cloud.version>Finchley.M2</spring-cloud.version> -->
 	</properties>
 	<!-- Dependency version manage -->
 	<dependencyManagement>
 		<dependencies>
-			<!-- Spring Core -->
+			<!-- Spring Core Dependencies -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-validation</artifactId>
+				<artifactId>spring-boot-dependencies</artifactId>
 				<version>${spring.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-data-jpa</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-web</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
+			<!-- Spring Cloud -->
 			<dependency>
 				<groupId>io.awspring.cloud</groupId>
 				<artifactId>spring-cloud-starter-aws-secrets-manager-config</artifactId>
-				<version>2.3.2</version>
+				<version>${awspring.cloud.version}</version>
 				<exclusions>
 					<exclusion>
 						<groupId>org.springframework.cloud</groupId>
@@ -132,6 +126,7 @@
 				<artifactId>slf4j-api</artifactId>
 				<version>${logging.version}</version>
 			</dependency>
+			<!-- OpenAPI -->
 			<dependency>
 				<groupId>org.springdoc</groupId>
 				<artifactId>springdoc-openapi-ui</artifactId>
@@ -142,68 +137,13 @@
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey.contribs</groupId>
+				<artifactId>jersey-apache-client4</artifactId>
+				<version>${jersey-apache-client4.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
-	<dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-config-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.awspring.cloud</groupId>
-			<artifactId>spring-cloud-starter-aws-secrets-manager-config</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct-processor</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-	</dependencies>
 	<build>
 		<pluginManagement>
 			<plugins>
