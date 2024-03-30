@@ -14,8 +14,8 @@ public class FlywayConfiguration {
 	private final DatabaseProperties databaseProperties;
 	
 	@Bean
-	public void flywayInit() {
-		Flyway.configure()
+	Flyway flywayInit() {
+		return Flyway.configure()
 				.dataSource(this.databaseProperties.getUrl(), this.databaseProperties.getUsername(), this.databaseProperties.getPassword())
 				.load();
 	}

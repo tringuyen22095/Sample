@@ -12,10 +12,6 @@
 
 	<artifactId>backend</artifactId>
 
-	<properties>
-		<java.version>11</java.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>project.personal</groupId>

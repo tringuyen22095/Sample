@@ -10,16 +10,17 @@ import java.security.PublicKey;
 import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
 import project.personal.shared.common.config.GlobalExceptionHandler;
 
 @SpringBootApplication
-@EnableEurekaClient
+@EnableDiscoveryClient
 @ComponentScan(basePackages = { "project.personal.social.network" })
 @Import(GlobalExceptionHandler.class)
 public class ResourceApplication {
@@ -28,7 +29,9 @@ public class ResourceApplication {
 	private static String HOME_DIR;
 
 	public static void main(String[] args) {
-		SpringApplication.run(ResourceApplication.class, args);
+        final SpringApplication app = new SpringApplication(ResourceApplication.class);
+        app.setBannerMode(Banner.Mode.OFF);
+        app.run(args);
 //		generateKey();
 	}
 

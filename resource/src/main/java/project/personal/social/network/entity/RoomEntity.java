@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,7 +32,7 @@ import project.personal.social.network.entity.base.EntityToPersistListener;
 @Entity
 @EntityListeners(EntityToPersistListener.class)
 @Table(name = "ROOM")
-@Where(clause = "IS_DELETED = 0")
+@SQLRestriction("IS_DELETED = 0")
 @Getter
 @Setter
 @NoArgsConstructor

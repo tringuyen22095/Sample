@@ -19,8 +19,7 @@
 		<module>shared-client</module>
 		<module>gateway</module>
 		<module>resource</module>
-		<!--
-		<module>backend</module>-->
+		<module>backend</module>
 	</modules>
 
 	<!-- List properties -->
