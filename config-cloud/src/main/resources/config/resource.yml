@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: resource
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+    property-naming-strategy: SNAKE_CASE
+  main:
+    allow-bean-definition-overriding: false
+  flyway:
+    locations: classpath:/db/migration
+    schemas: PRIVATE_APP
+    baselineOnMigrate: true
+    enabled: true
+  datasource:
+    url: jdbc:postgresql://${POSTGRESQL_HOST:127.0.0.1}:5432/testing?createDatabaseIfNotExist=true&currentSchema=PRIVATE_APP
+    username: postgres
+    password: password
+    hikari:
+      auto-commit: false
+    jpa:
+      open-in-view: false
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.show_sql: false
+      hibernate.format_sql: true
+      hibernate.jdbc.time_zone: UTC
+      hibernate.timezone.default_storage: NORMALIZE
+      hibernate.type.preferred_instant_jdbc_type: TIMESTAMP
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.jdbc.batch_size: 25
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.query.fail_on_pagination_over_collection_fetch: true
+      hibernate.query.in_clause_parameter_padding: true
+    hibernate:
+      ddl-auto: none
+
+server:
+  port: 8001
+  servlet:
+    encoding:
+      charset: UTF-8
+    context-path: "/resource"
+  shutdown: graceful
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://127.0.0.1:8761/eureka}
+  instance:
+    preferIpAddress: true
+
+springdoc:
+  swagger-ui:
+    path: "/api-docs"
+    enabled: true

@@ -1,12 +1,10 @@
 package project.personal.social.network.entity;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,8 +14,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -30,7 +28,7 @@ import project.personal.social.network.entity.base.EntityToPersistListener;
 @Entity
 @EntityListeners(EntityToPersistListener.class)
 @Table(name = "DOCUMENT")
-@Where(clause = "IS_DELETED = 0")
+@SQLRestriction("IS_DELETED = 'false'")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -39,15 +37,9 @@ public class DocumentEntity extends BaseEntity {
 
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(generator = "uuid2")
-	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@GeneratedValue(strategy = GenerationType.UUID)
 	@JsonProperty("id")
 	private UUID id;
-
-	@Column(name = "BDATA")
-	@JsonProperty("bData")
-	@Lob
-	private Blob bData;
 
 	@Column(name = "FILE_TYPE")
 	@JsonProperty("fileType")

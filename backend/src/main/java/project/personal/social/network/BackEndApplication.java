@@ -1,5 +1,6 @@
 package project.personal.social.network;
 
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -23,7 +24,9 @@ import project.personal.shared.common.config.GlobalExceptionHandler;
 public class BackEndApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackEndApplication.class, args);
+        final SpringApplication app = new SpringApplication(BackEndApplication.class);
+        app.setBannerMode(Banner.Mode.OFF);
+        app.run(args);
 	}
 
 }

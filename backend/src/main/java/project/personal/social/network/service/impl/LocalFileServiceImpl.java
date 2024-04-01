@@ -19,8 +19,8 @@ import project.personal.shared.common.exception.FileStorageException;
 import project.personal.shared.common.exception.FileStorageNotFoundException;
 import project.personal.social.network.service.FileService;
 
-@Service("LocalFileService")
-@Profile("dev")
+@Service
+@Profile("!prod")
 public class LocalFileServiceImpl implements FileService {
 
 	private Path fileStorageLocation;

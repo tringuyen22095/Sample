@@ -92,7 +92,7 @@ public interface DataMapper {
 	@Mapping(target = "updatedBy", ignore = true)
 	@Mapping(target = "updatedOn", ignore = true)
 	@Mapping(target = "id", ignore = true)
-	@Mapping(target = "BData", source = "BData", qualifiedByName = "byteArrayToBlob", conditionExpression = ("java(req.getBData() != null)"))
+//	@Mapping(target = "BData", source = "BData", qualifiedByName = "byteArrayToBlob", conditionExpression = ("java(req.getBData() != null)"))
 	abstract void fromRequestToExistEntity(@MappingTarget DocumentEntity entity, DocumentReq req);
 
 	@Mapping(target = "deleted", ignore = true)
@@ -102,10 +102,10 @@ public interface DataMapper {
 	@Mapping(target = "updatedOn", ignore = true)
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "messages", ignore = true)
-	@Mapping(target = "BData", source = "BData", qualifiedByName = "byteArrayToBlob", conditionExpression = ("java(req.getBData() != null)"))
+//	@Mapping(target = "BData", source = "BData", qualifiedByName = "byteArrayToBlob", conditionExpression = ("java(req.getBData() != null)"))
 	abstract DocumentEntity fromRequestToEntity(DocumentReq req);
 
-	@Mapping(target = "BData", source = "BData", qualifiedByName = "blobToByteArray", conditionExpression = ("java(req.getBData() != null)"))
+	@Mapping(target = "BData", ignore = true)
 	abstract DocumentRes fromEntityToResponse(DocumentEntity req);
 
 	/* Document */

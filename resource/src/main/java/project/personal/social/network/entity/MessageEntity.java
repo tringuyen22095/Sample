@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,6 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -32,7 +32,7 @@ import project.personal.social.network.entity.base.EntityToPersistListener;
 @Entity
 @EntityListeners(EntityToPersistListener.class)
 @Table(name = "MESSAGE")
-@Where(clause = "IS_DELETED = 0")
+@SQLRestriction("IS_DELETED = 'false'")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -41,8 +41,7 @@ public class MessageEntity extends BaseEntity {
 
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(generator = "uuid2")
-	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@GeneratedValue(strategy = GenerationType.UUID)
 	@JsonProperty("id")
 	private UUID id;
 
@@ -57,7 +56,6 @@ public class MessageEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ROOM_ID")
 	@JsonProperty("room")
-	@Where(clause = "1 = 1")
 	private RoomEntity room;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = DocumentEntity.class)
