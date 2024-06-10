@@ -5,8 +5,7 @@ import PaegOne from "page-one";
 export default function Home() {
   return (
     <>
-      
-      {PaegOne()}
+      <PaegOne></PaegOne>
     </>
   );
 }

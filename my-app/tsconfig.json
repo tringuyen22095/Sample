@@ -3,12 +3,12 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
-    "strictPropertyInitialization": false,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+    // "forceConsistentCasingInFileNames": true,
+    // "strictPropertyInitialization": false,
+    // "noImplicitOverride": true,
+    // "noPropertyAccessFromIndexSignature": true,
+    // "noImplicitReturns": true,
+    // "noFallthroughCasesInSwitch": true,
 
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -31,7 +31,9 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "page-one": ["../component/page-one/index"]
+      "page-one": ["../component/page-one/index"],
+      "utils": ["../common/utils"],
+      "constant": ["../common/constant"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
