@@ -1,20 +1,22 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+'use client'
 
-const inter = Inter({ subsets: ["latin"] });
+import { Inter } from 'next/font/google';
+import 'styles/globals.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import { useEffect } from 'react';
 
-export const metadata: Metadata = {
-  title: "T.Tri <3 H.Anh"
-};
+const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    import('bootstrap/dist/js/bootstrap');
+  }, []);
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={inter.className}>{children}</body>
     </html>
   );

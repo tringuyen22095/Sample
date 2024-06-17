@@ -6,6 +6,7 @@ import { Envs } from '../../common/env';
 import React, { useEffect, useState } from 'react';
 import { formatTimeLeft } from 'utils';
 import { DATETIME_FORMAT } from 'constant';
+import { Slider } from 'widgets';
 
 const weddingDate = moment(Envs.WEDDING_DATE, 'dd-MM-yyyy HH:mm:ss');
 
@@ -28,7 +29,7 @@ export default function PaegOne() {
     
 
     return (<>
-        <main>
+        {/* <div className='page-one'>
             <div className='main-notice'>
                 <div className='time-left'>
                     {formatTimeLeft(timeLeft)}
@@ -40,6 +41,9 @@ export default function PaegOne() {
                     {weddingDate.format(DATETIME_FORMAT)}
                 </div>
             </div>
-        </main>
+        </div> */}
+        <Slider>
+            text
+        </Slider>
     </>);
 }

@@ -31,7 +31,9 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "page-one": ["../component/page-one/index"],
+      "components/*": ["../components/*"],
+      "widgets": ["../common/widgets/index"],
+      "styles/*": ["../common/styles/*"],
       "utils": ["../common/utils"],
       "constant": ["../common/constant"]
     }

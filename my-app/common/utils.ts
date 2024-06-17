@@ -37,7 +37,7 @@ function calculateTimeLeft(seconds: number): {
   };
 }
 
-export function formatTimeLeft(seconds: number): string {
+function formatTimeLeft(seconds: number): string {
   const different = calculateTimeLeft(seconds);
   const result: string[] = [];
 
@@ -52,4 +52,8 @@ export function formatTimeLeft(seconds: number): string {
   }
 
   return result.join(' ');
+}
+
+export {
+  formatTimeLeft
 }
