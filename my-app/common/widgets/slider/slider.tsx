@@ -1,63 +1,69 @@
 'use client'
 
-import React from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import './style.scss';
+import classNames from 'classnames';
 
 type Props = {
     children: React.ReactNode
 }
 
-const SliderGenerate = (props: Props) => (
-    <div>
-        <div id="slider">
-            <input type="radio" name="slider" id="slide1" checked />
-            <input type="radio" name="slider" id="slide2" />
-            <input type="radio" name="slider" id="slide3" />
-            <input type="radio" name="slider" id="slide4" />
-            <div id="slides">
-                <div id="overflow">
-                    <div className="inner">
-                        <div className="slide slide_1">
-                            <div className="slide-content">
-                                <h2>Slide 1</h2>
-                                <p>Content for Slide 1</p>
-                            </div>
-                        </div>
-                        <div className="slide slide_2">
-                            <div className="slide-content">
-                                <h2>Slide 2</h2>
-                                <p>Content for Slide 2</p>
-                            </div>
-                        </div>
-                        <div className="slide slide_3">
-                            <div className="slide-content">
-                                <h2>Slide 3</h2>
-                                <p>Content for Slide 3</p>
-                            </div>
-                        </div>
-                        <div className="slide slide_4">
-                            <div className="slide-content">
-                                <h2>Slide 4</h2>
-                                <p>Content for Slide 4</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+const SliderGenerate = (props: Props) => {
+    const [slide, setSlide] = useState(0);
+    const [resetCountdown, setResetCountdown] = useState<boolean | null>(null);
+    const refs = useRef<(React.RefObject<HTMLInputElement> | null)[]>([]);
+
+    // execute as constructor
+    useEffect(() => {
+        Array.from({ length: 3 })
+            .forEach((_, i) => {
+                refs.current[i] = refs.current[i] || React.createRef();
+            });
+        setResetCountdown(true);
+    }, []);
+
+    useEffect(() => {
+            const interval = setInterval(() => {
+                const nextIndex = (slide + 1) % 3;
+                radioClicked(nextIndex);
+            }, 5000);
+            return () => clearInterval(interval);
+        
+    }, [ slide]);
+
+    const radioClicked = (index: number) => {
+        if (refs.current[index]?.current) {
+            setSlide(index);
+            refs.current[index].current.checked = true;
+            refs.current[index].current.focus();
+        }
+    }
+
+    const slideRender = () => {
+        return Array.from({ length: 3 }).map((v, i) => {
+            return (<Fragment key={'trigger' + i}>
+                <input type='radio' id={'trigger' + i}
+                    name='slider' ref={refs.current[i]}
+                    defaultChecked={i === 0} autoFocus={i === 0}
+                    onClick={() => radioClicked(i)} />
+                <label htmlFor={'trigger' + i}>
+                    <span className='sr-only'>Slide {i} of 5.</span>
+                </label>
+                <div className={classNames('slide', `bg${i}`)}></div>
+            </Fragment>);
+        });
+    }
+
+    return (
+        <Fragment>
+            <div className={classNames('background', 'slider')}>
+                {slideRender()}
             </div>
-            <div id="controls">
-                <label htmlFor="slide1"></label>
-                <label htmlFor="slide2"></label>
-                <label htmlFor="slide3"></label>
-                <label htmlFor="slide4"></label>
+            <div className={classNames('content', 'slider')}>
+                {props.children}
             </div>
-            <div id="bullets">
-                <label htmlFor="slide1"></label>
-                <label htmlFor="slide2"></label>
-                <label htmlFor="slide3"></label>
-                <label htmlFor="slide4"></label>
-            </div>
-        </div>
-    </div>
-);
+        </Fragment>
+    )
+};
 
 export default SliderGenerate;

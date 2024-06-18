@@ -26,24 +26,23 @@ export default function PaegOne() {
 
         return () => clearInterval(timer);
     }, [weddingDate]);
-    
+
 
     return (<>
-        {/* <div className='page-one'>
-            <div className='main-notice'>
-                <div className='time-left'>
-                    {formatTimeLeft(timeLeft)}
-                </div>
-                <div className='name'>
-                    We're getting married!
-                </div>
-                <div className='detail'>
-                    {weddingDate.format(DATETIME_FORMAT)}
+        <Slider>
+            <div className='page-one'>
+                <div className='main-notice'>
+                    <div className='time-left'>
+                        {formatTimeLeft(timeLeft)}
+                    </div>
+                    <div className='name'>
+                        We're getting married!
+                    </div>
+                    <div className='detail'>
+                        {weddingDate.format(DATETIME_FORMAT)}
+                    </div>
                 </div>
             </div>
-        </div> */}
-        <Slider>
-            text
         </Slider>
     </>);
 }
