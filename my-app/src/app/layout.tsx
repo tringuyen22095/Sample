@@ -1,11 +1,8 @@
 'use client'
 
-import { Inter } from 'next/font/google';
-import 'styles/globals.css';
+import './globals.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useEffect } from 'react';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
@@ -17,7 +14,13 @@ export default function RootLayout({
   }, []);
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <head>
+        <meta charSet='UTF-8' />
+        <title>Wedding Invitation</title>
+      </head>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
