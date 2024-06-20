@@ -1,3 +1,4 @@
+'use client'
 
 enum TimeUnit {
   years = "năm",
@@ -28,12 +29,12 @@ function calculateTimeLeft(seconds: number): {
   const secs = seconds % 60;
 
   return {
-    years,
+    years: years !== 0 ? years : null,
     months,
     days,
     hours,
     minutes,
-    seconds: secs,
+    seconds: secs
   };
 }
 
@@ -43,12 +44,8 @@ function formatTimeLeft(seconds: number): string {
 
   for (const key in different) {
     const value: number = different[key];
-    if (!!value)
-      result.push(`${value} ${TimeUnit[key]}`);
-  }
-
-  if (!result.length) {
-    result.push(`0 ${TimeUnit.seconds}`);
+    if (value !== null)
+      result.push(`${(value + '').padStart(2, '0')} ${TimeUnit[key]}`);
   }
 
   return result.join(' ');

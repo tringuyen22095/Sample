@@ -1,128 +1,199 @@
+$numOfSlides: 5;
+$slidingAT: 1.3s;
+$controlSize: 60px;
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .slider {
-    &.background {
-        padding: 0;
-        margin: 0;
-        width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 100vh;
+
+    &__slides {
+        z-index: 1;
+        position: relative;
         height: 100%;
-        text-align: center;
-        overflow: hidden;
-        user-select: none;
-
-        .sr-only {
-            position: absolute;
-            pointer-events: none;
-            width: 1px;
-            height: 1px;
-            overflow: hidden;
-            color: transparent;
-        }
-
-        input {
-            position: absolute;
-            opacity: 0;
-            margin-top: 95vh;
-            cursor: pointer;
-        }
-
-        label {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border: solid 2px white;
-            border-radius: 999px;
-            background-color: transparent;
-            margin: 95vh 6px 0 6px;
-            z-index: 2;
-            cursor: pointer;
-            transition-duration: .4s;
-            box-shadow: 0 0 20px 0 #000;
-        }
-
-        input:checked+label {
-            background-color: white;
-        }
-
-        input+label::after {
-            content: '';
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512' width='100' style='fill:white'%3E%3Cpath d='M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z' /%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: center 55%;
-            background-size: 80px 80px;
-            line-height: 100vh;
-            transition: background-size 200ms;
-            position: absolute;
-            color: white;
-            height: calc(95vh - 12px);
-            width: 80px;
-            top: 0;
-            left: 0;
-            z-index: 20;
-        }
-
-        input+label:hover::after {
-            background-size: 90px 90px;
-        }
-
-        input:checked+label::after {
-            background-image: none;
-            width: 100vw;
-            left: 0;
-            z-index: 10;
-        }
-
-        input:checked+label+.slide~input+label::after {
-            display: none;
-        }
-
-        input:checked+label+.slide+input+label::after {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512' width='100' fill='white'%3E%3Cpath d='M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z' /%3E%3C/svg%3E");
-            display: block;
-            width: 80px;
-            right: 0;
-            left: auto;
-        }
-
-        input:focus+label {
-            box-shadow: 0 0 0 2px teal, 0 0 18px white;
-        }
 
         .slide {
+            overflow: hidden;
             position: absolute;
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            transform: translateX(-100%);
-            transition-duration: .4s;
-            opacity: 1;
+            left: 50%;
+            top: 50%;
+            width: 150vmax;
+            height: 150vmax;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            transition: clip-path 0s $slidingAT*0.7;
+            clip-path: circle($controlSize/2 at 120vw 50%);
+        
+            &.s--prev {
+                clip-path: circle($controlSize/2 at 30vw 50%);
+            }
+        
+            &.s--active {
+                z-index: 1;
+                transition: clip-path $slidingAT;
+                clip-path: circle(120vmax at 120vw 50%);
+        
+                &.s--active-prev {
+                    clip-path: circle(120vmax at 30vw 50%);
+                }
+            }
+        
+            @for $i from 1 through $numOfSlides {
+                &:nth-child(#{$i}) {
+                    .slide__inner {
+                        background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-#{$i+1}.jpg');
+                    }
+                }
+            }
+        
+            &__inner {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                width: 100vw;
+                height: 100vh;
+                margin-left: -50vw;
+                margin-top: -50vh;
+                background-size: cover;
+                background-position: center center;
+        
+                &:before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.3);
+                }
+            }
+        
+            &__content {
+                position: absolute;
+                left: 5%;
+                top: 50%;
+                margin-left: $controlSize/-2;
+                margin-top: $controlSize*0.8;
+                max-width: 480px;
+                color: #fff;
+            }
+        
+            &__heading {
+                margin-bottom: 20px;
+                font-size: 60px;
+            }
+        
+            &__text {
+                font-size: 25px;
+        
+                a {
+                    color: inherit;
+                }
+            }
         }
-
-        input:checked~.slide {
-            transform: translateX(100%);
-        }
-
-        input:checked+label+.slide {    
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .bg1 {
-            background-image: url('../../../public/wallpaper-1.jpg');
-        }
-
-        .bg2 {
-            background-image: url('../../../public/wallpaper-2.jpg');
-        }
-
-        .bg0 {
-            background-image: url('../../../public/wallpaper-3.jpg');
-        }
-
     }
 
-    &.content {}
+    &__control {
+        z-index: 2;
+        position: absolute;
+        top: 50%;
+        left: 5%;
+        width: $controlSize;
+        height: $controlSize;
+        margin-left: $controlSize/-2;
+        margin-top: $controlSize/-2;
+        border-radius: 50%;
+        background: #fff;
+        transition: background-color 0.3s;
+        cursor: pointer;
+
+        &--right {
+            left: 95%;
+        }
+
+        &:hover {
+            background-color: #2da6ff;
+        }
+
+        &-line {
+            position: absolute;
+            left: 23px;
+            top: 50%;
+            width: 3px;
+            height: 14px;
+            transform-origin: 50% 0;
+            transform: rotate(-45deg);
+
+            &:nth-child(2) {
+                transform: translateY(1px) rotate(-135deg);
+            }
+
+            .slider__control--right & {
+                left: 37px;
+                transform-origin: 1px 0;
+                transform: rotate(45deg);
+
+                &:nth-child(2) {
+                    transform: translateY(1px) rotate(135deg);
+                }
+            }
+
+            &:after {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #e2e2e2;
+                transition: background-color 0.3s;
+            }
+
+            .slider__control:hover &:after {
+                background-color: #fff;
+            }
+
+            .slider__control.a--rotation & {
+
+                &:after {
+                    animation: arrowLineRotation 0.49s;
+                }
+
+                &:nth-child(1):after {
+                    animation: arrowLineRotationRev 0.49s;
+                }
+            }
+        }
+    }
+}
+
+.content {
+    margin-top: -100vh;
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+@keyframes arrowLineRotation {
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes arrowLineRotationRev {
+    to {
+        transform: rotate(-180deg);
+    }
 }

@@ -12,10 +12,10 @@ const weddingDate = moment(Envs.WEDDING_DATE, 'dd-MM-yyyy HH:mm:ss');
 export default function PaegTwo() {
 
     return (<>
-        <main>
+        <div className='page-two' id='page-two'>
             <div className='main-notice'>
                 page 2
             </div>
-        </main>
+        </div>
     </>);
 }

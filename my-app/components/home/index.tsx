@@ -11,29 +11,31 @@ import { Slider } from 'widgets';
 const weddingDate = moment(Envs.WEDDING_DATE, 'dd-MM-yyyy HH:mm:ss');
 
 export default function PaegOne() {
-
-    let calculateTimeLeft = () => {
-        const difference = weddingDate.diff(moment.now(), 's', true);
-        return Math.max(0, Math.floor(difference));
-    }
-
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+    const [display, setDisplay] = useState(formatTimeLeft(timeLeft));
 
     useEffect(() => {
         const timer = setInterval(() => {
             setTimeLeft(calculateTimeLeft());
         }, 1000);
-
         return () => clearInterval(timer);
-    }, [weddingDate]);
+    }, []);
 
+    useEffect(() => {
+        setDisplay(formatTimeLeft(timeLeft));
+    }, [timeLeft]);
+
+    function calculateTimeLeft() {
+        const difference = weddingDate.diff(moment.now(), 's', true);
+        return Math.max(0, Math.floor(difference));
+    }
 
     return (<>
         <Slider>
-            <div className='page-one'>
+            <div className='page-one' id='page-one'>
                 <div className='main-notice'>
                     <div className='time-left'>
-                        {formatTimeLeft(timeLeft)}
+                        {display}
                     </div>
                     <div className='name'>
                         We're getting married!
