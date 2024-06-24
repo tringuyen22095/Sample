@@ -1,6 +1,7 @@
-import PaegOne from "components/home";
-import PaegTwo from "components/page-two";
+import HomePage from "components/home-page";
+import AboutUs from "components/about-us";
 import Header from "components/header";
+import OurStory from "components/our-story";
 import {
   SnowFall
 } from "widgets";
@@ -10,8 +11,9 @@ export default function Home() {
   return (
     <>
       <Header></Header>
-      <PaegOne></PaegOne>
-      <PaegTwo></PaegTwo>
+      <HomePage></HomePage>
+      <AboutUs></AboutUs>
+      <OurStory></OurStory>
       {/* back drop */}
       {/* <SnowFall snowElementCount={20}/> */}
     </>

@@ -6,18 +6,21 @@ import React from 'react';
 export default function Header() {
 
     return (<>
-        <div className='header'>
+        <div className='headerContainer'>
             <span>
-                <a href="#page-one">Home</a>
+                <a href="#homePage">Home</a>
             </span>
             <span>
-                <a href="#page-two">Our Story</a>
+                <a href="#aboutUs">About Us</a>
             </span>
             <span>
-                <a href="#page-two">Gallery</a>
+                <a href="#ourStory">Our Story</a>
             </span>
             <span>
-                <a href="#">Wedding Event</a>
+                <a href="#gallery">Gallery</a>
+            </span>
+            <span>
+                <a href="#guestbook">Guestbook</a>
             </span>
         </div>
     </>);

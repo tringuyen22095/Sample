@@ -10,7 +10,7 @@ import { Slider } from 'widgets';
 
 const weddingDate = moment(Envs.WEDDING_DATE, 'dd-MM-yyyy HH:mm:ss');
 
-export default function PaegOne() {
+export default function HomePage() {
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
     const [display, setDisplay] = useState(formatTimeLeft(timeLeft));
 
@@ -32,7 +32,7 @@ export default function PaegOne() {
 
     return (<>
         <Slider>
-            <div className='page-one' id='page-one'>
+            <div className='homePageContainer' id='homePage'>
                 <div className='main-notice'>
                     <div className='time-left'>
                         {display}

@@ -101,14 +101,16 @@ a {
 }
 
 @font-face {
-  font-family: 'Bhlingglers';
-  src: url('../../public/fonts/Bhlingglers-L3nog.otf') format('opentype');
+  font-family: 'Level1';
+  src: url('../../public/fonts/Unique.otf') format('opentype');
 }
+
 @font-face {
-  font-family: 'Captivate';
-  src: url('../../public/fonts/Captivate-3zLJZ.otf') format('opentype');
+  font-family: 'Level2';
+  src: url('../../public/fonts/Bhlingglers.otf') format('opentype');
 }
+
 @font-face {
-  font-family: 'ChavezlafiaButter';
-  src: url('../../public/fonts/ChavezlafiaButter-ax9vx.otf') format('opentype');
+  font-family: 'Level3';
+  src: url('../../public/fonts/PlaypenSans.ttf') format('opentype');
 }

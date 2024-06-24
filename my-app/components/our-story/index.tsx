@@ -1,21 +1,23 @@
 'use client'
 
-import moment from 'moment';
+import classNames from 'classnames';
 import './style.scss';
-import { Envs } from '../../common/env';
-import React, { useEffect, useState } from 'react';
-import { formatTimeLeft } from 'utils';
-import { DATETIME_FORMAT } from 'constant';
+import React, { Fragment, useEffect, useState } from 'react';
 
-const weddingDate = moment(Envs.WEDDING_DATE, 'dd-MM-yyyy HH:mm:ss');
 
-export default function PaegTwo() {
+type ItemTemplate = {
 
-    return (<>
-        <div className='page-two' id='page-two'>
-            <div className='main-notice'>
-                page 2
-            </div>
+};
+
+export default function OurStory() {
+
+    const render = (lst: ItemTemplate[]) => {
+        return (<></>);
+    }
+
+    return (<Fragment>
+        <div className="ourStoryContainer">
+            
         </div>
-    </>);
+    </Fragment >);
 }

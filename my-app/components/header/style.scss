@@ -1,4 +1,4 @@
-.header {
+.headerContainer {
     z-index: 999;
     position: fixed;
     left: 0px;
@@ -16,6 +16,8 @@
 
     transition: top 1s;
     -webkit-transition: top 1s;
+
+    font-family: 'Level2';
 
     &:hover {
         top: 0px;
