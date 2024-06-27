@@ -6,7 +6,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 export default function AboutUs() {
 
     return (<Fragment>
-        <div className="aboutUsContainer" id='aboutUs'>
+        <div className='aboutUsContainer' id='aboutUs'>
             <div className='summary'>
                 <div className='summary-title'>
                     About Us

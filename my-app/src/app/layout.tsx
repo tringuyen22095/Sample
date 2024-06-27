@@ -17,7 +17,7 @@ export default function RootLayout({
       <head>
         <meta charSet='UTF-8' />
         <title>Wedding Invitation</title>
-        <script src="https://kit.fontawesome.com/0705440da3.js" crossOrigin="anonymous"></script>
+        <script src='https://kit.fontawesome.com/0705440da3.js' crossOrigin='anonymous'></script>
       </head>
       <body>
         {children}

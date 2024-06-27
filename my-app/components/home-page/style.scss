@@ -1,3 +1,21 @@
+@media only screen and (max-device-width: 989px) {
+  .homePageContainer {
+    .main-notice {
+      .time-left {
+        font-size: 1rem !important;
+      }
+
+      .name {
+        font-size: 4.5rem !important;
+      }
+
+      .detail {
+        font-size: 1rem !important;
+      }
+    }
+  }
+}
+
 .homePageContainer {
   color: #fff;
   text-align: center;

@@ -1,27 +1,22 @@
 'use client'
 
 import './style.scss';
-import React from 'react';
+import React, { Fragment } from 'react';
+import { HEADER_NAVIGATION } from 'constant';
 
 export default function Header() {
 
-    return (<>
-        <div className='headerContainer'>
-            <span>
-                <a href="#homePage">Home</a>
-            </span>
-            <span>
-                <a href="#aboutUs">About Us</a>
-            </span>
-            <span>
-                <a href="#ourStory">Our Story</a>
-            </span>
-            <span>
-                <a href="#gallery">Gallery</a>
-            </span>
-            <span>
-                <a href="#guestbook">Guestbook</a>
-            </span>
-        </div>
-    </>);
+    function headerRender() {
+        return HEADER_NAVIGATION.map((v, i) => {
+            return <Fragment key={`nav-${i}`}>
+                <span>
+                    <a href={v.redirect}>{v.text}</a>
+                </span>
+            </Fragment>;
+        });
+    }
+
+    return (<div className='headerContainer'>
+            {headerRender()}
+        </div>);
 }

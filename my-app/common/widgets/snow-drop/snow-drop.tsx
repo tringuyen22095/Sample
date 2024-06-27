@@ -9,7 +9,7 @@ type Props = {
 const generateSnowElement = (props: Props) => {
     const snowCount = props.snowElementCount ?? Math.floor(Math.random() * 12);
     return Array.from({ length: snowCount })
-        .map((v, i) => <div key={`snowEle-${i}}`} className="snow"></div>);
+        .map((v, i) => <div key={`snowEle-${i}}`} className='snow'></div>);
 };
 
 const SnowFallGenerate = (props: Props) => (

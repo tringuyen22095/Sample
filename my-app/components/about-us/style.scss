@@ -60,6 +60,42 @@
 
 @media only screen and (max-device-width: 989px) {
     .aboutUsContainer {
-        font-size: 10rem;
+        .summary {
+            .summary-content {
+                font-size: 1rem;
+            }
+        }
+        .couple {
+            width: 100% !important;
+            .personal-information {
+                background-color: unset !important;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+    
+                &.reverse {
+                    flex-direction: column-reverse !important;
+                }
+                .image {
+                    width: 250px !important;
+                    height: 250px !important;
+                    &-boy {
+                        background-image: url('https://i.etsystatic.com/9193132/r/il/e4b433/1777078144/il_794xN.1777078144_g0ow.jpg');
+                    }
+                    &-girl {
+                        background-image: url('https://i.etsystatic.com/9193132/r/il/082ee3/4089910818/il_1140xN.4089910818_3psa.jpg');
+                    }
+                }
+                .description {
+                    padding: 1.5rem 0;
+                    background-color: #f7f7f7;
+                    width: 250px !important;
+                    font-size: 0.8rem !important;
+                    span:first-child {
+                        font-size: 1.2rem !important;
+                    }
+                }
+            }
+        }
     }
 }

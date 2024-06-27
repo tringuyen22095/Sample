@@ -1,10 +1,10 @@
-import HomePage from "components/home-page";
-import AboutUs from "components/about-us";
-import Header from "components/header";
-import OurStory from "components/our-story";
+import HomePage from 'components/home-page';
+import AboutUs from 'components/about-us';
+import Header from 'components/header';
+import OurStory from 'components/our-story';
 import {
   SnowFall
-} from "widgets";
+} from 'widgets';
 import styles from './styles.module.css';
 
 export default function Home() {

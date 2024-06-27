@@ -1,3 +1,153 @@
+$numOfSlides: 5;
+
+@media only screen and (max-device-width: 989px) {
+    .ourStoryContainer {
+        padding: 3rem 0;
+
+        .story {
+            &.left {}
+
+            &.right {}
+        }
+    }
+}
+
+@media only screen and (min-device-width: 990px) {
+    .ourStoryContainer {
+        padding: 1rem 0;
+
+        .summary {
+            text-align: center;
+
+            .summary-title {
+                margin: 1rem 0 0.4rem 0;
+                font-family: 'Level1';
+                font-size: 3.2rem;
+            }
+        }
+
+        .contentSection {
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            .story {
+                width: 180px;
+                display: flex;
+                justify-content: center;
+                height: 500px;
+                justify-content: space-between;
+
+                &.isOdd {
+                    flex-direction: column-reverse;
+
+                    .bg-image {
+                        justify-content: end;
+                    }
+
+                    .description {
+                        flex-direction: column;
+
+                        span:nth-child(1) {
+                            margin-bottom: 1rem;
+                        }
+                    }
+                }
+
+                &.isEven {
+                    flex-direction: column;
+
+                    .bg-image {
+                        justify-content: start;
+                    }
+
+                    .description {
+                        flex-direction: column-reverse;
+
+                        span:nth-child(1) {
+                            margin-top: 1rem;
+                        }
+                    }
+                }
+
+                .bg-image {
+                    flex: 10;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .separate {
+                    flex: 1;
+
+                    .line {
+                        height: 1px;
+                        width: 100%;
+                        background-color: #fff;
+                        position: relative;
+                        top: 50%;
+                    }
+
+                    .pot {
+                        height: 20px;
+                        aspect-ratio: 1 / 1;
+                        border-radius: 4rem;
+                        background-color: #fff;
+                        margin: auto;
+                    }
+                }
+
+                .description {
+                    flex: 10;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    span {
+                        &:nth-child(1) {
+                            font-weight: 800;
+                            font-size: 1.1rem;
+                        }
+
+                        &:nth-child(2) {
+                            font-size: 0.95rem;
+                            text-align: center;
+
+                            .special {
+                                font-family: "Special";
+                                font-size: 1.7rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 .ourStoryContainer {
-    
+    background-color: #2f332c;
+    color: #fff;
+    font-family: 'Level3';
+
+    .bg-image>.img {
+        box-shadow: #fff 0 0 0 2.5px; // X Y blur size
+        width: 155px;
+        height: 210px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        &.landscape {
+            width: 170px;
+            height: 140px;
+        }
+    }
+
+    // @for $i from 1 through $numOfSlides {
+    //     .story:nth-child(#{$i})>.bg-image>.img {
+    //         background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-#{$i+1}.jpg');
+    //     }
+    // }
 }
