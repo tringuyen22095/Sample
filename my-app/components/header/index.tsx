@@ -2,12 +2,12 @@
 
 import './style.scss';
 import React, { Fragment } from 'react';
-import { HEADER_NAVIGATION } from 'constant';
+import { HEADER_NAVIGATION_TEMPLATE } from 'constant';
 
 export default function Header() {
 
     function headerRender() {
-        return HEADER_NAVIGATION.map((v, i) => {
+        return HEADER_NAVIGATION_TEMPLATE.map((v, i) => {
             return <Fragment key={`nav-${i}`}>
                 <span>
                     <a href={v.redirect}>{v.text}</a>

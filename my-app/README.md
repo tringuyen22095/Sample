@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Mobile Devices (Smartphones): Typically range from 320px to 767px
+Tablets: Typically range from 768px to 1024px
+Laptops and Small Desktops: Typically range from 1024px to 1440px
+Large Desktops: Typically start from 1440px and above
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Top 16:9 Resolutions
+640 x 360 (nHD)
+854 x 480 (FWVGA)
+960 x 540 (qHD)
+1024 x 576 (WSVGA)
+1280 x 720 (HD/WXGA)
+1366 x 768 (FWXGA)
+1600 x 900 (HD+)
+1920 x 1080 (FHD)
+2048 x 1152 (QWXGA)
+2560 x 1440 (QHD)
+3200 x 1800 (WQXGA+)
+3840 x 2160 (UHD)
+5120 x 2880 (UHD+)
+7680 x 4320 (FUHD)
+15360 x 8640 (QUHD)
+30720 x 17280 (HHD)
+61440 x 34560 (FHHD)
+122880 x 69120 (QHHD)

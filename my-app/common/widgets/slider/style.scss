@@ -46,14 +46,6 @@ $controlSize: 60px;
                 }
             }
         
-            @for $i from 1 through $numOfSlides {
-                &:nth-child(#{$i}) {
-                    .slide__inner {
-                        background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-#{$i+1}.jpg');
-                    }
-                }
-            }
-        
             &__inner {
                 position: absolute;
                 left: 50%;

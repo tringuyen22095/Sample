@@ -1,12 +1,12 @@
-'use client'
+'use server'
 
 import classNames from 'classnames';
 import './style.scss';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import { OUR_STORY_TEMPLATE } from 'constant';
 import moment from 'moment';
 
-export default function OurStory() {
+export default async function OurStory() {
 
     const render = () => {
         return OUR_STORY_TEMPLATE.map((v, i) => {
@@ -38,14 +38,17 @@ export default function OurStory() {
         });
     }
 
-    return (<div className='ourStoryContainer'>
-        <div className='summary'>
-            <div className='summary-title'>
-                Our Story...
+    return (<Fragment>
+        <span id='ourStory'/>
+        <div className='ourStoryContainer' id='ourStory'>
+            <div className='summary'>
+                <div className='summary-title'>
+                    Our Story...
+                </div>
+            </div>
+            <div className='contentSection'>
+                {render()}
             </div>
         </div>
-        <div className='contentSection'>
-            {render()}
-        </div>
-    </div>);
+    </Fragment>);
 }

@@ -3,13 +3,18 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import './style.scss';
 import classNames from 'classnames';
+import { HOMEPAGE_IMAGE_SRC_TEMPLATE } from 'constant';
 
 type Props = {
-    children: React.ReactNode,
-    maxSlide?: number
+    children: React.ReactNode
 }
 
-const SliderGenerate = ({ children, maxSlide = 5 }: Props) => {
+const SliderGenerate = ({ children }: Props) => {
+    const template = HOMEPAGE_IMAGE_SRC_TEMPLATE;
+    const maxSlide = template.length;
+
+    const [html, setHtml] = useState<any>();
+
     const [activeSlide, setActiveSlide] = useState(0);
     const activeSlideRef = useRef(activeSlide);
 
@@ -21,11 +26,12 @@ const SliderGenerate = ({ children, maxSlide = 5 }: Props) => {
     const rightRef = useRef<HTMLDivElement | null>(null);
 
     const rolateIconTimeout: number = 1300;
-    const autoSlideTimeout: number = 5000;
+    const autoSlideTimeout: number = 15000;
 
     // execute as constructor
     useEffect(() => {
         refs.current = Array.from({ length: maxSlide }, () => React.createRef());
+        setHtml(slideRender());
 
         if (leftRef.current) {
             leftRef.current.addEventListener('click', handleClick);
@@ -60,9 +66,9 @@ const SliderGenerate = ({ children, maxSlide = 5 }: Props) => {
         const _isRight = this == rightRef.current;
         const _control = _isRight ? rightRef.current : leftRef.current;
         const _currentIndex = activeSlideRef;
-        const _prevIndex = _currentIndex.current === 0 ? 4 : _currentIndex.current - 1;
+        const _prevIndex = _currentIndex.current === 0 ? maxSlide - 1 : _currentIndex.current - 1;
         const _incommingIndex = Math.abs(_currentIndex.current + (_isRight ? 1 : (-maxSlide + 1))) % maxSlide;
-        const _incommingPrevIndex = _incommingIndex === 0 ? 4 : _incommingIndex - 1;
+        const _incommingPrevIndex = _incommingIndex === 0 ? maxSlide - 1 : _incommingIndex - 1;
 
         _control.classList.add('a--rotation');
         refs.current[_currentIndex.current].current.classList.remove('s--active', 's--active-prev');
@@ -79,13 +85,19 @@ const SliderGenerate = ({ children, maxSlide = 5 }: Props) => {
     };
 
     const slideRender = () => {
-        return Array.from({ length: maxSlide }).map((v, i) => {
+        return template.map(({src, backgroundPositionOverride, backgroundRepeatOverride, backgroundSizeOverride}, i) => {
             return (<Fragment key={'slide' + i}>
                 <div className={classNames('slide', {
                     's--prev': i === maxSlide - 1,
                     's--active': i === 0
                 })} ref={refs.current[i]}>
-                    <div className='slide__inner'>
+                    <div className='slide__inner'
+                        style={{
+                                backgroundImage: `url(\'${src}\')`,
+                                backgroundPosition: backgroundPositionOverride,
+                                backgroundSize: backgroundSizeOverride,
+                                backgroundRepeat: backgroundRepeatOverride
+                            }}>
                     </div>
                 </div>
             </Fragment>);
@@ -96,7 +108,7 @@ const SliderGenerate = ({ children, maxSlide = 5 }: Props) => {
         <Fragment>
             <div className='slider'>
                 <div className='slider__slides'>
-                    {slideRender()}
+                    {html}
                 </div>
                 <div className='slider__control' ref={leftRef}>
                     <div className='slider__control-line'></div>

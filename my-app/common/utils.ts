@@ -1,12 +1,12 @@
 'use client'
 
 enum TimeUnit {
-  years = 'năm',
-  months = 'tháng',
-  days = 'ngày',
-  hours = 'giờ',
-  minutes = 'phút',
-  seconds = 'giây'
+  years = 'years',
+  months = 'months',
+  days = 'days',
+  hours = 'hours',
+  minutes = 'minutes',
+  seconds = 'seconds'
 }
 
 function calculateTimeLeft(seconds: number): {

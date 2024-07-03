@@ -3,7 +3,7 @@
 import moment from 'moment';
 import './style.scss';
 import { Envs } from '../../common/env';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { formatTimeLeft } from 'utils';
 import { DATETIME_FORMAT } from 'constant';
 import { Slider } from 'widgets';
@@ -30,9 +30,10 @@ export default function HomePage() {
         return Math.max(0, Math.floor(difference));
     }
 
-    return (<>
+    return (<Fragment>
+        <span id='homePage'/>
         <Slider>
-            <div className='homePageContainer' id='homePage'>
+            <div className='homePageContainer'>
                 <div className='main-notice'>
                     <div className='time-left'>
                         {display}
@@ -46,5 +47,5 @@ export default function HomePage() {
                 </div>
             </div>
         </Slider>
-    </>);
+    </Fragment>);
 }
