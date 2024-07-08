@@ -1,70 +1,57 @@
 'use client';
 
 import './style.scss';
-import React, { Fragment, useEffect, useRef, useState } from 'react';
-import { GALLERY_TEMPLATE } from 'constant';
+import React, { Fragment, useEffect, useRef } from 'react';
+import { GALLERY_TEMPLATE, GALLERY_TYPE } from 'constant';
 import classNames from 'classnames';
 
-export default function Gallery() {
-    const template = GALLERY_TEMPLATE;
-    const length = template.length;
-
-    const [html, setHtml] = useState<any>(null);
-    
-    const parentRefs = useRef<(React.RefObject<HTMLImageElement> | null)[]>(Array(length).fill(null));
-    const childRefs = useRef<(React.RefObject<HTMLImageElement> | null)[]>(Array(length).fill(null));
-    const previewRef = useRef<HTMLImageElement>(null);
-
-    useEffect(() => {
-        setHtml(renderGrid());
-
-        parentRefs.current.forEach((parentRef, index) => {
-            const child = childRefs.current[index];
-            if (child) {
-                child.current.addEventListener('load', function () {
-                    if (parentRef) {
-                        parentRef.current.style.opacity = '1';
-                    }
-                });
-            }
-        });
-        return () => {
-            childRefs.current.forEach((child) => {
-                if (child) {
-                    child.current.removeEventListener('load', () => {});
-                }
-            });
-        };
-    }, []);
-
-    function renderGrid() {
-        return GALLERY_TEMPLATE.map((v, i) => {
-            return (<Fragment key={`imgItem-${i}`}>
-                <figure  ref={parentRefs.current[i]}
-                    style={{
-                        gridColumn: v.gridColumn,
-                        gridRow: v.gridRow
-                    }}>
-                    <div ref={childRefs.current[i]}
+function renderGrid(childRefs, previewRef, template: GALLERY_TYPE[]) {
+    return template.map((v, i) => {
+        return <Fragment key={`imgItem-${i}`}>
+            <figure style={{
+                    gridColumn: v.gridColumn,
+                    gridRow: v.gridRow
+                }}>
+                <a href='#img_preview' onClick={() => previewRef.current.src = v.src}>
+                    <img ref={childRefs[i]}
+                        src={v.src}
                         style={{
-                            backgroundImage: `url('${v.src}')`
+                            objectFit: v.objectFit,
+                            objectPosition: v.objectPosition
                         }}
                         className={classNames({
                             vertical: v.imgType === 'VERTICAL',
                             horizontal: v.imgType === 'HORIZONTAL'
-                        })}></div>
-                </figure>
-            </Fragment>);
-        });
-    }
-
-    function renderHref() {
-        return (<Fragment>
-                <a href='#_preview_out' className="lightbox trans" id='img_preview'>
-                    <img ref={previewRef} />
+                        })}/>
                 </a>
-            </Fragment>);
-    }
+            </figure>
+        </Fragment>;
+    });
+}
+
+const Gallery = () => {
+    const template = GALLERY_TEMPLATE.filter(v => v.display === true);
+
+    const childRefs = useRef<(React.RefObject<HTMLImageElement> | null)[]>(template.map(() => React.createRef()));
+    const previewRef = useRef<HTMLImageElement>(null);
+
+    useEffect(() => {
+        const handleLoad = (index) => {
+            childRefs.current[index].current.style.opacity = '1';
+        };
+
+        childRefs.current.forEach((child, index) => {
+            const img = new Image();
+            img.src = template[index].src;
+            img.onload = () => handleLoad(index);
+        });
+        return () => {
+            childRefs.current.forEach((child) => {
+                if (child.current)
+                    child.current.style.opacity = '0';
+            });
+        };
+    }, []);
 
     return (<Fragment>
         <span id='gallery' />
@@ -75,26 +62,13 @@ export default function Gallery() {
                 </div>
             </div>
             <section className="grid">
-                {/* {html} */}
-                <figure ref={parentRefs.current[0]}
-                    style={{
-                        gridColumn: null,
-                        gridRow: null
-                    }}>
-                    <div ref={childRefs.current[0]}
-                        style={{
-                            backgroundImage: `url('/gallery/GIN00021.jpg')`
-                        }}
-                        className={classNames({
-                            vertical: true
-                        })}></div>
-                </figure>
+                {renderGrid(childRefs.current, previewRef, template)}
             </section>
-            {/* {renderHref()} */}
-            
             <a href='#_preview_out' className="lightbox trans" id='img_preview'>
                 <img ref={previewRef} />
             </a>
         </div>
     </Fragment>);
 }
+
+export default Gallery;

@@ -1,5 +1,3 @@
-$gutter: 0;
-
 .galleryContainer {
     width: 100%;
 
@@ -67,25 +65,22 @@ $gutter: 0;
         }
     }
 
+    @media only screen and (min-width: 1440px) {
+        
+    }
     .grid {
-        padding: 2rem 3rem;
         position: relative;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        // grid-template-rows: repeat(4, 1fr);
-        grid-gap: $gutter;
+        grid-template-columns: repeat(8, 1fr);
 
         figure {
             position: relative;
             overflow: hidden;
-            opacity: 0;
-            transition: 0.2s;
             margin: unset !important;
 
-            div {
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
+            div,img {
+                opacity: 0;
+                transition: opacity 1.5s;
 
                 &.vertical {
                     width: calc(540px/2);
@@ -93,13 +88,13 @@ $gutter: 0;
                 }
 
                 &.horizontal {
-                    width: calc(640px/2);
-                    height: calc(360px/2);
+                    width: calc(960px/2);
+                    height: calc(540px/2);
                 }
             }
             
             &:hover {
-                div {
+                div,img {
                     transform: scale(.97);
                     transition: 0.2s;
                 }

@@ -1,5 +1,3 @@
-'use client'
-
 enum TimeUnit {
   years = 'years',
   months = 'months',
