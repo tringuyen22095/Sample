@@ -64,41 +64,80 @@
             }
         }
     }
-
-    @media only screen and (min-width: 1440px) {
-        
-    }
+    
     .grid {
         position: relative;
         display: grid;
-        grid-template-columns: repeat(8, 1fr);
 
         figure {
             position: relative;
             overflow: hidden;
             margin: unset !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-            div,img {
+            img {
                 opacity: 0;
-                transition: opacity 1.5s;
-
-                &.vertical {
-                    width: calc(540px/2);
-                    height: calc(960px/2);
-                }
-
-                &.horizontal {
-                    width: calc(960px/2);
-                    height: calc(540px/2);
+                transition: opacity 2s, transform 0.3s ease-in-out;
+                &:hover {
+                    transform: scale(1.05);
                 }
             }
             
-            &:hover {
-                div,img {
-                    transform: scale(.97);
-                    transition: 0.2s;
+            
+        }
+    }
+
+    @media only screen and (min-width: 1440px) {
+        $maxWidth: 1440px;
+        $gridGrap: 2px;
+        $columnCount: 8;
+        $rowCount: 8;
+        .grid {
+            width: $maxWidth;
+            margin: 1.5rem auto 2rem auto;
+            grid-gap: $gridGrap;
+            grid-template-columns: repeat($columnCount, calc(1440px / $columnCount));
+            grid-template-rows: repeat($rowCount, calc(960px / 4));
+
+            figure {
+                img {
+                    opacity: 0;
+                    transition: opacity 2s, transform 0.3s ease-in-out;
+    
+                    &.vertical {
+                        width: calc(540px/2);
+                        height: calc(960px/2);
+                    }
+    
+                    &.horizontal {
+                        width: calc(960px/2);
+                        height: calc(540px/2);
+                    }
                 }
             }
+        }
+    }
+
+    .test {
+        display: none;
+        width: 100px;
+        height: 100px;
+        animation: pulse 5s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            background-color: #001F3F;
+        }
+        
+        50% {
+            background-color: yellow;
+        }
+    
+        100% {
+            background-color: #FF4136;
         }
     }
 }

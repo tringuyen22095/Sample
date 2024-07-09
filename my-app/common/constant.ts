@@ -116,20 +116,20 @@ const OUR_STORY_TEMPLATE: OurStoryItemType[] = [
         type: 'portrait'
     },
     {
-        imgSrc: '/first-trip.JPG',
+        imgSrc: '/first-trip.jpg',
         date: moment('06/08/2023', VN_DATETIME_FORMAT).toDate(),
         description: 'Our first trip</br>Phu Yen city',
         type: 'portrait'
     },
     {
-        imgSrc: '/HPNY-together.JPG',
+        imgSrc: '/HPNY-together.jpg',
         date: moment('01/01/2024', VN_DATETIME_FORMAT).toDate(),
         description: 'Ring in the New Year together',
         type: 'landscape',
         backgroundPositionOverride: 'bottom'
     },
     {
-        imgSrc: '/da-nang-trip.JPG',
+        imgSrc: '/da-nang-trip.jpg',
         date: moment('05/04/2024', VN_DATETIME_FORMAT).toDate(),
         description: 'Da Nang Trip',
         type: 'landscape',
@@ -152,11 +152,15 @@ const OUR_STORY_TEMPLATE: OurStoryItemType[] = [
 
 export type GALLERY_TYPE = {
     src: string,
-    imgType: 'VERTICAL' | 'HORIZONTAL',
+    imgType?: 'VERTICAL' | 'HORIZONTAL',
     gridColumn?: string,
     gridRow?: string,
     objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down',
     objectPosition?: 'center' | 'bottom' | 'top' | 'left' | 'right',
+    width?: string | 'unset',
+    height?: string | 'unset',
+    justifyContent?: string,
+    alignItems?: string,
     display?: true | false
 }
 
@@ -165,185 +169,241 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN00021.jpg',
         imgType: 'VERTICAL',
         gridColumn: '1',
-        gridRow: '1',
+        gridRow: '1/3',
         objectFit: 'cover',
-        objectPosition: 'right',
         display: true
     },
     {
         src: '/gallery/GIN00031.jpg',
         imgType: 'VERTICAL',
+        gridColumn: '2',
+        gridRow: '2/4',
         objectFit: 'cover',
-        objectPosition: 'right',
         display: true
     },
     {
         src: '/gallery/GIN00131.jpg',
         imgType: 'VERTICAL',
+        gridColumn: '5',
+        gridRow: '1/3',
         objectFit: 'cover',
-        objectPosition: 'right',
         display: true
     },
     {
         src: '/gallery/GIN00311.jpg',
         imgType: 'VERTICAL',
+        gridColumn: '7/9',
+        gridRow: '1/3',
+        width: '100%',
+        height: 'unset',
         objectFit: 'cover',
-        objectPosition: 'right',
         display: true
     },
     {
         src: '/gallery/GIN00365.jpg',
         imgType: 'HORIZONTAL',
+        gridColumn: '2/4',
+        gridRow: '1',
         objectFit: 'cover',
         display: true
     },
     {
         src: '/gallery/GIN00422.jpg',
         imgType: 'VERTICAL',
+        gridColumn: '4',
+        gridRow: '1',
+        objectFit: 'cover',
+        justifyContent: 'start',
         display: true
     },
     {
         src: '/gallery/GIN00465.jpg',
         imgType: 'HORIZONTAL',
+        gridColumn: '3/5',
+        gridRow: '2',
+        alignItems: 'end',
+        objectFit: 'cover',
         display: true
     },
     {
         src: '/gallery/GIN00515_1.jpg',
         imgType: 'VERTICAL',
+        gridColumn: '6',
+        gridRow: '1/3',
+        alignItems: 'end',
+        objectFit: 'cover',
         display: true
     },
     {
         src: '/gallery/GIN00658.jpg',
         imgType: 'HORIZONTAL',
+        gridColumn: '3/5',
+        gridRow: '3',
+        alignItems: 'end',
+        objectFit: 'cover',
         display: true
     },
     {
-        src: '/gallery/GIN00731_1.jpg',
-        imgType: 'HORIZONTAL'
-    },
-    {
         src: '/gallery/GIN00769.jpg',
-        imgType: 'VERTICAL'
-    },
-    {
-        src: '/gallery/GIN00845.jpg',
-        imgType: 'HORIZONTAL'
+        imgType: 'VERTICAL',
+        gridColumn: '1',
+        gridRow: '3/5',
+        objectFit: 'cover',
+        display: true
     },
     {
         src: '/gallery/GIN00934.jpg',
-        imgType: 'VERTICAL'
-    },
-    {
-        src: '/gallery/GIN00962.jpg',
-        imgType: 'HORIZONTAL'
+        imgType: 'VERTICAL',
+        objectFit: 'cover',
+        gridColumn: '5/7',
+        gridRow: '3/5',
+        width: '100%',
+        height: 'unset',
+        display: true
     },
     {
         src: '/gallery/GIN00994.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        objectFit: 'cover',
+        alignItems: 'start',
+        display: true
     },
     {
         src: '/gallery/GIN01115.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        objectFit: 'cover',
+        justifyContent: 'start',
+        display: true
     },
     {
         src: '/gallery/GIN01463.jpg',
-        imgType: 'HORIZONTAL'
+        imgType: 'HORIZONTAL',
+        objectFit: 'cover',
+        gridColumn: '2/5',
+        gridRow: '4/6',
+        height: 'unset',
+        width: '100%',
+        display: true
     },
     {
         src: '/gallery/GIN01750.jpg',
-        imgType: 'HORIZONTAL'
+        imgType: 'HORIZONTAL',
+        display: true
     },
     {
         src: '/gallery/GIN01822.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN01842_1.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN01982.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02025.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02059_1.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02093.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02110.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02311.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02324.jpg',
-        imgType: 'HORIZONTAL'
+        imgType: 'HORIZONTAL',
+        display: true
     },
     {
         src: '/gallery/GIN02339.jpg',
-        imgType: 'HORIZONTAL'
+        imgType: 'HORIZONTAL',
+        display: true
     },
     {
         src: '/gallery/GIN02365.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02400.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02405.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02409.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02454.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02472.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02534.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02614.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02624.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02638.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN02684.jpg',
-        imgType: 'VERTICAL'
+        imgType: 'VERTICAL',
+        display: true
     },
     {
         src: '/gallery/GIN09835.jpg',
-        imgType: 'HORIZONTAL'
+        imgType: 'HORIZONTAL',
+        display: true
     },
     {
         src: '/gallery/GIN09892.jpg',
-        imgType: 'HORIZONTAL'
+        imgType: 'HORIZONTAL',
+        display: true
     },
 ];
 
