@@ -154,8 +154,6 @@ const OUR_STORY_TEMPLATE: OurStoryItemType[] = [
 export type GALLERY_TYPE = {
     src: string,
     imgType?: 'VERTICAL' | 'HORIZONTAL',
-    gridColumn?: string,
-    gridRow?: string,
     objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down',
     objectPosition?: 'center' | 'bottom' | 'top' | 'left' | 'right',
     width?: string | 'unset',
@@ -171,32 +169,24 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
     {
         src: '/gallery/GIN00021.jpg',
         imgType: 'VERTICAL',
-        gridColumn: '1',
-        gridRow: '1/3',
         objectFit: 'cover',
         display: true
     },
     {
         src: '/gallery/GIN00031.jpg',
         imgType: 'VERTICAL',
-        gridColumn: '2',
-        gridRow: '2/4',
         objectFit: 'cover',
         display: true
     },
     {
         src: '/gallery/GIN00131.jpg',
         imgType: 'VERTICAL',
-        gridColumn: '5',
-        gridRow: '1/3',
         objectFit: 'cover',
         display: true
     },
     {
         src: '/gallery/GIN00311.jpg',
         imgType: 'VERTICAL',
-        gridColumn: '7/9',
-        gridRow: '1/3',
         width: '100%',
         height: 'unset',
         objectFit: 'cover',
@@ -205,16 +195,12 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
     {
         src: '/gallery/GIN00365.jpg',
         imgType: 'HORIZONTAL',
-        gridColumn: '2/4',
-        gridRow: '1',
         objectFit: 'cover',
         display: true
     },
     {
         src: '/gallery/GIN00422.jpg',
         imgType: 'VERTICAL',
-        gridColumn: '4',
-        gridRow: '1',
         objectFit: 'cover',
         justifyContent: 'start',
         display: true
@@ -222,8 +208,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
     {
         src: '/gallery/GIN00465.jpg',
         imgType: 'HORIZONTAL',
-        gridColumn: '3/5',
-        gridRow: '2',
         alignItems: 'end',
         objectFit: 'cover',
         display: true
@@ -231,8 +215,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
     {
         src: '/gallery/GIN00515_1.jpg',
         imgType: 'VERTICAL',
-        gridColumn: '6',
-        gridRow: '1/3',
         alignItems: 'end',
         objectFit: 'cover',
         display: true
@@ -240,8 +222,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
     {
         src: '/gallery/GIN00658.jpg',
         imgType: 'HORIZONTAL',
-        gridColumn: '3/5',
-        gridRow: '3',
         alignItems: 'end',
         objectFit: 'cover',
         display: true
@@ -249,8 +229,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
     {
         src: '/gallery/GIN00769.jpg',
         imgType: 'VERTICAL',
-        gridColumn: '1',
-        gridRow: '3/5',
         objectFit: 'cover',
         display: true
     },
@@ -258,8 +236,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN00934.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
-        gridColumn: '5/7',
-        gridRow: '3/5',
         width: '100%',
         height: 'unset',
         display: true
@@ -282,8 +258,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN01463.jpg',
         imgType: 'HORIZONTAL',
         objectFit: 'cover',
-        gridColumn: '2/5',
-        gridRow: '4/6',
         height: 'unset',
         width: '100%',
         display: true
@@ -292,8 +266,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN01750.jpg',
         imgType: 'HORIZONTAL',
         objectFit: 'cover',
-        gridColumn: '7/9',
-        gridRow: '4',
         justifyContent: 'start',
         display: true
     },
@@ -322,7 +294,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN02311.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
-        gridColumn: '7/9',
         width: '100%',
         height: 'unset',
         alignItems: 'center',
@@ -332,7 +303,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN02339.jpg',
         imgType: 'HORIZONTAL',
         objectFit: 'cover',
-        gridColumn: '1/3',
         alignItems: 'start',
         display: true
     },
@@ -340,8 +310,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN02365.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
-        gridColumn: '3/4',
-        gridRow: '6/8',
         clipPath: 'polygon(0% 0%, 100% 0%, 100% 85%, 0% 85%)',
         display: true
     },
@@ -349,8 +317,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN02400.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
-        gridColumn: '4/5',
-        gridRow: '6/8',
         clipPath: 'polygon(0% 15%, 100% 15%, 100% 100%, 0% 100%)',
         display: true
     },
@@ -370,16 +336,12 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN02534.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
-        gridColumn: '7/8',
-        gridRow: '6/8',
         display: true
     },
     {
         src: '/gallery/GIN02614.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
-        gridColumn: '8/9',
-        gridRow: '6/8',
         display: true
     },
     {
@@ -398,7 +360,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN09835.jpg',
         imgType: 'HORIZONTAL',
         objectFit: 'cover',
-        gridColumn: '5/7',
         justifyContent: 'start',
         display: true
     }

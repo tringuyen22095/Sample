@@ -3,12 +3,11 @@ import AboutUs from 'components/about-us';
 import Header from 'components/header';
 import OurStory from 'components/our-story';
 import Gallery from 'components/gallery';
-import GuestBook from 'components/guestBook';
+import GuestBook from 'components/guestbook';
 import {
   SnowFall
 } from 'widgets';
 import { Fragment } from 'react';
-
 
 export default function Home() {
   return (
@@ -18,9 +17,9 @@ export default function Home() {
       <AboutUs></AboutUs>
       <OurStory></OurStory>
       <Gallery></Gallery>
-      <GuestBook></GuestBook>
+      {/* <GuestBook></GuestBook> */}
       {/* back drop */}
-      {/* <SnowFall snowElementCount={20}/> */}
+      {/* <SnowFall snowElementCount={6}/> */}
     </Fragment>
   );
 }

@@ -5,7 +5,6 @@ import React, { Fragment } from 'react';
 import { HEADER_NAVIGATION_TEMPLATE } from 'constant';
 
 export default function Header() {
-
     function headerRender() {
         return HEADER_NAVIGATION_TEMPLATE.map((v, i) => {
             return <Fragment key={`nav-${i}`}>
@@ -17,6 +16,6 @@ export default function Header() {
     }
 
     return (<div className='headerContainer'>
-            {headerRender()}
-        </div>);
+        {headerRender()}
+    </div>);
 }
