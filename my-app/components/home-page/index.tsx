@@ -11,24 +11,23 @@ import { Slider } from 'widgets';
 const weddingDate = moment(Envs.WEDDING_DATE, 'dd-MM-yyyy HH:mm:ss');
 
 export default function HomePage() {
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-    const [display, setDisplay] = useState(formatTimeLeft(timeLeft));
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setTimeLeft(calculateTimeLeft());
-        }, 1000);
-        return () => clearInterval(timer);
-    }, []);
-
-    useEffect(() => {
-        setDisplay(formatTimeLeft(timeLeft));
-    }, [timeLeft]);
+    const [display, setDisplay] = useState('');
 
     function calculateTimeLeft() {
         const difference = weddingDate.diff(moment.now(), 's', true);
         return Math.max(0, Math.floor(difference));
     }
+
+    useEffect(() => {
+        const timeLeft = calculateTimeLeft();
+        setDisplay(formatTimeLeft(timeLeft));
+
+        const timer = setInterval(() => {
+            const timeLeft = calculateTimeLeft();
+            setDisplay(formatTimeLeft(timeLeft));
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
 
     return (<Fragment>
         <span id='homePage'/>

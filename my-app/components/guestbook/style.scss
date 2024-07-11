@@ -1,0 +1,15 @@
+.guestBookContainer {
+    background-color: #2f332c;
+    color: #fff;
+    font-family: 'Level3';
+
+    .summary {
+        text-align: center;
+
+        .summary-title {
+            margin: 1rem 0 0.4rem 0;
+            font-family: 'Level1';
+            font-size: 3.2rem;
+        }
+    }
+}

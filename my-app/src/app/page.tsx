@@ -18,6 +18,7 @@ export default function Home() {
       <AboutUs></AboutUs>
       <OurStory></OurStory>
       <Gallery></Gallery>
+      <GuestBook></GuestBook>
       {/* back drop */}
       {/* <SnowFall snowElementCount={20}/> */}
     </Fragment>

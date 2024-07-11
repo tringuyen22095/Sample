@@ -8,6 +8,13 @@ export default function GuestBook() {
 
     return (<Fragment>
         <span id='guestGook'/>
-        
+        <div className='guestBookContainer'>
+            <div className='summary'>
+                <div className='summary-title'>
+                    Guest Book
+                </div>
+            </div>
+            
+        </div>
     </Fragment >);
 }

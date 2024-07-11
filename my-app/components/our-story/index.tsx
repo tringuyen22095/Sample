@@ -5,6 +5,7 @@ import './style.scss';
 import React, { Fragment } from 'react';
 import { OUR_STORY_TEMPLATE } from 'constant';
 import moment from 'moment';
+import Image from 'next/image';
 
 export default async function OurStory() {
 
@@ -17,13 +18,15 @@ export default async function OurStory() {
                     isOdd: !isEven
                 })}>
                     <div className='bg-image'>
-                        <div className={classNames('img', {
-                            landscape: v.type === 'landscape'
-                        })}
+                        <Image src={v.imgSrc}
+                            height={0}
+                            width={0}
+                            sizes='100vw'
+                            alt={`Image ${i}`}
                             style={{
-                                backgroundImage: `url(${v.imgSrc})`,
-                                backgroundPosition: v.backgroundPositionOverride
-                            }} />
+                                objectFit: 'cover'
+                            }}
+                            className={classNames('img', v.type)} />
                     </div>
                     <div className='separate'>
                         <div className='line'></div>
@@ -40,7 +43,7 @@ export default async function OurStory() {
 
     return (<Fragment>
         <span id='ourStory'/>
-        <div className='ourStoryContainer' id='ourStory'>
+        <div className='ourStoryContainer'>
             <div className='summary'>
                 <div className='summary-title'>
                     Our Story...

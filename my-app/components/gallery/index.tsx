@@ -1,37 +1,56 @@
 'use client';
 
 import './style.scss';
-import React, { Fragment, useEffect, useRef } from 'react';
-import { GALLERY_TEMPLATE, GALLERY_TYPE } from 'constant';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+import { GALLERY_TEMPLATE, GALLERY_TYPE, ANIMATION_KEYS } from 'constant';
 import classNames from 'classnames';
 import Image from 'next/image';
 
-function renderGrid(childRefs, previewRef, template: GALLERY_TYPE[]) {
-    return template.map((v, i) => {
+function getRandomAnimationKeys(): string {
+    const index = (Math.random() * Number.MAX_SAFE_INTEGER) % ANIMATION_KEYS.length;
+    return ANIMATION_KEYS[Math.floor(index)];
+}
+
+function renderGrid(figureRefs: React.RefObject<any>[], childRefs: React.RefObject<HTMLImageElement>[], setSrc: (string) => void, template: GALLERY_TYPE[]) {
+    return template.map(({
+        src,
+        imgType,
+        gridColumn,
+        gridRow,
+        objectFit,
+        objectPosition,
+        width,
+        height,
+        justifyContent,
+        alignItems,
+        clipPath
+    }, i) => {
         return <Fragment key={`imgItem-${i}`}>
-            <figure style={{
-                    gridColumn: v.gridColumn,
-                    gridRow: v.gridRow,
-                    justifyContent: v.justifyContent,
-                    alignItems: v.alignItems
+            <figure ref={figureRefs[i]}
+                style={{
+                    gridColumn,
+                    gridRow,
+                    justifyContent,
+                    alignItems,
+                    clipPath
                 }}>
-                <a href='#img_preview' onClick={() => previewRef.current.src = v.src}>
+                <a href='#img_preview' onClick={() => setSrc(src)}>
                     <Image ref={childRefs[i]}
-                        src={v.src}
+                        src={src}
                         style={{
-                            objectFit: v.objectFit,
-                            objectPosition: v.objectPosition,
-                            height: v.height,
-                            width: v.width
+                            objectFit,
+                            objectPosition,
+                            height,
+                            width,
+                            clipPath
                         }}
                         height={0}
                         width={0}
                         sizes='100vw'
                         alt={`Image ${i}`}
                         className={classNames({
-                            vertical: v.imgType === 'VERTICAL',
-                            horizontal: v.imgType === 'HORIZONTAL'
-                        })}/>
+                            [imgType]: true
+                        })} />
                 </a>
             </figure>
         </Fragment>;
@@ -41,13 +60,20 @@ function renderGrid(childRefs, previewRef, template: GALLERY_TYPE[]) {
 const Gallery = () => {
     const template = GALLERY_TEMPLATE.filter(v => v.display === true);
 
+    const figureRefs = useRef<(React.RefObject<any> | null)[]>(template.map(() => React.createRef()));
     const refs = useRef<(React.RefObject<HTMLImageElement> | null)[]>(template.map(() => React.createRef()));
-    const previewRef = useRef<HTMLImageElement>(null);
+    const href = useRef(null);
+    const [src, setSrc] = useState<string>('/blank.png');
 
     useEffect(() => {
         const handleLoad = (index) => {
             if (refs.current[index].current) {
                 refs.current[index].current.style.opacity = '1';
+                const animation = `${getRandomAnimationKeys()} 2s ease`;
+                figureRefs.current[index].current.style.animation = animation;
+                figureRefs.current[index].current.style.webkitAnimation = animation; // Safari and Chrome
+                figureRefs.current[index].current.style.mozAnimation = animation; // Firefox
+                figureRefs.current[index].current.style.oAnimation = animation; // Opera
             }
         };
 
@@ -77,10 +103,21 @@ const Gallery = () => {
                 </div>
             </div>
             <section className="grid">
-                { renderGrid(refs.current, previewRef, template) }
+                { renderGrid(figureRefs.current, refs.current, setSrc, template) }
             </section>
-            <a href='#_preview_out' className="lightbox trans" id='img_preview'>
-                <img ref={previewRef} />
+            <a href='#_preview_out'
+                ref={href}
+                className="lightbox trans"
+                id='img_preview'>
+                <Image src={src}
+                        height={0}
+                        width={0}
+                        sizes='100vw'
+                        style={{
+                            width: 'auto',
+                            height: '100%'
+                        }}
+                        alt={`Image preview`} />
             </a>
             <div className='test'></div>
         </div>

@@ -1,3 +1,5 @@
+$distance: 4rem;
+
 .galleryContainer {
     width: 100%;
 
@@ -79,9 +81,9 @@
 
             img {
                 opacity: 0;
-                transition: opacity 2s, transform 0.3s ease-in-out;
+                transition: opacity 1s, transform 0.3s ease-in-out;
                 &:hover {
-                    transform: scale(1.05);
+                    transform: scale(1.02);
                 }
             }
             
@@ -91,9 +93,9 @@
 
     @media only screen and (min-width: 1440px) {
         $maxWidth: 1440px;
-        $gridGrap: 2px;
+        $gridGrap: 1px;
         $columnCount: 8;
-        $rowCount: 8;
+        $rowCount: 7;
         .grid {
             width: $maxWidth;
             margin: 1.5rem auto 2rem auto;
@@ -103,15 +105,12 @@
 
             figure {
                 img {
-                    opacity: 0;
-                    transition: opacity 2s, transform 0.3s ease-in-out;
-    
-                    &.vertical {
+                    &.vertical, &.VERTICAL {
                         width: calc(540px/2);
                         height: calc(960px/2);
                     }
     
-                    &.horizontal {
+                    &.horizontal, &.HORIZONTAL {
                         width: calc(960px/2);
                         height: calc(540px/2);
                     }
@@ -122,22 +121,70 @@
 
     .test {
         display: none;
+        position: relative;
+        background-color: #000;
         width: 100px;
         height: 100px;
-        animation: pulse 5s infinite;
+        margin:  10rem auto;
+        animation: bottomFloatIn 1s infinite;
+    }
+}
+
+@keyframes rightFloatIn {
+    0% {
+        opacity: 0;
+        right: -$distance;
     }
 
-    @keyframes pulse {
-        0% {
-            background-color: #001F3F;
-        }
-        
-        50% {
-            background-color: yellow;
-        }
-    
-        100% {
-            background-color: #FF4136;
-        }
+    100% {
+        opacity: 1;
+        right: 0;
+    }
+}
+
+@keyframes leftFloatIn {
+    0% {
+        opacity: 0;
+        left: -$distance;
+    }
+
+    100% {
+        opacity: 1;
+        left: 0;
+    }
+}
+
+@keyframes topFloatIn {
+    0% {
+        opacity: 0;
+        top: -$distance;
+    }
+
+    100% {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+@keyframes bottomFloatIn {
+    0% {
+        opacity: 0;
+        bottom: -$distance;
+    }
+
+    100% {
+        opacity: 1;
+        bottom: 0;
+    }
+}
+
+@keyframes flip {
+    from {
+        opacity: 0;
+        transform: rotateY(90deg);
+    }
+    to {
+        opacity: 1;
+        transform: rotateY(0deg);
     }
 }
