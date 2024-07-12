@@ -21,6 +21,7 @@ export default async function OurStory() {
                         <Image src={v.imgSrc}
                             height={0}
                             width={0}
+                            loading='eager'
                             sizes='100vw'
                             alt={`Image ${i}`}
                             style={{

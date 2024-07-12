@@ -3,7 +3,7 @@ import AboutUs from 'components/about-us';
 import Header from 'components/header';
 import OurStory from 'components/our-story';
 import Gallery from 'components/gallery';
-import GuestBook from 'components/guestbook';
+import GuestBook from 'components/guest-book';
 import {
   SnowFall
 } from 'widgets';

@@ -4,6 +4,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import './style.scss';
 import classNames from 'classnames';
 import { HOMEPAGE_IMAGE_SRC_TEMPLATE } from 'constant';
+import Image from 'next/image';
 
 type Props = {
     children: React.ReactNode
@@ -33,19 +34,12 @@ const SliderGenerate = ({ children }: Props) => {
         refs.current = Array.from({ length: maxSlide }, () => React.createRef());
         setHtml(slideRender());
 
-        if (leftRef.current) {
-            leftRef.current.addEventListener('click', handleClick);
-        }
-        if (rightRef.current) {
-            rightRef.current.addEventListener('click', handleClick);
-        }
+        if (leftRef.current) leftRef.current.addEventListener('click', handleClick);
+        if (rightRef.current) rightRef.current.addEventListener('click', handleClick);
+        
         return () => {
-            if (leftRef.current) {
-                leftRef.current.removeEventListener('click', handleClick);
-            }
-            if (rightRef.current) {
-                rightRef.current.removeEventListener('click', handleClick);
-            }
+            if (leftRef.current) leftRef.current.removeEventListener('click', handleClick);
+            if (rightRef.current) rightRef.current.removeEventListener('click', handleClick);
         };
     }, []);
     
@@ -91,14 +85,12 @@ const SliderGenerate = ({ children }: Props) => {
                     's--prev': i === maxSlide - 1,
                     's--active': i === 0
                 })} ref={refs.current[i]}>
-                    <div className='slide__inner'
-                        style={{
-                                backgroundImage: `url(\'${src}\')`,
-                                backgroundPosition: backgroundPositionOverride,
-                                backgroundSize: backgroundSizeOverride,
-                                backgroundRepeat: backgroundRepeatOverride
-                            }}>
-                    </div>
+                    <Image src={src}
+                        height={0}
+                        width={0}
+                        sizes='100vw'
+                        alt={`Image ${i}`}
+                        className={'slide__inner'} />
                 </div>
             </Fragment>);
         });

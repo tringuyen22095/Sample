@@ -31,7 +31,7 @@ function renderGrid(figureRefs: React.RefObject<any>[], childRefs: React.RefObje
                     alignItems,
                     clipPath
                 }}>
-                <a href={`#preview_${i}`}>
+                {/* <a href={`#preview_${i}`}> */}
                     <Image ref={childRefs[i]}
                         src={src}
                         style={{
@@ -43,12 +43,13 @@ function renderGrid(figureRefs: React.RefObject<any>[], childRefs: React.RefObje
                         }}
                         height={0}
                         width={0}
+                        loading='eager'
                         sizes='100vw'
                         alt={`Image ${i}`}
                         className={classNames({
                             [imgType]: true
                         })} />
-                </a>
+                {/* </a> */}
             </figure>
         </Fragment>;
     });
@@ -83,7 +84,6 @@ const Gallery = () => {
     const refs = useRef<(React.RefObject<HTMLImageElement> | null)[]>(template.map(() => React.createRef()));
 
     useEffect(() => {
-        console.log(template.length)
         const handleLoad = (index) => {
             if (refs.current[index].current) {
                 refs.current[index].current.style.opacity = '1';
@@ -123,7 +123,6 @@ const Gallery = () => {
             <section className="grid">
                 { renderGrid(figureRefs.current, refs.current, template) }
             </section>
-            { renderPreview(template) }
             <div className='test'></div>
         </div>
     </Fragment>);

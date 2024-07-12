@@ -14,7 +14,6 @@ export default function GuestBook() {
                     Guest Book
                 </div>
             </div>
-            
         </div>
     </Fragment >);
 }
