@@ -72,11 +72,12 @@ $distance: 4rem;
         display: grid;
     }
 
-    @media only screen and (min-width: 1024px) {
-        $maxWidth: 1024px;
+    @media only screen and (min-width: 320px) and (max-width: 599px) {
+        $maxWidth: 500px;
         $gridGrap: 1px;
-        $columnCount: 8;
-        $rowCount: 4;
+        $columnCount: 3;
+        $rowCount: 6;
+        $scaleDown: 3.5;
 
         .grid {
             width: 90%;
@@ -84,7 +85,7 @@ $distance: 4rem;
             margin: 1.5rem auto 2rem auto;
             grid-gap: $gridGrap;
             grid-template-columns: repeat($columnCount, 1fr);
-            grid-template-rows: repeat($rowCount, calc(960px / 4));
+            grid-template-rows: repeat($rowCount, calc(960px / 6));
 
             figure {
                 position: relative;
@@ -96,87 +97,241 @@ $distance: 4rem;
                 img {
                     opacity: 0;
                     transition: opacity 1s, transform 0.3s ease-in-out;
-                    &:hover {
-                        transform: scale(1.02);
-                    }
+
                     &.vertical, &.VERTICAL {
-                        width: calc(540px/2);
-                        height: calc(960px/2);
+                        width: calc(540px/$scaleDown);
+                        height: calc(960px/$scaleDown);
                     }
     
                     &.horizontal, &.HORIZONTAL {
-                        width: calc(960px/2);
-                        height: calc(540px/2);
+                        width: calc(960px/$scaleDown);
+                        height: calc(540px/$scaleDown);
                     }
                 }
 
                 &.img-1 {
-                    grid-column: 1;
+                    grid-row: 1/3;
+                    img {
+                        width: -webkit-fill-available !important;
+                        height: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-2 {
+                    align-items: start !important;
+                    img {
+                        width: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-3 {
+                    img {
+                        width: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-4 {
+                    align-items: end !important;
+                }
+
+                &.img-5 {
+                    display: none;
+                    justify-content: start !important;
+                    img {
+                        width: auto !important;
+                        height: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-6 {
+                    img {
+                        width: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-7 {
+                    grid-column: 2/4;
+                    img {
+                        width: -webkit-fill-available !important;
+                        height: auto !important;
+                    }
+                }
+
+                &.img-8 {
+                    img {
+                        width: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-9 {
+                    img {
+                        height: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-10 {
+                    align-items: start !important;
+                    img {
+                        width: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-11 {
+                    align-items: end !important;
+                    img {
+                        width: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-12 {
+                    grid-column: 1/2;
+                    grid-row: 3/4;
+                    img {
+                        width: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-13 {
+                    align-items: end !important;
+                    img {
+                        width: -webkit-fill-available !important;
+                    }
+                }
+
+                &.img-14 {
+                    grid-column: 2/4;
+                    grid-row: 5/6;
+                    img {
+                        width: -webkit-fill-available !important;
+                        height: auto !important;
+                    }
+                }
+
+                &.img-15 {
+                    grid-column: 1/3;
+                    grid-row: 6/7;
+                    img {
+                        height: auto !important;
+                        width: -webkit-fill-available !important;
+                    }
+                }
+            }
+        }
+    }
+
+    @media only screen and (min-width: 600px) and (max-width: 1439px) {
+        $maxWidth: 1024px;
+        $gridGrap: 1px;
+        $columnCount: 5;
+        $rowCount: 4;
+        $scaleDown :2.3;
+
+        .grid {
+            width: 90%;
+            max-width: $maxWidth;
+            margin: 1.5rem auto 2rem auto;
+            grid-gap: $gridGrap;
+            grid-template-columns: repeat($columnCount, 1fr);
+            grid-template-rows: repeat($rowCount, calc(960px / 5));
+
+            figure {
+                position: relative;
+                overflow: hidden;
+                margin: unset !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    opacity: 0;
+                    transition: opacity 1s, transform 0.3s ease-in-out;
+
+                    &.vertical, &.VERTICAL {
+                        width: calc(540px/$scaleDown);
+                        height: calc(960px/$scaleDown);
+                    }
+    
+                    &.horizontal, &.HORIZONTAL {
+                        width: calc(960px/$scaleDown);
+                        height: calc(540px/$scaleDown);
+                    }
+                }
+
+                &.img-1 {
+                    grid-column: 1/2;
                     grid-row: 1/3;
                 }
 
                 &.img-2 {
-                    grid-column: 2;
-                    grid-row: 2/4;
+                    grid-column: 4/5;
+                    grid-row: 1/3;
                 }
 
                 &.img-3 {
-                    grid-column: 5;
-                    grid-row: 1/3;
+                    display: none;
                 }
 
                 &.img-4 {
-                    grid-column: 7/9;
-                    grid-row: 1/3;
+                    img {
+                        width: auto !important;
+                        height: -webkit-fill-available !important;
+                    }
                 }
 
                 &.img-5 {
                     grid-column: 2/4;
-                    grid-row: 1;
+                    grid-row: 1/2;
                 }
 
                 &.img-6 {
-                    grid-column: 4;
-                    grid-row: 1;
                 }
 
                 &.img-7 {
-                    grid-column: 3/5;
-                    grid-row: 2;
+                    grid-column: 1/3;
+                    grid-row: 4/5;
                 }
 
                 &.img-8 {
-                    grid-column: 6;
-                    grid-row: 1/3;
+                    grid-column: 5/6;
+                    grid-row: 2/4;
                 }
 
                 &.img-9 {
-                    grid-column: 3/5;
-                    grid-row: 3;
+                    display: none;
                 }
 
                 &.img-10 {
-                    grid-column: 1;
-                    grid-row: 3/5;
+                    align-items: start !important;
                 }
 
                 &.img-11 {
-                    grid-column: 5/7;
-                    grid-row: 3/5;
+                    img {
+                        width: auto !important;
+                        height: -webkit-fill-available !important;
+                    }
                 }
 
-                &.img-12 {}
+                &.img-12 {
+                    grid-column: 1/2;
+                    grid-row: 3/4;
+                }
 
-                &.img-13 {}
+                &.img-13 {
+                    grid-column: 3/4;
+                    grid-row: 2/4;
+                    align-items: end !important;
+                }
 
                 &.img-14 {
-                    grid-column: 2/5;
-                    grid-row: 4;
+                    justify-content: end !important;
+                    img {
+                        width: auto !important;
+                        height: -webkit-fill-available !important;
+                    }
                 }
 
                 &.img-15 {
-                    grid-column: 7/9;
-                    grid-row: 4;
+                    align-items: end !important;
+                    grid-column: 4/6;
                 }
             }
         }
@@ -187,6 +342,7 @@ $distance: 4rem;
         $gridGrap: 1px;
         $columnCount: 8;
         $rowCount: 4;
+        $scaleDown: 2;
 
         .grid {
             width: 90%;
@@ -194,7 +350,7 @@ $distance: 4rem;
             margin: 1.5rem auto 2rem auto;
             grid-gap: $gridGrap;
             grid-template-columns: repeat($columnCount, 1fr);
-            grid-template-rows: repeat($rowCount, calc(960px / 4));
+            grid-template-rows: repeat($rowCount, calc(960px / $rowCount));
 
             figure {
                 position: relative;
@@ -210,13 +366,13 @@ $distance: 4rem;
                         transform: scale(1.02);
                     }
                     &.vertical, &.VERTICAL {
-                        width: calc(540px/2);
-                        height: calc(960px/2);
+                        width: calc(540px/$scaleDown);
+                        height: calc(960px/$scaleDown);
                     }
     
                     &.horizontal, &.HORIZONTAL {
-                        width: calc(960px/2);
-                        height: calc(540px/2);
+                        width: calc(960px/$scaleDown);
+                        height: calc(540px/$scaleDown);
                     }
                 }
 

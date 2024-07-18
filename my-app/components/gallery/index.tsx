@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Image from 'next/image';
 
 function getRandomAnimationKeys(): string {
-    const index = (Math.random() * Number.MAX_SAFE_INTEGER) % ANIMATION_KEYS.length;
+    const index = (Math.random() * Number.MAX_SAFE_INTEGER) % (ANIMATION_KEYS.length - 1);
     return ANIMATION_KEYS[Math.floor(index)];
 }
 
@@ -43,9 +43,9 @@ function renderGrid(figureRefs: React.RefObject<any>[], childRefs: React.RefObje
                         }}
                         height={0}
                         width={0}
-                        loading='eager'
+                        loading='lazy'
                         sizes='100vw'
-                        alt={`Image ${i}`}
+                        alt={`Image ${i+1}`}
                         className={classNames({
                             [imgType]: true
                         })} />

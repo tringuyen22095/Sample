@@ -1,14 +1,22 @@
 import { NextResponse } from 'next/server';
+import { guestBookSchema } from 'models';
 import fs from 'fs';
 import path from 'path';
 
-export async function POST(request: Request) {
-    const { content } = await request.json();
-    const filePath = path.join(process.cwd(), 'data', 'file.txt');
+export async function POST(request: Request): Promise<NextResponse<{ error?: string, message?: string }>> {
+    const folderPath = path.join(process.cwd(), 'data');
+    if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath, { recursive: true });
+
     try {
-        fs.writeFileSync(filePath, content, 'utf8');
-        return NextResponse.json({ message: 'File written successfully' });
-    } catch (err) {
-        return NextResponse.json({ error: 'Failed to write to file' }, { status: 500 });
+        const payload: string = await request.json();
+        guestBookSchema.parse(payload);
+        const filePath = path.join(folderPath, 'data.txt');
+        if (!fs.existsSync(filePath))
+            fs.writeFileSync(filePath, JSON.stringify(payload), 'utf8');
+        else
+            fs.appendFileSync(filePath, `\r\n${JSON.stringify(payload)}`, 'utf8');
+        return NextResponse.json({ message: 'File written successfully' }, { status: 200 });
+    } catch(err) {
+        return NextResponse.json(err, { status: 500 });
     }
 }

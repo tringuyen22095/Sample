@@ -1,12 +1,25 @@
 import { NextResponse } from 'next/server';
+import { GuestBookType } from 'models';
 import fs from 'fs';
 import path from 'path';
+import readline from 'readline';
 
-export async function GET() {
-    const filePath = path.join(process.cwd(), 'data', 'file.txt');
+export async function GET(): Promise<NextResponse<GuestBookType[] | { error: string }>> {
+    const filePath = path.join(process.cwd(), 'data', 'data.txt');
+
     try {
-        const data = fs.readFileSync(filePath, 'utf8');
-        return NextResponse.json({ content: data });
+        const lines: GuestBookType[] = [];
+        const fileStream = fs.createReadStream(filePath);
+        const rl = readline.createInterface({
+            input: fileStream,
+            crlfDelay: Infinity
+        });
+        for await (const line of rl) {
+            const record: GuestBookType = JSON.parse(line);
+            lines.push(record);
+        }
+        // const data = fs.readFileSync(filePath, 'utf8');
+        return NextResponse.json(lines, { status: 200 });
     } catch (err) {
         return NextResponse.json({ error: 'Failed to read file' }, { status: 500 });
     }

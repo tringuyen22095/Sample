@@ -35,7 +35,8 @@
       "styles/*": ["../common/styles/*"],
       "utils": ["../common/utils"],
       "constant": ["../common/constant"],
-      "pug-render": ["../common/pug-render"]
+      "pug-render": ["../common/pug-render"],
+      "models": ["../common/models"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
