@@ -4,23 +4,11 @@ $bordor-color: #000;
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 100vw;
-    padding: 1rem 0;
+    width: 100%;
+    padding: 2rem 0;
     font-family: 'Level3';
     font-size: 1.3rem;
     text-align: center;
-
-    .summary {
-        .summary-title {
-            margin: 1rem 0 0.4rem 0;
-            font-family: 'Level1';
-            font-size: 3.2rem;
-        }
-
-        .summary-content {
-            margin-bottom: 1rem;
-        }
-    }
 
     .couple {
         width: 900px;

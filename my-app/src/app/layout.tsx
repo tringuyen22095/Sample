@@ -3,6 +3,7 @@
 import './globals.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useEffect } from 'react';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 
 export default function RootLayout({
   children,
@@ -20,7 +21,9 @@ export default function RootLayout({
         <script src='https://kit.fontawesome.com/0705440da3.js' crossOrigin='anonymous'></script>
       </head>
       <body>
-        {children}
+        <AppRouterCacheProvider>
+          {children}
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

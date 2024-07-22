@@ -33,6 +33,18 @@ a {
   text-decoration: none;
 }
 
+.summary {
+  .summary-title {
+      margin-top: 1rem;
+      font-family: 'Level1';
+      font-size: 3.2rem;
+  }
+
+  .summary-content {
+      margin-bottom: 1rem;
+  }
+}
+
 @font-face {
   font-family: 'Level1';
   src: url('../../public/fonts/Unique.otf') format('opentype');

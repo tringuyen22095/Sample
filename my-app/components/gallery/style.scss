@@ -2,16 +2,10 @@ $distance: 4rem;
 
 .galleryContainer {
     width: 100%;
-
-    .summary {
-        text-align: center;
-
-        .summary-title {
-            margin-top: 2rem;
-            font-family: 'Level1';
-            font-size: 3.2rem;
-        }
-    }
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .lightbox {
         position: fixed;

@@ -8,7 +8,8 @@ export type GuestBookType = {
 };
 
 export const guestBookSchema = z.object({
-    createbBy: z.string(),
-    createdOn: z.string(),
-    content: z.string()
+    createbBy: z.string({ message: 'fullName is required!' }),
+    createdOn: z.string({ message: 'Create date is required!' }),
+    content: z.string({ message: 'Content is required!' }),
+    email: z.string().email('Email isn\'t correct!').optional()
 });

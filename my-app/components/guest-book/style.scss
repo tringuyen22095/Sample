@@ -1,15 +1,26 @@
+$border-color: #c89d9c;
+
 .guestBookContainer {
-    background-color: #2f332c;
-    color: #fff;
+    background-image: url('/bg.png');
     font-family: 'Level3';
+    padding: 2rem 0;
 
-    .summary {
-        text-align: center;
+    .contentSection {
+        padding: 2rem 0;
 
-        .summary-title {
-            margin: 1rem 0 0.4rem 0;
-            font-family: 'Level1';
-            font-size: 3.2rem;
+        .col {
+            height: 500px;
+            padding: 0 15px;
+
+            .wish-form {
+                border: $border-color double 4px;
+                height: -webkit-fill-available;
+            }
+    
+            .wish-box {
+                border: $border-color solid 4px;
+                height: -webkit-fill-available;
+            }
         }
     }
 }
