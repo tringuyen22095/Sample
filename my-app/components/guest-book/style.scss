@@ -15,11 +15,21 @@ $border-color: #c89d9c;
             .wish-form {
                 border: $border-color double 4px;
                 height: -webkit-fill-available;
+                padding: 4rem 1.8rem 0 1.8rem;
             }
     
             .wish-box {
                 border: $border-color solid 4px;
                 height: -webkit-fill-available;
+            }
+
+            .btnSubmit {
+                width: 100%;
+                background-color: #c89d9cdd !important;
+                
+                &:hover {
+                    background-color: #c89d9cff !important;
+                }
             }
         }
     }

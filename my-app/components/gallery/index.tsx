@@ -61,7 +61,7 @@ function renderPreview(template: GALLERY_TYPE[]) {
     }, i) => {
         return <Fragment key={`imgPreview-${i}`}>
             <a href='#_preview_out'
-                className="lightbox trans"
+                className='lightbox trans'
                 id={`preview_${i}`}>
                 <Image src={src}
                         height={0}
@@ -120,7 +120,7 @@ const Gallery = () => {
                     Gallery
                 </div>
             </div>
-            <section className="grid">
+            <section className='grid'>
                 { renderGrid(figureRefs.current, refs.current, template) }
             </section>
             <div className='test'></div>

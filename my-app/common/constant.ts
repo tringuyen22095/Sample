@@ -352,6 +352,23 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
     }
 ];
 
+export const wishesSuggest: { label: string }[] = [
+    { label: 'Chúc mừng hạnh phúc! Chúc hai bạn trăm năm hạnh phúc!' },
+    { label: 'Chúc mừng ngày trọng đại tới hai bạn. Hạnh phúc bền lâu và trọn vẹn nhé!' },
+    { label: 'Chúc hai bạn ngày vui hạnh phúc. Hãy yêu thương nhau thật nhiều và sống thật hạnh phúc nha!' },
+    { label: 'Thật vui vì cuối cùng ngày này cũng tới với bạn. Tôi thành tâm chúc hai bạn thật nhiều hạnh phúc và sống đời vui vẻ cùng nhau mãi mãi!' },
+    { label: 'Một chương mới đã mở ra với hai bạn rồi. Tôi mong cuộc sống mới của cả hai sẽ tràn ngập hy vọng, hạnh phúc và niềm vui!' },
+    { label: 'Chia vui cùng bạn trong ngày trọng đại này. Cầu mong cuộc sống sau này của 2 vợ chồng thật thuận hòa, may mắn, làm ăn phát tài nha.' },
+    { label: 'Tôi mong tình yêu của hai bạn thật bền chặt, gắn bó để xây dựng tổ ấm yên bình, hạnh phúc!' },
+    { label: 'Gửi lời chúc mừng chân thành nhất tới bạn của tôi. Chúc hai bạn một cuộc sống thật tuyệt vời, hòa thuận, gắn bó son sắt, thủy chung, hạnh phúc lâu dài.' },
+    { label: 'Nơi nào có yêu thương nơi đó chắc chắn hạnh phúc. Hai bạn đã tìm được nơi đủ đầy yêu thương rồi, hãy cùng nắm tay nhau đi hết cuộc đời nhé!' },
+    { label: 'Hai trở thành một: Một giường, một điều khiển từ xa, một phòng tắm! Xin chúc mừng đám cưới hai bạn.' },
+    { label: 'Chúc đôi trai tài gái sắc nhà mình hạnh phúc vẹn tròn, cung hỷ cung hỷ!' },
+    { label: 'Chúc anh/chị/em trăm năm hạnh phúc, thuận vợ thuận chồng.' },
+    { label: 'Hôm nay chú rể đẹp trai, cô dâu xinh gái. Chúc mừng ngày thành hôn hai bạn tôi!' },
+    { label: 'Chúc mừng đôi bạn trẻ nhé! Mãi yêu thương nhau đến đầu bạc răng long bạn nha!' }
+];
+
 export {
     DATETIME_FORMAT,
     HEADER_NAVIGATION_TEMPLATE,
@@ -359,5 +376,6 @@ export {
     ABOUT_US_TEMPLATE,
     OUR_STORY_TEMPLATE,
     GALLERY_TEMPLATE,
-    ANIMATION_KEYS
+    ANIMATION_KEYS,
+    VN_DATETIME_FORMAT
 };
