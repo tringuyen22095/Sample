@@ -16,6 +16,7 @@ $border-color: #c89d9c;
                 border: $border-color double 4px;
                 height: -webkit-fill-available;
                 padding: 4rem 1.8rem 0 1.8rem;
+                background-color: #ffffff99;
             }
     
             .wish-box {
@@ -24,7 +25,7 @@ $border-color: #c89d9c;
             }
 
             .btnSubmit {
-                width: 100%;
+                width: 50%;
                 background-color: #c89d9cdd !important;
                 
                 &:hover {

@@ -15,12 +15,14 @@ export async function GET(): Promise<NextResponse<GuestBookType[] | { error: str
             crlfDelay: Infinity
         });
         for await (const line of rl) {
-            const record: GuestBookType = JSON.parse(line);
-            lines.push(record);
+            if (line) {
+                const record: GuestBookType = JSON.parse(line);
+                if (!record.isDeleted) lines.push(record);
+            }
         }
         // const data = fs.readFileSync(filePath, 'utf8');
         return NextResponse.json(lines, { status: 200 });
     } catch (err) {
-        return NextResponse.json({ error: 'Failed to read file' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to read file', msg: err }, { status: 500 });
     }
 }

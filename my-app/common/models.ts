@@ -4,7 +4,8 @@ export type GuestBookType = {
     createdBy: string,
     createdOn: string,
     content: string,
-    email?: string
+    email?: string,
+    isDeleted: true | false
 };
 
 export const guestBookSchema = z.object({
@@ -15,14 +16,16 @@ export const guestBookSchema = z.object({
         .optional()
         .refine((value) => value === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value), {
             message: 'Invalid email address'
-        })
+        }),
+    isDeleted: z.boolean().optional()
 });
 
 export type FormSchema = z.infer<typeof guestBookSchema>;
 
-export const initGuestBookFormValues = {
+export const initGuestBookFormValues: GuestBookType = {
     createdBy: '',
     createdOn: '',
     content: '',
-    email: ''
+    email: '',
+    isDeleted: false
 };
