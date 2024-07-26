@@ -8,20 +8,20 @@ export async function GET(): Promise<NextResponse<GuestBookType[] | { error: str
     const filePath = path.join(process.cwd(), 'data', 'data.txt');
 
     try {
-        const lines: GuestBookType[] = [];
-        const fileStream = fs.createReadStream(filePath);
-        const rl = readline.createInterface({
-            input: fileStream,
-            crlfDelay: Infinity
-        });
-        for await (const line of rl) {
-            if (line) {
-                const record: GuestBookType = JSON.parse(line);
-                if (!record.isDeleted) lines.push(record);
-            }
-        }
-        // const data = fs.readFileSync(filePath, 'utf8');
-        return NextResponse.json(lines, { status: 200 });
+        // const lines: GuestBookType[] = [];
+        // const fileStream = fs.createReadStream(filePath);
+        // const rl = readline.createInterface({
+        //     input: fileStream,
+        //     crlfDelay: Infinity
+        // });
+        // for await (const line of rl) {
+        //     if (line) {
+        //         const record: GuestBookType = JSON.parse(line);
+        //         if (!record.isDeleted) lines.push(record);
+        //     }
+        // }
+        const data = fs.readFileSync(filePath, 'utf8');
+        return NextResponse.json(JSON.parse(data), { status: 200 });
     } catch (err) {
         return NextResponse.json({ error: 'Failed to read file', msg: err }, { status: 500 });
     }

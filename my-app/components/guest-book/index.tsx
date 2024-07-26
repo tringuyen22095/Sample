@@ -47,7 +47,7 @@ export default function GuestBook() {
         const res = await fetch('/api/read-file', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json; charset=utf-8'
             }
         });
         const body = await res.json();
@@ -84,17 +84,19 @@ export default function GuestBook() {
     const onSubmit = async (form: FormSchema) => {
         form.createdOn = moment().format(VN_DATETIME_FORMAT);
         if (!isValid) return;
+        form.content = form.content.replaceAll(/\\[n|r]/gm, '<br/>');
         try {
             await fetch('/api/write-file', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json; charset=utf-8',
                 },
                 body: JSON.stringify(form)
             });
         } catch (error) {
             console.error(error);
         } finally {
+            reset();
             await fetchData();
         }
     }
@@ -103,8 +105,11 @@ export default function GuestBook() {
     function renderListData() {
         return lstData.map((item, index) => {
             return <Fragment key={`data${index}`}>
-                <div className={classNames(index % 0 ? 'even' : 'odd', 'dlex')}>
-                    {item.createdBy} - {item.createdOn}
+                <div className={classNames(index % 2 ? 'even' : 'odd', 'd-flex', 'flex-column')}>
+                    <div className='wishes-description'>
+                        <span>{item.createdBy}</span><span>({item.createdOn})</span>
+                    </div>
+                    <div className='wishes-content' dangerouslySetInnerHTML={{__html: item.content}}/>
                 </div>
             </Fragment>;
         });
@@ -114,14 +119,14 @@ export default function GuestBook() {
         <span id='guestBook' />
         <div className='guestBookContainer'>
             <div className='container'>
-                <div className='summary text-center'>
+                <div className='summary mb-4 text-center'>
                     <div className='summary-title'>
                         Guest Book
                     </div>
                 </div>
                 <div className='contentSection row'>
-                    <div className='col col-lg-6 col-md-6'>
-                        <div className='wish-form'>
+                    <div className='col col-xl-6 col-sm-12 col-12 mb-4'>
+                        <div className='wish-form d-flex align-items-center justify-content-center'>
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className='row'>
                                     <div className='col-lg-6 col-md-6 d-flex flex-row align-items-center justify-content-center'>
@@ -146,7 +151,7 @@ export default function GuestBook() {
                                     </div>
                                 </div>
                                 <div className='row mt-4'>
-                                    <div className='col-lg-12 col-md-12' style={{textAlign: 'right'}}>
+                                    <div className='col-12' style={{textAlign: 'right'}}>
                                         <Paper elevation={1}>
                                             <FormControl error={!!errors.content}
                                                 size='small'
@@ -185,7 +190,7 @@ export default function GuestBook() {
                                     </div>
                                 </div>
                                 <div className='row mt-2'>
-                                    <div className='col-lg-12 col-md-12 text-center'>
+                                    <div className='col-12 text-center'>
                                         {
                                             show ?
                                             (<Autocomplete options={wishesSuggest}
@@ -222,7 +227,6 @@ export default function GuestBook() {
                                                 zIndex: 1
                                             }}>
                                             <Image src='/qr.jpeg'
-                                                objectFit='cover'
                                                 alt='QR banking'
                                                 loading='eager'
                                                 sizes='100vw'
@@ -238,10 +242,23 @@ export default function GuestBook() {
                             </form>
                         </div>
                     </div>
-                    <div className='col col-lg-6 col-md-6'>
+                    <div className='col col-xl-6 col-sm-12 col-12'>
                         <div className='wish-box'>
                             {renderListData()}
                         </div>
+                    </div>
+                </div>
+                <div className='contentSection row'>
+                    <div className='col col-xl-6 col-sm-12 col-12 mb-4'>
+                        <div className='maps-container'>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.770089646576!2d106.65942877577592!3d10.752194459638716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f0c4d558edb%3A0x2c60d7b2f3e598a0!2zTmjDoCBIw6BuZyDDgWkgSHXDqiAyIC0g5oSb6I-vIDIg5aSn5rSS5qiT!5e0!3m2!1svi!2s!4v1721982196698!5m2!1svi!2s"
+                            allowFullScreen={false}
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                    <div className='col col-xl-6 col-sm-12 col-12 mb-4'>
+                        TIMELINE
                     </div>
                 </div>
             </div>

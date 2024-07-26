@@ -22,3 +22,15 @@ Top 16:9 Resolutions
 30720 x 17280 (HHD)
 61440 x 34560 (FHHD)
 122880 x 69120 (QHHD)
+
+
+Bootstrap
+_______________________________________________________________
+|Breakpoint          |    Class infix           |    Dimensions|
+|X-Small             |    None                  |    <576px    |
+|Small               |    sm                    |    ≥576px    |
+|Medium              |    md                    |    ≥768px    |
+|Large               |    lg                    |    ≥992px    |
+|Extra large         |    xl                    |    ≥1200px   |
+|Extra extra large   |    xxl                   |    ≥1400px   |
+________________________________________________________________

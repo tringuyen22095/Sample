@@ -1,3 +1,1 @@
-
-{"createdBy":"dsa","createdOn":"25/07/2024","content":"Chúc mừng ngày trọng đại tới hai bạn. Hạnh phúc bền lâu và trọn vẹn nhé!","email":"","isDeleted":false}
-{"createdBy":"dsa","createdOn":"25/07/2024","content":"Chúc mừng ngày trọng đại tới hai bạn. Hạnh phúc bền lâu và trọn vẹn nhé!😵🤯🤠","email":"","isDeleted":false}
+[{"createdBy":"Trí Nguyễn","createdOn":"26/07/2024","content":"I love you pặc pặc","email":"","isDeleted":false},{"createdBy":"Hâm mộ giấu tên","createdOn":"26/07/2024","content":"Wishing all the best","email":"","isDeleted":false}]

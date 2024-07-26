@@ -38,7 +38,7 @@ export default async function AboutUs() {
                         <div className='description'>
                             <span>{ womanSummary.fullName }</span>
                             <span>{ `${womanSummary.dob} (${womanSummary.zodiac})` }</span>
-                            <span>{ womanSummary.slogan }</span>
+                            <span dangerouslySetInnerHTML={{__html: womanSummary.slogan}}/>
                         </div>
                     </div>
                 </div>

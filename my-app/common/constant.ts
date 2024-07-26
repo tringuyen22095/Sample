@@ -91,7 +91,7 @@ const ABOUT_US_TEMPLATE: {
         fullName: 'Chu Thị Hải Anh',
         dob: '26-08',
         zodiac: 'Virgo',
-        slogan: 'slogan'
+        slogan: 'When you realize that you want to spend your life with someone, you just want to start as soon as possible.'
     }
 };
 
