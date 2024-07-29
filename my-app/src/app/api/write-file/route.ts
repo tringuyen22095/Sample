@@ -17,21 +17,13 @@ export async function POST(request: Request): Promise<NextResponse<{ error?: str
         if (!fs.existsSync(filePath)) {
             finalizeData.push(payload);
         } else {
-            const data: GuestBookType[] = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-            log('before:');
-            log('type:', typeof data);
-            log('data:', data);
-            log('--------------------------------------')
+            const data: GuestBookType[] = JSON.parse(fs.readFileSync(filePath, 'utf8') ?? '[]');
             data.push(payload);
-            log('after:');
-            log('type:', typeof data);
-            log('data:', data);
-            log('--------------------------------------')
             finalizeData.push(...data);
         }
-        fs.writeFileSync(filePath, JSON.stringify(finalizeData), 'utf8');
-        return NextResponse.json({ message: 'File written successfully' }, { status: 200 });
-    } catch(err) {
-        return NextResponse.json({message: 'File written fail'}, { status: 500 });
+        fs.writeFileSync(filePath, JSON.stringify(finalizeData, null, 2), 'utf8');
+        return NextResponse.json({ error: 'File written successfully' }, { status: 200 });
+    } catch (err) {
+        return NextResponse.json({ error: 'File written fail' }, { status: 500 });
     }
 }

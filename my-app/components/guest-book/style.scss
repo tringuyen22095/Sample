@@ -6,22 +6,35 @@ $border-color: #c89d9c;
     padding: 2rem 0;
 
     .contentSection {
+        input {
+            background-color: #fff;
+        }
 
         .col {
-            height: 500px;
-            padding: 0 15px;
-
-            .wish-form {
+            .left-side {
                 border: $border-color double 4px;
                 height: -webkit-fill-available;
                 padding: 0 1.8rem;
                 background-color: #ffffff99;
+                height: 100%;
+
+                .seperate-line {
+                    border: 1px solid #dbdbdb;
+                }
+
+                .qr {
+                    .text {
+                        font-size: 18px;
+                        font-weight: 200;
+                        font-style: italic;
+                    }
+                }
             }
-    
-            .wish-box {
+
+            .right-side {
                 background-color: #ffffff;
                 border: $border-color solid 4px;
-                height: -webkit-fill-available;
+                height: 100%;
                 overflow-y: auto;
 
                 >div {
@@ -38,7 +51,7 @@ $border-color: #c89d9c;
                         }
                         span:last-child {
                             margin-left: 4px;
-                            font-size: 11px;
+                            font-size: 10px;
                             font-style: italic;
                         }
                     }
@@ -51,7 +64,7 @@ $border-color: #c89d9c;
 
             .maps-container, .maps-container>iframe {
                 width: 100%;
-                height: 100%;
+                height: 500px;
             }
 
             .btnSubmit {
