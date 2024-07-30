@@ -16,30 +16,17 @@ function renderGrid(figureRefs: React.RefObject<any>[], childRefs: React.RefObje
         src,
         imgType,
         objectFit,
-        objectPosition,
-        width,
-        height,
-        justifyContent,
-        alignItems,
-        clipPath
+        objectPosition
     }, i) => {
         return <Fragment key={`imgItem-${i}`}>
             <figure ref={figureRefs[i]}
-                className={`img-${i+1}`}
-                style={{
-                    justifyContent,
-                    alignItems,
-                    clipPath
-                }}>
+                className={`img-${i+1}`}>
                 {/* <a href={`#preview_${i}`}> */}
                     <Image ref={childRefs[i]}
                         src={src}
                         style={{
                             objectFit,
-                            objectPosition,
-                            height,
-                            width,
-                            clipPath
+                            objectPosition
                         }}
                         height={0}
                         width={0}

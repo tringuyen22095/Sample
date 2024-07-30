@@ -1,5 +1,6 @@
-@media only screen and (min-width: 657px) {
+@media only screen and (min-width: 768px) {
     .headerContainer {
+        font-family: 'Level2';
         z-index: 999;
         position: fixed;
         left: 0px;
@@ -18,8 +19,6 @@
         transition: top 1s;
         -webkit-transition: top 1s;
 
-        font-family: 'Level2';
-
         &:hover {
             top: 0px;
         }
@@ -36,5 +35,19 @@
                 }
             }
         }
+    }
+    .nav-menu {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .headerContainer {
+        display: none;
+    }
+    .nav-menu {
+        position: fixed !important;
+        bottom: calc(100vh / 30);
+        right: calc(100vw / 30);
     }
 }

@@ -106,107 +106,79 @@ $distance: 4rem;
                 &.img-1 {
                     grid-row: 1/3;
                     img {
-                        width: -webkit-fill-available !important;
-                        height: -webkit-fill-available !important;
+                        width: auto;
+                        height: auto;
                     }
                 }
 
                 &.img-2 {
-                    align-items: start !important;
-                    img {
-                        width: -webkit-fill-available !important;
-                    }
+                    align-items: start;
                 }
 
-                &.img-3 {
-                    img {
-                        width: -webkit-fill-available !important;
-                    }
-                }
+                &.img-3 {}
 
                 &.img-4 {
-                    align-items: end !important;
+                    align-items: end;
                 }
 
                 &.img-5 {
                     display: none;
-                    justify-content: start !important;
-                    img {
-                        width: auto !important;
-                        height: -webkit-fill-available !important;
-                    }
+                    justify-content: start;
                 }
 
-                &.img-6 {
-                    img {
-                        width: -webkit-fill-available !important;
-                    }
-                }
+                &.img-6 {}
 
                 &.img-7 {
                     grid-column: 2/4;
                     img {
-                        width: -webkit-fill-available !important;
-                        height: auto !important;
+                        width: auto;
+                        height: auto;
                     }
                 }
 
-                &.img-8 {
-                    img {
-                        width: -webkit-fill-available !important;
-                    }
-                }
+                &.img-8 {}
 
                 &.img-9 {
                     img {
-                        height: -webkit-fill-available !important;
+                        width: auto;
+                        height: auto;
                     }
                 }
 
                 &.img-10 {
-                    align-items: start !important;
-                    img {
-                        width: -webkit-fill-available !important;
-                    }
+                    align-items: start;
                 }
 
-                &.img-11 {
-                    align-items: end !important;
-                    img {
-                        width: -webkit-fill-available !important;
-                    }
-                }
+                &.img-11 {}
 
                 &.img-12 {
                     grid-column: 1/2;
                     grid-row: 3/4;
-                    img {
-                        width: -webkit-fill-available !important;
-                    }
+                    align-items: start;
                 }
 
                 &.img-13 {
-                    align-items: end !important;
-                    img {
-                        width: -webkit-fill-available !important;
-                    }
+                    align-items: end;
                 }
 
                 &.img-14 {
                     grid-column: 2/4;
                     grid-row: 5/6;
+                    align-items: end;
+                    justify-content: end;
                     img {
-                        width: -webkit-fill-available !important;
-                        height: auto !important;
+                        width: auto;
+                        height: auto;
                     }
                 }
 
                 &.img-15 {
                     grid-column: 1/3;
                     grid-row: 6/7;
+                    justify-content: start;
                     img {
-                        height: auto !important;
-                        width: -webkit-fill-available !important;
+                        width: auto;
+                        height: auto;
                     }
                 }
             }
@@ -253,6 +225,7 @@ $distance: 4rem;
                 &.img-1 {
                     grid-column: 1/2;
                     grid-row: 1/3;
+                    align-items: end;
                 }
 
                 &.img-2 {
@@ -264,16 +237,12 @@ $distance: 4rem;
                     display: none;
                 }
 
-                &.img-4 {
-                    img {
-                        width: auto !important;
-                        height: -webkit-fill-available !important;
-                    }
-                }
+                &.img-4 {}
 
                 &.img-5 {
                     grid-column: 2/4;
                     grid-row: 1/2;
+                    align-items: start;
                 }
 
                 &.img-6 {
@@ -282,11 +251,13 @@ $distance: 4rem;
                 &.img-7 {
                     grid-column: 1/3;
                     grid-row: 4/5;
+                    align-items: end;
                 }
 
                 &.img-8 {
                     grid-column: 5/6;
                     grid-row: 2/4;
+                    align-items: end;
                 }
 
                 &.img-9 {
@@ -294,32 +265,31 @@ $distance: 4rem;
                 }
 
                 &.img-10 {
-                    align-items: start !important;
+                    align-items: start;
                 }
 
                 &.img-11 {
                     img {
-                        width: auto !important;
-                        height: -webkit-fill-available !important;
+                        width: auto;
                     }
                 }
 
                 &.img-12 {
                     grid-column: 1/2;
                     grid-row: 3/4;
+                    align-items: start;
                 }
 
                 &.img-13 {
                     grid-column: 3/4;
                     grid-row: 2/4;
-                    align-items: end !important;
+                    align-items: end;
                 }
 
                 &.img-14 {
-                    justify-content: end !important;
+                    justify-content: center;
                     img {
-                        width: auto !important;
-                        height: -webkit-fill-available !important;
+                        width: auto;
                     }
                 }
 
@@ -388,21 +358,27 @@ $distance: 4rem;
                 &.img-4 {
                     grid-column: 7/9;
                     grid-row: 1/3;
+                    img {
+                        width: 100%;
+                    }
                 }
 
                 &.img-5 {
                     grid-column: 2/4;
                     grid-row: 1;
+                    justify-content: start;
                 }
 
                 &.img-6 {
                     grid-column: 4;
                     grid-row: 1;
+                    justify-content: start;
                 }
 
                 &.img-7 {
                     grid-column: 3/5;
                     grid-row: 2;
+                    align-items: end;
                 }
 
                 &.img-8 {
@@ -413,6 +389,7 @@ $distance: 4rem;
                 &.img-9 {
                     grid-column: 3/5;
                     grid-row: 3;
+                    align-items: end;
                 }
 
                 &.img-10 {
@@ -423,20 +400,34 @@ $distance: 4rem;
                 &.img-11 {
                     grid-column: 5/7;
                     grid-row: 3/5;
+                    img {
+                        width: 100%;
+                    }
                 }
 
-                &.img-12 {}
+                &.img-12 {
+                    align-items: start;
+                }
 
-                &.img-13 {}
+                &.img-13 {
+                    justify-content: start;
+                    align-items: end;
+                }
 
                 &.img-14 {
                     grid-column: 2/5;
                     grid-row: 4;
+                    align-items: end;
+                    img {
+                        width: 100%;
+                    }
                 }
 
                 &.img-15 {
                     grid-column: 7/9;
                     grid-row: 4;
+                    justify-content: start;
+                    align-items: end;
                 }
             }
         }

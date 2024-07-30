@@ -153,14 +153,9 @@ const OUR_STORY_TEMPLATE: OurStoryItemType[] = [
 
 export type GALLERY_TYPE = {
     src: string,
-    imgType?: 'VERTICAL' | 'HORIZONTAL',
+    imgType: 'VERTICAL' | 'HORIZONTAL',
     objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down',
     objectPosition?: 'center' | 'bottom' | 'top' | 'left' | 'right',
-    width?: string | 'unset',
-    height?: string | 'unset',
-    justifyContent?: 'start' | 'end' | 'center' | 'space-between',
-    alignItems?: 'start' | 'end' | 'center' | 'space-between',
-    clipPath?: string,
     display?: true | false,
     animation?: string
 }
@@ -187,8 +182,6 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
     {
         src: '/gallery/GIN00311.jpg',
         imgType: 'VERTICAL',
-        width: '100%',
-        height: 'unset',
         objectFit: 'cover',
         display: true
     },
@@ -202,27 +195,23 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN00422.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
-        justifyContent: 'start',
         display: true
     },
     {
         src: '/gallery/GIN00465.jpg',
         imgType: 'HORIZONTAL',
-        alignItems: 'end',
         objectFit: 'cover',
         display: true
     },
     {
         src: '/gallery/GIN00515_1.jpg',
         imgType: 'VERTICAL',
-        alignItems: 'end',
         objectFit: 'cover',
         display: true
     },
     {
         src: '/gallery/GIN00658.jpg',
         imgType: 'HORIZONTAL',
-        alignItems: 'end',
         objectFit: 'cover',
         display: true
     },
@@ -236,52 +225,41 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         src: '/gallery/GIN00934.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
-        width: '100%',
-        height: 'unset',
         display: true
     },
     {
         src: '/gallery/GIN00994.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
-        alignItems: 'start',
         display: true
     },
     {
         src: '/gallery/GIN01115.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
-        justifyContent: 'start',
         display: true
     },
     {
         src: '/gallery/GIN01463.jpg',
         imgType: 'HORIZONTAL',
         objectFit: 'cover',
-        height: 'unset',
-        width: '100%',
-        alignItems: 'end',
         display: true
     },
     {
         src: '/gallery/GIN01750.jpg',
         imgType: 'HORIZONTAL',
         objectFit: 'cover',
-        justifyContent: 'start',
         display: true
     },
     {
         src: '/gallery/GIN01982.jpg',
         imgType: 'VERTICAL',
-        objectFit: 'cover',
-        alignItems: 'end',
-        justifyContent: 'end'
+        objectFit: 'cover'
     },
     {
         src: '/gallery/GIN02059_1.jpg',
         imgType: 'VERTICAL',
-        objectFit: 'cover',
-        alignItems: 'end'
+        objectFit: 'cover'
     },
     {
         src: '/gallery/GIN02093.jpg',
@@ -291,28 +269,22 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
     {
         src: '/gallery/GIN02311.jpg',
         imgType: 'VERTICAL',
-        objectFit: 'cover',
-        width: '100%',
-        height: 'unset',
-        alignItems: 'center'
+        objectFit: 'cover'
     },
     {
         src: '/gallery/GIN02339.jpg',
         imgType: 'HORIZONTAL',
-        objectFit: 'cover',
-        alignItems: 'start'
+        objectFit: 'cover'
     },
     {
         src: '/gallery/GIN02365.jpg',
         imgType: 'VERTICAL',
-        objectFit: 'cover',
-        clipPath: 'polygon(0% 0%, 100% 0%, 100% 85%, 0% 85%)'
+        objectFit: 'cover'
     },
     {
         src: '/gallery/GIN02400.jpg',
         imgType: 'VERTICAL',
-        objectFit: 'cover',
-        clipPath: 'polygon(0% 15%, 100% 15%, 100% 100%, 0% 100%)'
+        objectFit: 'cover'
     },
     {
         src: '/gallery/GIN02405.jpg',
@@ -347,8 +319,7 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
     {
         src: '/gallery/GIN09835.jpg',
         imgType: 'HORIZONTAL',
-        objectFit: 'cover',
-        justifyContent: 'start'
+        objectFit: 'cover'
     }
 ];
 

@@ -11,7 +11,8 @@ import {
     InputLabel,
     OutlinedInput,
     TextField,
-    Box
+    Box,
+    ClickAwayListener
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import data from '@emoji-mart/data';
@@ -27,7 +28,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Image from 'next/image';
 import classNames from 'classnames';
 
-const TIMELINE_SIZE = 100;
+const TIMELINE_SIZE = 120;
 const HTTP_HEADERS = {
     'Content-Type': 'application/json; charset=utf-8'
 }
@@ -41,26 +42,34 @@ export default function GuestBook() {
         defaultValues: initGuestBookFormValues,
         resolver: zodResolver(guestBookSchema)
     });
-    const [squareHeight, setSquareHeight] = useState<string | null>(null);
-    const [autocompleteValue, setAutocompleteValue] = useState(null);
+    const [formSquareHeight, setFormSquareHeight] = useState<string | null>(null);
+    const [mapSquareWidth, setMapSquareWidth] = useState<string | null>(null);
+    const [mapSquareHeight, setMapSquareHeight] = useState<string | null>(null);
+    const [autoCompleteWidth, setAutoCompleteWidth] = useState<string | null>(null);
+    const [autoCompleteValue, setAutoCompleteValue] = useState(null);
 
     const [lstData, setLstData] = useState<GuestBookType[]>([]);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [autocompleteWidth, setAutocompleteWidth] = useState<string | null>(null);
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const leftSide = useRef(null);
 
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const formSquare = useRef(null);
+    const mapSquare = useRef(null);
+
+    // Constructor
     useEffect(() => {
         fetchData();
     }, []);
 
     useEffect(() => {
-        if (leftSide.current) {
-            console.log(leftSide.current)
-            setSquareHeight(`${leftSide.current.offsetHeight}px`);
+        if (formSquare.current) {
+            setFormSquareHeight(`${formSquare.current.offsetHeight}px`);
         }
         if (textareaRef.current) {
-            setAutocompleteWidth(`${textareaRef.current.offsetWidth}px`)
+            setAutoCompleteWidth(`${textareaRef.current.offsetWidth}px`)
+        }
+        if (mapSquare.current) {
+            setMapSquareHeight(`${mapSquare.current.offsetHeight}px`)
+            setMapSquareWidth(`${mapSquare.current.offsetWidth}px`);
         }
     }, [lstData]);
 
@@ -93,7 +102,7 @@ export default function GuestBook() {
     };
     const onIdeaSelect = (event: any, idea: { label: string }) => {
         setValue('content', idea.label);
-        setAutocompleteValue(null);
+        setAutoCompleteValue(null);
         setIdeaShow(false);
     };
 
@@ -159,14 +168,14 @@ export default function GuestBook() {
                 </div>
                 <div className='contentSection row'>
                     <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5'>
-                        <div className='p-5 left-side' ref={leftSide} >
+                        <div className='p-5 left-side' ref={formSquare} >
                             <div className='form'>
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className='row'>
                                         <div className='col-lg-6 col-md-6 mb-2 d-flex flex-row justify-content-center'>
-                                            <FormControl size='small'
-                                                fullWidth
-                                                error={!!errors.createdBy}>
+                                            <FormControl error={!!errors.createdBy}
+                                                size='small'
+                                                fullWidth>
                                                 <InputLabel htmlFor='txtFullname'>Fullname*</InputLabel>
                                                 <OutlinedInput {...register('createdBy')}
                                                     value={watch('createdBy', '')}
@@ -175,9 +184,9 @@ export default function GuestBook() {
                                             </FormControl>
                                         </div>
                                         <div className='col-lg-6 col-md-6 mb-2 d-flex flex-row justify-content-center'>
-                                            <FormControl size='small'
-                                                fullWidth
-                                                error={!!errors.email}>
+                                            <FormControl error={!!errors.email}
+                                                size='small'
+                                                fullWidth>
                                                 <InputLabel htmlFor='txtEmail'>Email</InputLabel>
                                                 <OutlinedInput {...register('email')}
                                                     value={watch('email', '')}
@@ -188,15 +197,15 @@ export default function GuestBook() {
                                     </div>
                                     <div className='row mb-3'>
                                         <div className='col-12'>
-                                            <Paper elevation={1} style={{textAlign: 'right'}}>
+                                            <Paper elevation={1} style={{ textAlign: 'right' }}>
                                                 <FormControl error={!!errors.content}
                                                     size='small'
                                                     fullWidth>
                                                     <InputLabel htmlFor='txtYourWishes'>Your Wishes*</InputLabel>
                                                     <OutlinedInput onChange={(e) => setValue('content', e.target.value)}
+                                                        value={watch('content', '')}
                                                         {...register('content')}
                                                         inputRef={textareaRef}
-                                                        value={watch('content', '')}
                                                         label='Your Wishes'
                                                         id='txtYourWishes'
                                                         multiline
@@ -216,12 +225,12 @@ export default function GuestBook() {
                                                 className='d-flex justify-content-center'
                                                 style={{
                                                     zIndex: 1,
-                                                    width: autocompleteWidth
+                                                    width: autoCompleteWidth
                                                 }}>
                                                 <Autocomplete options={wishesSuggest}
                                                     renderInput={(params) => <TextField {...params} label="Select Option" size='small' variant="outlined" />}
                                                     getOptionLabel={(option) => option.label}
-                                                    value={autocompleteValue}
+                                                    value={autoCompleteValue}
                                                     onChange={onIdeaSelect}
                                                     clearOnEscape={true}
                                                     clearIcon={null}
@@ -238,13 +247,12 @@ export default function GuestBook() {
                                                 className='d-flex justify-content-end'
                                                 style={{
                                                     zIndex: 1,
-                                                    width: autocompleteWidth
+                                                    width: autoCompleteWidth
                                                 }}>
                                                 <Picker categories={['people', 'foods', 'activity', 'places', 'objects']}
                                                     onClickOutside={() => setEmojiShow(false)}
                                                     onEmojiSelect={onEmojiSelect}
                                                     skinTonePosition={'none'}
-                                                    className='dsadhsakjdhksja'
                                                     previewPosition={'none'}
                                                     maxFrequentRows={0}
                                                     theme={'light'}
@@ -287,13 +295,13 @@ export default function GuestBook() {
                         </div>
                     </div>
                     <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5'>
-                        <div className='right-side' style={{height: squareHeight}}>
+                        <div className='right-side' style={{ height: formSquareHeight }}>
                             {renderListData()}
                         </div>
                     </div>
                 </div>
                 <div className='contentSection row'>
-                    <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5'>
+                    <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5' ref={mapSquare}>
                         <div className='maps-container'>
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.770089646576!2d106.65942877577592!3d10.752194459638716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f0c4d558edb%3A0x2c60d7b2f3e598a0!2zTmjDoCBIw6BuZyDDgWkgSHXDqiAyIC0g5oSb6I-vIDIg5aSn5rSS5qiT!5e0!3m2!1svi!2s!4v1721982196698!5m2!1svi!2s"
                                 allowFullScreen={false}
@@ -301,27 +309,44 @@ export default function GuestBook() {
                                 referrerPolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
-                    <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5 d-flex flex-column justify-content-between'>
-                        <div>
+                    <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5 d-flex flex-column justify-content-between timeline'
+                        style={{ height: mapSquareHeight }}>
+                        <div className='separate-line' style={{
+                            height: mapSquareHeight,
+                            left: `calc(50% + ${mapSquareWidth} / 2)`
+                        }} />
+                        <div className='d-flex flex-row justify-content-around align-items-center'>
                             <Image src='/welcome.svg'
                                 alt='welcome'
                                 loading='eager'
                                 height={TIMELINE_SIZE}
                                 width={TIMELINE_SIZE} />
+                            <div className='d-flex flex-column align-items-center'>
+                                <span className='detail fw-bold fs-4'>Pick Up</span>
+                                <span className='time fst-italic fw-light'>18:00</span>
+                            </div>
                         </div>
-                        <div>
+                        <div className='d-flex flex-row-reverse justify-content-around align-items-center'>
                             <Image src='/wedding.svg'
                                 alt='wedding'
                                 loading='eager'
                                 height={TIMELINE_SIZE}
                                 width={TIMELINE_SIZE} />
+                            <div className='d-flex flex-column align-items-center'>
+                                <span className='detail fw-bold fs-4'>Celebrate</span>
+                                <span className='time fst-italic fw-light'>19:30</span>
+                            </div>
                         </div>
-                        <div>
+                        <div className='d-flex flex-row justify-content-around align-items-center'>
                             <Image src='/meat.svg'
                                 alt='meat'
                                 loading='eager'
                                 height={TIMELINE_SIZE}
                                 width={TIMELINE_SIZE} />
+                            <div className='d-flex flex-column align-items-center'>
+                                <span className='detail fw-bold fs-4 text-center'>Join The party</span>
+                                <span className='time fst-italic fw-light'>19:50</span>
+                            </div>
                         </div>
                     </div>
                 </div>

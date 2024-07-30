@@ -17,7 +17,7 @@ export async function POST(request: Request): Promise<NextResponse<{ error?: str
         if (!fs.existsSync(filePath)) {
             finalizeData.push(payload);
         } else {
-            const data: GuestBookType[] = JSON.parse(fs.readFileSync(filePath, 'utf8') ?? '[]');
+            const data: GuestBookType[] = JSON.parse(fs.readFileSync(filePath, 'utf8') || '[]');
             data.push(payload);
             finalizeData.push(...data);
         }
