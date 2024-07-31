@@ -1,7 +1,22 @@
 'use client'
 
-import './style.scss';
+import { ErrorModel, HTTP_HEADERS, TIMELINE_SIZE, VN_DATETIME_FORMAT, wishesSuggest } from 'constant';
+import { initGuestBookFormValues, guestBookSchema, FormSchema } from 'models';
+import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Autocomplete from '@mui/material/Autocomplete';
+import SendIcon from '@mui/icons-material/Send';
+import { useForm } from 'react-hook-form';
+import { setData } from 'dataReducer';
+import Picker from '@emoji-mart/react';
+import data from '@emoji-mart/data';
+import classNames from 'classnames';
+import Image from 'next/image';
+import moment from 'moment';
+import './style.scss';
 import {
     Button,
     IconButton,
@@ -12,31 +27,6 @@ import {
     OutlinedInput,
     TextField
 } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import data from '@emoji-mart/data';
-import Picker from '@emoji-mart/react';
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-import { useForm } from 'react-hook-form';
-import { initGuestBookFormValues, guestBookSchema, FormSchema, GuestBookType } from 'models';
-import { zodResolver } from '@hookform/resolvers/zod';
-import moment from 'moment';
-import { VN_DATETIME_FORMAT, wishesSuggest } from 'constant';
-import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
-import Autocomplete from '@mui/material/Autocomplete';
-import Image from 'next/image';
-import classNames from 'classnames';
-import { RootState } from '../../common/redux/store';
-import { useAppDispatch, useAppSelector } from '../../common/redux/hooks';
-import { setData } from '../../common/redux/reducers/dataReducer';
-
-export const TIMELINE_SIZE = 120;
-export const HTTP_HEADERS = {
-    'Content-Type': 'application/json; charset=utf-8'
-}
-
-export type ErrorModel = {
-    error: string;
-};
 
 export default function GuestBook() {
     const { register, handleSubmit, reset, setError, watch, setFocus, getValues, trigger, setValue, formState: { errors, isDirty, isSubmitted, isValid } } = useForm<FormSchema>({
@@ -49,18 +39,13 @@ export default function GuestBook() {
     const [autoCompleteWidth, setAutoCompleteWidth] = useState<string | null>(null);
     const [autoCompleteValue, setAutoCompleteValue] = useState(null);
 
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const lstData = useAppSelector(state => state.data);
     const dispatch = useAppDispatch();
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const formSquare = useRef(null);
     const mapSquare = useRef(null);
-
-    // Constructor
-    useEffect(() => {
-        // setLstData();
-    }, []);
 
     useEffect(() => {
         if (formSquare.current) {
@@ -230,7 +215,7 @@ export default function GuestBook() {
                                                     width: autoCompleteWidth
                                                 }}>
                                                 <Autocomplete options={wishesSuggest}
-                                                    renderInput={(params) => <TextField {...params} label="Select Option" size='small' variant="outlined" />}
+                                                    renderInput={(params) => <TextField {...params} label='Select Option' size='small' variant='outlined' />}
                                                     getOptionLabel={(option) => option.label}
                                                     value={autoCompleteValue}
                                                     onChange={onIdeaSelect}
@@ -305,10 +290,10 @@ export default function GuestBook() {
                 <div className='contentSection row'>
                     <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5' ref={mapSquare}>
                         <div className='maps-container'>
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.770089646576!2d106.65942877577592!3d10.752194459638716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f0c4d558edb%3A0x2c60d7b2f3e598a0!2zTmjDoCBIw6BuZyDDgWkgSHXDqiAyIC0g5oSb6I-vIDIg5aSn5rSS5qiT!5e0!3m2!1svi!2s!4v1721982196698!5m2!1svi!2s"
+                            <iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.770089646576!2d106.65942877577592!3d10.752194459638716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f0c4d558edb%3A0x2c60d7b2f3e598a0!2zTmjDoCBIw6BuZyDDgWkgSHXDqiAyIC0g5oSb6I-vIDIg5aSn5rSS5qiT!5e0!3m2!1svi!2s!4v1721982196698!5m2!1svi!2s'
                                 allowFullScreen={false}
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade"></iframe>
+                                loading='lazy'
+                                referrerPolicy='no-referrer-when-downgrade'></iframe>
                         </div>
                     </div>
                     <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5 d-flex flex-column justify-content-between timeline'

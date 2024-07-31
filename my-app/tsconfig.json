@@ -36,7 +36,10 @@
       "utils": ["../common/utils"],
       "constant": ["../common/constant"],
       "pug-render": ["../common/pug-render"],
-      "models": ["../common/models"]
+      "models": ["../common/models"],
+      "hooks": ["../common/redux/hooks"],
+      "dataReducer": ["../common/redux/reducers/dataReducer"],
+      "env": ["../common/env"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

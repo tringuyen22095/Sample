@@ -1,10 +1,10 @@
 'use client';
 
-import './style.scss';
-import React, { Fragment, useEffect, useRef } from 'react';
 import { GALLERY_TEMPLATE, GALLERY_TYPE, ANIMATION_KEYS } from 'constant';
+import React, { Fragment, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import Image from 'next/image';
+import './style.scss';
 
 function getRandomAnimationKeys(): string {
     const index = (Math.random() * Number.MAX_SAFE_INTEGER) % (ANIMATION_KEYS.length - 1);
@@ -21,7 +21,6 @@ function renderGrid(figureRefs: React.RefObject<any>[], childRefs: React.RefObje
         return <Fragment key={`imgItem-${i}`}>
             <figure ref={figureRefs[i]}
                 className={`img-${i+1}`}>
-                {/* <a href={`#preview_${i}`}> */}
                     <Image ref={childRefs[i]}
                         src={src}
                         style={{
@@ -30,13 +29,10 @@ function renderGrid(figureRefs: React.RefObject<any>[], childRefs: React.RefObje
                         }}
                         height={0}
                         width={0}
-                        loading='lazy'
+                        priority
                         sizes='100vw'
                         alt={`Image ${i+1}`}
-                        className={classNames({
-                            [imgType]: true
-                        })} />
-                {/* </a> */}
+                        className={imgType} />
             </figure>
         </Fragment>;
     });

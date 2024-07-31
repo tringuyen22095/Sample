@@ -1,12 +1,12 @@
 'use client'
 
-import moment from 'moment';
-import './style.scss';
-import { Envs } from '../../common/env';
 import React, { Fragment, useEffect, useState } from 'react';
-import { formatTimeLeft } from 'utils';
 import { DATETIME_FORMAT } from 'constant';
+import { formatTimeLeft } from 'utils';
 import { Slider } from 'widgets';
+import moment from 'moment';
+import { Envs } from 'env';
+import './style.scss';
 
 const weddingDate = moment(Envs.WEDDING_DATE, 'dd-MM-yyyy HH:mm:ss');
 
@@ -33,8 +33,8 @@ export default function HomePage() {
         <span id='homePage'/>
         <Slider>
             <div className='homePageContainer'>
-                <div className='main-notice'>
-                    <div className='time-left'>
+                <div className='main-notice d-flex flex-column align-items-center'>
+                    <div className='time-left text-wrap w-75'>
                         {display}
                     </div>
                     <div className='name'>

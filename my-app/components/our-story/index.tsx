@@ -1,11 +1,11 @@
 'use server'
 
-import classNames from 'classnames';
-import './style.scss';
-import React, { Fragment } from 'react';
 import { OUR_STORY_TEMPLATE } from 'constant';
-import moment from 'moment';
+import React, { Fragment } from 'react';
+import classNames from 'classnames';
 import Image from 'next/image';
+import moment from 'moment';
+import './style.scss';
 
 export default async function OurStory() {
 

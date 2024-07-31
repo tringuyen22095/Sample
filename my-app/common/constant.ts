@@ -9,6 +9,13 @@ import moment from 'moment';
 const DATETIME_FORMAT = 'MMM DD, yyyy HH:mm';
 const VN_DATETIME_FORMAT = 'DD/MM/yyyy';
 const ANIMATION_KEYS: string[] = ['flip', 'bottomFloatIn', 'topFloatIn', 'leftFloatIn', 'rightFloatIn'];
+const TIMELINE_SIZE = 120;
+const HTTP_HEADERS = {
+    'Content-Type': 'application/json; charset=utf-8'
+}
+export type ErrorModel = {
+    error: string;
+};
 
 // ------------------------------------------------------------------------------
 //
@@ -22,12 +29,12 @@ export type HEADER_NAVIGATION_TYPE = {
 };
 
 const HEADER_NAVIGATION_TEMPLATE: HEADER_NAVIGATION_TYPE[] = [
-        { redirect: '#homePage', text: 'Home' },
-        { redirect: '#aboutUs', text: 'About Us' },
-        { redirect: '#ourStory', text: 'Our Story' },
-        { redirect: '#gallery', text: 'Gallery' },
-        { redirect: '#guestBook', text: 'Guest Book' }
-    ];
+    { redirect: '#homePage', text: 'Home' },
+    { redirect: '#aboutUs', text: 'About Us' },
+    { redirect: '#ourStory', text: 'Our Story' },
+    { redirect: '#gallery', text: 'Gallery' },
+    { redirect: '#guestBook', text: 'Guest Book' }
+];
 
 // ------------------------------------------------------------------------------
 //
@@ -43,20 +50,20 @@ export type HOMEPAGE_IMAGE_SRC_TYPE = {
 };
 
 const HOMEPAGE_IMAGE_SRC_TEMPLATE: HOMEPAGE_IMAGE_SRC_TYPE[] = [
-        {
-            src: '/gallery/GIN00021.jpg',
-            backgroundPositionOverride: 'center',
-            backgroundRepeatOverride: 'no-repeat'
-        },
-        {
-            src: '/gallery/GIN09835.jpg',
-            backgroundRepeatOverride: 'no-repeat'
-        },
-        {
-            src: '/gallery/GIN02339.jpg',
-            backgroundRepeatOverride: 'no-repeat'
-        }
-    ];
+    {
+        src: '/gallery/GIN00021.jpg',
+        backgroundPositionOverride: 'center',
+        backgroundRepeatOverride: 'no-repeat'
+    },
+    {
+        src: '/gallery/GIN09835.jpg',
+        backgroundRepeatOverride: 'no-repeat'
+    },
+    {
+        src: '/gallery/GIN02339.jpg',
+        backgroundRepeatOverride: 'no-repeat'
+    }
+];
 
 // ------------------------------------------------------------------------------
 //
@@ -348,5 +355,7 @@ export {
     OUR_STORY_TEMPLATE,
     GALLERY_TEMPLATE,
     ANIMATION_KEYS,
-    VN_DATETIME_FORMAT
+    VN_DATETIME_FORMAT,
+    TIMELINE_SIZE,
+    HTTP_HEADERS
 };

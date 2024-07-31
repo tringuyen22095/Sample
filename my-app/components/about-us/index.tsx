@@ -1,8 +1,8 @@
 'use server'
 
-import './style.scss';
-import React, { Fragment } from 'react';
 import { ABOUT_US_TEMPLATE } from 'constant';
+import React, { Fragment } from 'react';
+import './style.scss';
 
 export default async function AboutUs() {
 
