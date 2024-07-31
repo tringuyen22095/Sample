@@ -38,7 +38,7 @@ export default function HomePage() {
                         {display}
                     </div>
                     <div className='name'>
-                        We're getting married!
+                        We&apos;re getting married!
                     </div>
                     <div className='detail'>
                         {weddingDate.format(DATETIME_FORMAT)}

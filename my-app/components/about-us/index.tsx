@@ -20,7 +20,7 @@ export default async function AboutUs() {
                     <div className='summary-title'>
                         About Us
                     </div>
-                    <div className='summary-content'>
+                    <div className='summary-content' hidden={!description}>
                         { description }
                     </div>
                 </div>

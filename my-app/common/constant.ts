@@ -78,13 +78,13 @@ const ABOUT_US_TEMPLATE: {
     womanSrc: string,
     womanSummary: Profile
 } = {
-    description: 'From this day forward, you\'ll never walk alone.',
+    description: '',
     menSrc: 'https://i.etsystatic.com/9193132/r/il/e4b433/1777078144/il_794xN.1777078144_g0ow.jpg',
     menSummary: {
         fullName: 'Nguyễn Thành Trí',
         dob: '22-09',
         zodiac: 'Virgo',
-        slogan: 'slogan'
+        slogan: 'From this day forward, you\'ll never walk alone.'
     },
     womanSrc: 'https://i.etsystatic.com/9193132/r/il/082ee3/4089910818/il_1140xN.4089910818_3psa.jpg',
     womanSummary: {
@@ -117,20 +117,20 @@ const OUR_STORY_TEMPLATE: OurStoryItemType[] = [
         type: 'portrait'
     },
     {
-        imgSrc: '/first-trip.jpg',
+        imgSrc: '/firstTrip.JPG',
         date: moment('06/08/2023', VN_DATETIME_FORMAT).toDate(),
         description: 'Our first trip</br>Phu Yen city',
         type: 'portrait'
     },
     {
-        imgSrc: '/HPNY-together.jpg',
+        imgSrc: '/HPNYTogether.JPG',
         date: moment('01/01/2024', VN_DATETIME_FORMAT).toDate(),
         description: 'Ring in the New Year together',
         type: 'landscape',
         backgroundPositionOverride: 'bottom'
     },
     {
-        imgSrc: '/da-nang-trip.jpg',
+        imgSrc: '/daNangTrip.JPG',
         date: moment('05/04/2024', VN_DATETIME_FORMAT).toDate(),
         description: 'Da Nang Trip',
         type: 'landscape',

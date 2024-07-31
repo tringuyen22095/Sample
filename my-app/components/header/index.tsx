@@ -1,16 +1,39 @@
 'use client'
 
 import './style.scss';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { HEADER_NAVIGATION_TEMPLATE } from 'constant';
-import { Box, Button, Drawer, Fab, Link, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { Box, Drawer, Fab, Link, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { ErrorModel, HTTP_HEADERS } from 'components/guest-book';
+import { setData } from '../../common/redux/reducers/dataReducer';
+import { useAppDispatch } from '../../common/redux/hooks';
 
 export default function Header() {
     const [open, setOpen] = useState(false);
+    const dispatch = useAppDispatch();
+
     const toggleDrawer = (newOpen: boolean) => () => {
-      setOpen(newOpen);
+        setOpen(newOpen);
     };
+
+    useEffect(() => {
+        fetchData();
+    }, [dispatch]);
+
+    const fetchData = async () => {
+        const res = await fetch('/api/read-file', {
+            method: 'GET',
+            headers: HTTP_HEADERS
+        });
+        if (res.ok) {
+            const body = await res.json();
+            dispatch(setData(body));
+        } else {
+            const errBody: ErrorModel = await res.json();
+            console.log('There is error', errBody);
+        }
+    }
 
     const DrawerList = (
         <Box sx={{ width: 250 }}

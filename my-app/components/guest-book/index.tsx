@@ -10,9 +10,7 @@ import {
     FormControl,
     InputLabel,
     OutlinedInput,
-    TextField,
-    Box,
-    ClickAwayListener
+    TextField
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import data from '@emoji-mart/data';
@@ -27,13 +25,16 @@ import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import Autocomplete from '@mui/material/Autocomplete';
 import Image from 'next/image';
 import classNames from 'classnames';
+import { RootState } from '../../common/redux/store';
+import { useAppDispatch, useAppSelector } from '../../common/redux/hooks';
+import { setData } from '../../common/redux/reducers/dataReducer';
 
-const TIMELINE_SIZE = 120;
-const HTTP_HEADERS = {
+export const TIMELINE_SIZE = 120;
+export const HTTP_HEADERS = {
     'Content-Type': 'application/json; charset=utf-8'
 }
 
-type ErrorModel = {
+export type ErrorModel = {
     error: string;
 };
 
@@ -48,7 +49,8 @@ export default function GuestBook() {
     const [autoCompleteWidth, setAutoCompleteWidth] = useState<string | null>(null);
     const [autoCompleteValue, setAutoCompleteValue] = useState(null);
 
-    const [lstData, setLstData] = useState<GuestBookType[]>([]);
+    const lstData = useAppSelector(state => state.data);
+    const dispatch = useAppDispatch();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -57,7 +59,7 @@ export default function GuestBook() {
 
     // Constructor
     useEffect(() => {
-        fetchData();
+        // setLstData();
     }, []);
 
     useEffect(() => {
@@ -122,7 +124,7 @@ export default function GuestBook() {
         });
         if (res.ok) {
             const body = await res.json();
-            setLstData(body);
+            dispatch(setData(body));
         } else {
             const errBody: ErrorModel = await res.json();
             console.log('There is error', errBody);

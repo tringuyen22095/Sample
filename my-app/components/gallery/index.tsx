@@ -71,6 +71,7 @@ const Gallery = () => {
     const refs = useRef<(React.RefObject<HTMLImageElement> | null)[]>(template.map(() => React.createRef()));
 
     useEffect(() => {
+        const currents = refs.current;
         const handleLoad = (index) => {
             if (refs.current[index].current) {
                 refs.current[index].current.style.opacity = '1';
@@ -82,7 +83,7 @@ const Gallery = () => {
             }
         };
 
-        refs.current.forEach((ref, index) => {
+        currents.forEach((ref, index) => {
             if (ref.current) {
                 ref.current.addEventListener('load', () => handleLoad(index));
                 if (ref.current.complete) {
@@ -90,8 +91,9 @@ const Gallery = () => {
                 }
             }
         });
+ 
         return () => {
-            refs.current.forEach((ref) => {
+            currents.forEach((ref) => {
                 if (ref.current) {
                     ref.current.removeEventListener('load', () => handleLoad(ref));
                 }
