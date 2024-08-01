@@ -79,7 +79,7 @@ const SliderGenerate = ({ children }: Props) => {
     };
 
     const slideRender = () => {
-        return template.map(({src, backgroundPositionOverride, backgroundRepeatOverride, backgroundSizeOverride}, i) => {
+        return template.map(({src}, i) => {
             return (<Fragment key={'slide' + i}>
                 <div className={classNames('slide', {
                     's--prev': i === maxSlide - 1,
@@ -89,8 +89,9 @@ const SliderGenerate = ({ children }: Props) => {
                         height={0}
                         width={0}
                         sizes='100vw'
+                        priority
                         alt={`Image ${i}`}
-                        className={'slide__inner'} />
+                        className={classNames('slide__inner', `img_slide${i+1}`)} />
                 </div>
             </Fragment>);
         });

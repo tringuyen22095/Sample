@@ -85,6 +85,15 @@ $border-color: #c89d9c;
                 height: 500px;
             }
 
+            &.timeline {
+                img {
+                    @media only screen and (max-device-width: 425px) {
+                        height: 100px !important;
+                        width: 100px !important;
+                    }
+                }
+            }
+
             .separate-line {
                 border: 1px solid #000;
                 position: absolute;

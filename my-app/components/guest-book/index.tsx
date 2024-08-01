@@ -269,7 +269,7 @@ export default function GuestBook() {
                                 <div className='qr-code'>
                                     <Image src='/qr.jpeg'
                                         alt='QR banking'
-                                        loading='eager'
+                                        priority
                                         sizes='100vw'
                                         height={0}
                                         width={0}
@@ -305,7 +305,7 @@ export default function GuestBook() {
                         <div className='d-flex flex-row justify-content-around align-items-center'>
                             <Image src='/welcome.svg'
                                 alt='welcome'
-                                loading='eager'
+                                priority
                                 height={TIMELINE_SIZE}
                                 width={TIMELINE_SIZE} />
                             <div className='d-flex flex-column align-items-center'>
@@ -316,7 +316,7 @@ export default function GuestBook() {
                         <div className='d-flex flex-row-reverse justify-content-around align-items-center'>
                             <Image src='/wedding.svg'
                                 alt='wedding'
-                                loading='eager'
+                                priority
                                 height={TIMELINE_SIZE}
                                 width={TIMELINE_SIZE} />
                             <div className='d-flex flex-column align-items-center'>
@@ -327,11 +327,11 @@ export default function GuestBook() {
                         <div className='d-flex flex-row justify-content-around align-items-center'>
                             <Image src='/meat.svg'
                                 alt='meat'
-                                loading='eager'
+                                priority
                                 height={TIMELINE_SIZE}
                                 width={TIMELINE_SIZE} />
                             <div className='d-flex flex-column align-items-center'>
-                                <span className='detail fw-bold fs-4 text-center'>Join The party</span>
+                                <span className='detail fw-bold fs-4 text-center text-wrap w-75'>Join The party</span>
                                 <span className='time fst-italic fw-light'>19:50</span>
                             </div>
                         </div>

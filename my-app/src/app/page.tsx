@@ -4,6 +4,7 @@ import Header from 'components/header';
 import OurStory from 'components/our-story';
 import Gallery from 'components/gallery';
 import GuestBook from 'components/guest-book';
+import ThankYou from 'components/thank-you';
 import {
   SnowFall
 } from 'widgets';
@@ -13,14 +14,14 @@ export default function Home() {
 
   return (
     <Fragment>
+      <SnowFall snowElementCount={8}/>
       <Header></Header>
       <HomePage></HomePage>
       <AboutUs></AboutUs>
       <OurStory></OurStory>
       <Gallery></Gallery>
       <GuestBook></GuestBook>
-      {/* back drop */}
-      {/* <SnowFall snowElementCount={6}/> */}
+      <ThankYou></ThankYou>
     </Fragment>
   );
 }

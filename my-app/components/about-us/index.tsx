@@ -24,7 +24,7 @@ export default async function AboutUs() {
                         { description }
                     </div>
                 </div>
-                <div className='couple'>
+                <div className='couple mt-4'>
                     <div className='personal-information'>
                         <div className='image' style={{backgroundImage: `url('${menSrc}')`}}></div>
                         <div className='description'>

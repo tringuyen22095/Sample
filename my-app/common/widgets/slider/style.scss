@@ -38,6 +38,8 @@ $controlSize: 60px;
                     clip-path: circle(120vmax at 30vw 50%);
                 }
             }
+
+
         
             &__inner {
                 object-fit: cover;
@@ -49,6 +51,12 @@ $controlSize: 60px;
                 top: 50%;
                 margin-left: -50vw;
                 margin-top: -50vh;
+                
+                &.img_slide2 {
+                    @media only screen and (max-device-width: 1024px) {
+                        object-position: left !important;
+                    }
+                }
             }
         }
     }

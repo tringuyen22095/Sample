@@ -43,25 +43,18 @@ const HEADER_NAVIGATION_TEMPLATE: HEADER_NAVIGATION_TYPE[] = [
 // ------------------------------------------------------------------------------
 
 export type HOMEPAGE_IMAGE_SRC_TYPE = {
-    src: string,
-    backgroundPositionOverride?: 'center' | 'bottom' | 'top' | 'left' | 'right',
-    backgroundRepeatOverride?: 'no-repeat',
-    backgroundSizeOverride?: 'auto' | 'contain' | 'cover'
+    src: string
 };
 
 const HOMEPAGE_IMAGE_SRC_TEMPLATE: HOMEPAGE_IMAGE_SRC_TYPE[] = [
     {
-        src: '/gallery/GIN00021.jpg',
-        backgroundPositionOverride: 'center',
-        backgroundRepeatOverride: 'no-repeat'
+        src: '/gallery/GIN00021.jpg'
     },
     {
-        src: '/gallery/GIN09835.jpg',
-        backgroundRepeatOverride: 'no-repeat'
+        src: '/gallery/GIN09835.jpg'
     },
     {
-        src: '/gallery/GIN02339.jpg',
-        backgroundRepeatOverride: 'no-repeat'
+        src: '/gallery/GIN02339.jpg'
     }
 ];
 

@@ -2,7 +2,6 @@
 
 import { GALLERY_TEMPLATE, GALLERY_TYPE, ANIMATION_KEYS } from 'constant';
 import React, { Fragment, useEffect, useRef } from 'react';
-import classNames from 'classnames';
 import Image from 'next/image';
 import './style.scss';
 
@@ -50,6 +49,7 @@ function renderPreview(template: GALLERY_TYPE[]) {
                         height={0}
                         width={0}
                         sizes='100vw'
+                        priority
                         style={{
                             width: 'auto',
                             height: '100%'
