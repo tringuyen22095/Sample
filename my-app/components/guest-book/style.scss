@@ -1,7 +1,7 @@
 $border-color: #c89d9c;
 
 .guestBookContainer {
-    background-image: url('/bg.png');
+    // background-image: url('/bg.png');
     font-family: 'Level3';
     padding: 2rem 0;
 
@@ -12,7 +12,7 @@ $border-color: #c89d9c;
 
         .col {
             .left-side {
-                border: $border-color double 4px;
+                border: var(--stone) double 4px;
                 height: -webkit-fill-available;
                 background-color: #ffffff99;
                 height: 100%;
@@ -51,18 +51,18 @@ $border-color: #c89d9c;
 
             .right-side {
                 background-color: #ffffff;
-                border: $border-color solid 4px;
+                border: var(--stone) solid 4px;
                 height: 100%;
                 overflow-y: auto;
 
                 >div {
                     padding: 10px;
                     &.even {
-                        background-color: rgb(200 157 156 / 20%);
+                        background-color: var(--linen);
                     }
 
                     .wishes-description {
-                        border-bottom: 1px solid #00000040;
+                        border-bottom: 1px solid rgb(var(--font-color));
 
                         span:first-child {
                             font-weight: 800;
@@ -95,7 +95,7 @@ $border-color: #c89d9c;
             }
 
             .separate-line {
-                border: 1px solid #000;
+                border: 1px solid rgb(var(--font-color));
                 position: absolute;
                 @media only screen and (max-width: 1024px) {
                     left: 50% !important;
@@ -103,11 +103,12 @@ $border-color: #c89d9c;
             }
 
             .btnSubmit {
+                color: rgb(var(--font-color)); 
                 width: 50%;
-                background-color: #c89d9cdd !important;
+                background-color: var(--linen) !important;
                 
                 &:hover {
-                    background-color: #c89d9cff !important;
+                    background-color: var(--champagne) !important;
                 }
             }
         }

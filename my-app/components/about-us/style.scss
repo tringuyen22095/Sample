@@ -1,5 +1,3 @@
-$bordor-color: #000;
-
 .aboutUsContainer {
     display: flex;
     align-items: center;
@@ -9,12 +7,12 @@ $bordor-color: #000;
     font-family: 'Level3';
     font-size: 1.3rem;
     text-align: center;
+    background-color: var(--linen);
 
     .couple {
         width: 900px;
 
         .personal-information {
-            background-color: #f7f7f7;
             display: flex;
             flex-direction: row;
 
@@ -38,6 +36,7 @@ $bordor-color: #000;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                background-color: #fff;
 
                 span:first-child {
                     font-size: 1.4rem;

@@ -1,5 +1,5 @@
 :root {
-  --foreground-rgb: 16, 13, 8;
+  --font-color: 16, 13, 8;
 
   --ivory: #ede9e3;
   --nude: #e7d7c9;
@@ -33,7 +33,7 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--font-color));
 }
 
 a {

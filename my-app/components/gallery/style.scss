@@ -6,6 +6,7 @@ $distance: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--linen);
 
     .lightbox {
         position: fixed;
@@ -436,7 +437,7 @@ $distance: 4rem;
     .test {
         display: none;
         position: relative;
-        background-color: #000;
+        background-color: rgb(var(--font-color));
         width: 100px;
         height: 100px;
         margin:  10rem auto;

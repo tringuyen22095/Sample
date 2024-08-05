@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import HomePage from 'components/home-page';
 import AboutUs from 'components/about-us';
 import Header from 'components/header';
@@ -14,7 +15,8 @@ export default function Home() {
 
   return (
     <Fragment>
-      <SnowFall snowElementCount={8}/>
+      <SpeedInsights />
+      <SnowFall snowElementCount={20} />
       <Header></Header>
       <HomePage></HomePage>
       <AboutUs></AboutUs>

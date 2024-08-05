@@ -18,7 +18,7 @@ export default function Header() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch('/api/read-file', {
+            const res = await fetch('/api/data', {
                 method: 'GET',
                 headers: HTTP_HEADERS
             });
