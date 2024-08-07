@@ -37,7 +37,7 @@ export default function HomePage() {
                     <div className='time-left text-wrap w-75'>
                         {display}
                     </div>
-                    <div className='name'>
+                    <div className='name text-wrap'>
                         We&apos;re getting married!
                     </div>
                     <div className='detail'>

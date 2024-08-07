@@ -36,7 +36,7 @@
             }
         }
     }
-    .nav-menu {
+    .nav-btn {
         display: none !important;
     }
 }
@@ -45,9 +45,25 @@
     .headerContainer {
         display: none;
     }
-    .nav-menu {
+    .nav-btn {
         position: fixed !important;
         bottom: calc(100vh / 30);
         right: calc(100vw / 30);
+        background-color: var(--champagne) !important;
+        color: rgb(var(--font-color)) !important;
+    }
+    .nav-menu {
+        .MuiPaper-root {
+            background-color: var(--linen);
+            .href {
+                color: rgb(var(--font-color)) !important;
+                text-decoration: none !important;
+                cursor: pointer !important;
+                
+                .MuiTypography-root {
+                    font-family: 'Level3' !important;
+                }
+            }
+        }
     }
 }

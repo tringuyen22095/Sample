@@ -2,14 +2,36 @@
 
 import React from 'react';
 import './style.scss';
+import Image from 'next/image';
 
 export default async function ThankYou() {
 
     return <div className='thankYouContainer'>
-        <div className='summary'>
-            <div className='summary-title fs-1 text-center'>
+        <div className='summary d-flex flex-row justify-content-center'>
+            <Image src={'/corner.png'}
+                alt=''
+                className='me-3'
+                width={0}
+                height={0}
+                sizes='100vw'
+                style={{
+                    width: '150px',
+                    height: 'auto'
+                }} />
+            <span className='summary-title fs-1'>
                 Thank You
-            </div>
+            </span>
+            <Image src={'/corner.png'}
+                alt=''
+                width={0}
+                height={0}
+                sizes='100vw'
+                className='ms-3'
+                style={{
+                    width: '150px',
+                    height: 'auto',
+                    transform: 'rotateY(-180deg)'
+                }} />
         </div>
     </div>;
 }
