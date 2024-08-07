@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import { guestBookSchema, GuestBookType } from 'models';
+import type { NextRequest } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-const temporaryData : GuestBookType[] = [];
+const temporaryData: GuestBookType[] = [];
 
 // export async function POST(request: Request): Promise<NextResponse<{ error?: string, message?: string }>> {
 //     const folderPath = path.join(process.cwd(), 'data');
@@ -29,22 +30,36 @@ const temporaryData : GuestBookType[] = [];
 //     }
 // }
 
-export async function POST(request: Request): Promise<NextResponse<{ error?: string, message?: string }>> {
+export async function POST(request: NextRequest): Promise<NextResponse<{ error?: string, message?: string }>> {
     try {
+        if (request.method === 'OPTIONS') {
+            return buildResponse(null, 200);
+        }
         const payload: GuestBookType = await request.json();
         guestBookSchema.parse(payload);
-
         temporaryData.push(payload);
-        return NextResponse.json({ error: 'File written successfully' }, { status: 200 });
+
+        return buildResponse(null, 200);
     } catch (err) {
-        return NextResponse.json({ error: 'File written fail' }, { status: 500 });
+        return buildResponse({ error: 'File written fail' }, 500);
     }
 }
 
 export async function GET(): Promise<NextResponse<GuestBookType[] | { error: string }>> {
     try {
-        return NextResponse.json(temporaryData, { status: 200 });
+        return buildResponse(temporaryData, 200);
     } catch (err) {
-        return NextResponse.json({ error: 'Failed to read file' }, { status: 500 });
+        return buildResponse({ error: 'Failed to read file' }, 500);
     }
+}
+
+function buildResponse(payload: any | null, httpStatusInt: 200 | 500): NextResponse<any> {
+    const response = NextResponse.json(payload, { status: httpStatusInt });
+
+    response.headers.set('Access-Control-Allow-Credentials', 'true');
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'GET,OPTIONS,POST,PUT');
+    response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+    return response;
 }

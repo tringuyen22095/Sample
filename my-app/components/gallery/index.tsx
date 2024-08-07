@@ -49,7 +49,6 @@ function renderPreview(template: GALLERY_TYPE[]) {
                         height={0}
                         width={0}
                         sizes='100vw'
-                        priority
                         style={{
                             width: 'auto',
                             height: '100%'

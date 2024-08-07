@@ -10,10 +10,11 @@ export default async function ThankYou() {
         <div className='summary d-flex flex-row justify-content-center'>
             <Image src={'/corner.png'}
                 alt=''
-                className='me-3'
                 width={0}
                 height={0}
                 sizes='100vw'
+                loading='eager'
+                className='me-3'
                 style={{
                     width: '150px',
                     height: 'auto'
@@ -26,6 +27,7 @@ export default async function ThankYou() {
                 width={0}
                 height={0}
                 sizes='100vw'
+                loading='eager'
                 className='ms-3'
                 style={{
                     width: '150px',

@@ -106,7 +106,7 @@ export default function GuestBook() {
 
     // Api
     const fetchData = async () => {
-        const res = await fetch('/api/data', {
+        const res = await fetch('https://stored-blush.vercel.app/api/data', {
             method: 'GET',
             headers: HTTP_HEADERS
         });
@@ -119,7 +119,7 @@ export default function GuestBook() {
         }
     }
     const saveData = async (form: FormSchema) => {
-        const res = await fetch('/api/data', {
+        const res = await fetch('https://stored-blush.vercel.app/api/data', {
             method: 'POST',
             headers: HTTP_HEADERS,
             body: JSON.stringify(form)
@@ -292,7 +292,7 @@ export default function GuestBook() {
                 </div>
                 <div className='contentSection row'>
                     <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5 d-flex flex-column' ref={mapSquare}>
-                        <span className='w-100 text-center mb-2'>Map</span>
+                        <span className='w-100 text-center mb-2 fs-4'>Map</span>
                         <div className='maps-container' ref={mapContainer}>
                             <iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.770089646576!2d106.65942877577592!3d10.752194459638716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f0c4d558edb%3A0x2c60d7b2f3e598a0!2zTmjDoCBIw6BuZyDDgWkgSHXDqiAyIC0g5oSb6I-vIDIg5aSn5rSS5qiT!5e0!3m2!1svi!2s!4v1721982196698!5m2!1svi!2s'
                                 allowFullScreen={false}
@@ -301,7 +301,7 @@ export default function GuestBook() {
                         </div>
                     </div>
                     <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5 d-flex flex-column'>
-                        <span className='w-100 text-center mb-2'>TIMELINE</span>
+                        <span className='w-100 text-center mb-2 fs-4'>TIMELINE</span>
                         <div className='d-flex flex-column justify-content-between timeline' style={{ height: mapContainerHeight }}>
                             <div className='separate-line' style={{
                                 height: mapContainerHeight,
@@ -339,7 +339,7 @@ export default function GuestBook() {
                                     height={TIMELINE_SIZE}
                                     width={TIMELINE_SIZE} />
                                 <div className='d-flex flex-column align-items-center w-50 text-wrap'>
-                                    <span className='detail fw-bold fs-4 text-center'>Join The party</span>
+                                    <span className='detail fw-bold fs-4 text-center'>Join The Party</span>
                                     <span className='time fst-italic fw-light'>19:50</span>
                                 </div>
                             </div>
