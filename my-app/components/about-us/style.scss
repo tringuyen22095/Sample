@@ -18,6 +18,10 @@
 
             &.reverse {
                 flex-direction: row-reverse !important;
+                .description {
+                    border-bottom-left-radius: 10rem;
+                    border-top-right-radius: unset;
+                }
             }
 
             .image {
@@ -37,6 +41,7 @@
                 justify-content: center;
                 align-items: center;
                 background-color: #fff;
+                border-top-right-radius: 10rem;
 
                 span:first-child {
                     font-size: 1.4rem;
@@ -84,6 +89,8 @@
                     background-color: #f7f7f7;
                     width: 250px !important;
                     font-size: 0.8rem !important;
+                    border-bottom-left-radius: unset !important;
+                    border-top-right-radius: unset !important;
 
                     span:first-child {
                         font-size: 1.2rem !important;
