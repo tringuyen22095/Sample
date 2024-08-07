@@ -23,7 +23,7 @@ export default function Header() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch('https://stored-blush.vercel.app/api/data', {
+            const res = await fetch('/api/data', {
                 method: 'GET',
                 headers: HTTP_HEADERS
             });

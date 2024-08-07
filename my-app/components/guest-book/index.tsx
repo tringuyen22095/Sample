@@ -106,7 +106,7 @@ export default function GuestBook() {
 
     // Api
     const fetchData = async () => {
-        const res = await fetch('https://stored-blush.vercel.app/api/data', {
+        const res = await fetch('/api/data', {
             method: 'GET',
             headers: HTTP_HEADERS
         });
@@ -119,7 +119,7 @@ export default function GuestBook() {
         }
     }
     const saveData = async (form: FormSchema) => {
-        const res = await fetch('https://stored-blush.vercel.app/api/data', {
+        const res = await fetch('/api/data', {
             method: 'POST',
             headers: HTTP_HEADERS,
             body: JSON.stringify(form)
