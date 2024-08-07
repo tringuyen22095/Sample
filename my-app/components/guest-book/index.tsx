@@ -157,7 +157,7 @@ export default function GuestBook() {
                     </div>
                 </div>
                 <div className='contentSection row'>
-                    <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5'>
+                    <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-4'>
                         <div className='p-5 left-side' ref={formSquare} >
                             <div className='form'>
                                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -284,60 +284,64 @@ export default function GuestBook() {
                             </div>
                         </div>
                     </div>
-                    <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5'>
+                    <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-4'>
                         <div className='right-side' style={{ height: formSquareHeight }}>
                             {renderListData()}
                         </div>
                     </div>
                 </div>
                 <div className='contentSection row'>
-                    <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5 d-flex flex-column' ref={mapSquare}>
-                        <span className='w-100 text-center mb-2 fs-4'>Map</span>
+                    <div className='col col-xl-6 col-sm-12 col-12 mb-5 px-4 d-flex flex-column' ref={mapSquare}>
+                        <span className='w-100 text-center mb-2 fs-4'>Wedding Place</span>
                         <div className='maps-container' ref={mapContainer}>
+                            <div className='address mb-1 text-center'>Ai Hue 2 Restaurant-<span>338 Đ. Trần Hưng Đạo, Phường 11, Quận 5, Hồ Chí Minh</span></div>
                             <iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.770089646576!2d106.65942877577592!3d10.752194459638716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f0c4d558edb%3A0x2c60d7b2f3e598a0!2zTmjDoCBIw6BuZyDDgWkgSHXDqiAyIC0g5oSb6I-vIDIg5aSn5rSS5qiT!5e0!3m2!1svi!2s!4v1721982196698!5m2!1svi!2s'
                                 allowFullScreen={false}
                                 loading='lazy'
                                 referrerPolicy='no-referrer-when-downgrade'></iframe>
                         </div>
                     </div>
-                    <div className='col col-xl-6 col-sm-12 col-12 mb-4 px-5 d-flex flex-column'>
-                        <span className='w-100 text-center mb-2 fs-4'>TIMELINE</span>
+                    <div className='col col-xl-6 col-sm-12 col-12 mb-5 px-4 d-flex flex-column'>
+                        <span className='w-100 text-center mb-2 fs-4'>Our Timeline</span>
                         <div className='d-flex flex-column justify-content-between timeline' style={{ height: mapContainerHeight }}>
                             <div className='separate-line' style={{
                                 height: mapContainerHeight,
                                 left: `calc(50% + ${mapSquareWidth} / 2)`
                             }} />
                             <div className='d-flex flex-row justify-content-around align-items-center pb-4'>
-                                <Image src='/welcome.svg'
-                                    alt='welcome'
-                                    className='w-50'
-                                    priority
-                                    height={TIMELINE_SIZE}
-                                    width={TIMELINE_SIZE} />
+                                <div className='w-50 d-flex justify-content-center'>
+                                    <Image src='/welcome.svg'
+                                        alt='welcome'
+                                        priority
+                                        height={TIMELINE_SIZE}
+                                        width={TIMELINE_SIZE} />
+                                </div>
                                 <div className='d-flex flex-column align-items-center w-50 text-wrap'>
                                     <span className='detail fw-bold fs-4'>Pick Up</span>
                                     <span className='time fst-italic fw-light'>18:00</span>
                                 </div>
                             </div>
                             <div className='d-flex flex-row-reverse justify-content-around align-items-center pb-4'>
-                                <Image src='/wedding.svg'
-                                    alt='wedding'
-                                    className='w-50'
-                                    priority
-                                    height={TIMELINE_SIZE}
-                                    width={TIMELINE_SIZE} />
+                                <div className='w-50 d-flex justify-content-center'>
+                                    <Image src='/wedding.svg'
+                                        alt='wedding'
+                                        priority
+                                        height={TIMELINE_SIZE}
+                                        width={TIMELINE_SIZE} />
+                                </div>
                                 <div className='d-flex flex-column align-items-center w-50 text-wrap'>
                                     <span className='detail fw-bold fs-4'>Celebrate</span>
                                     <span className='time fst-italic fw-light'>19:30</span>
                                 </div>
                             </div>
                             <div className='d-flex flex-row justify-content-around align-items-center'>
-                                <Image src='/meat.svg'
-                                    alt='meat'
-                                    className='w-50'
-                                    priority
-                                    height={TIMELINE_SIZE}
-                                    width={TIMELINE_SIZE} />
+                                <div className='w-50 d-flex justify-content-center'>
+                                    <Image src='/meat.svg'
+                                        alt='meat'
+                                        priority
+                                        height={TIMELINE_SIZE}
+                                        width={TIMELINE_SIZE} />
+                                </div>
                                 <div className='d-flex flex-column align-items-center w-50 text-wrap'>
                                     <span className='detail fw-bold fs-4 text-center'>Join The Party</span>
                                     <span className='time fst-italic fw-light'>19:50</span>

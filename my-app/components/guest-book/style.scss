@@ -83,6 +83,13 @@ $border-color: #c89d9c;
             .maps-container, .maps-container>iframe {
                 width: 100%;
                 height: 500px;
+                .address {
+                    font-weight: 550;
+                    span {
+                        font-weight: 300;
+                        font-size: 12px;
+                    }
+                }
             }
 
             .timeline {

@@ -33,7 +33,7 @@ export default async function OurStory() {
                         <div className='line'></div>
                         <div className='pot'></div>
                     </div>
-                    <div className='description'>
+                    <div className='description text-center'>
                         <span>{moment(v.date).format('DD MMM yyyy')}</span>
                         <span dangerouslySetInnerHTML={{ __html: v.description }} />
                     </div>

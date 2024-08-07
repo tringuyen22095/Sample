@@ -8,17 +8,17 @@ enum TimeUnit {
 }
 
 function calculateTimeLeft(seconds: number): {
-  years: number,
-  months: number,
+  // years: number,
+  // months: number,
   days: number,
   hours: number,
   minutes: number,
   seconds: number
 } {
-  const years = Math.floor(seconds / (365 * 24 * 60 * 60));
-  seconds %= 365 * 24 * 60 * 60;
-  const months = Math.floor(seconds / (30 * 24 * 60 * 60));
-  seconds %= 30 * 24 * 60 * 60;
+  // const years = Math.floor(seconds / (365 * 24 * 60 * 60));
+  // seconds %= 365 * 24 * 60 * 60;
+  // const months = Math.floor(seconds / (30 * 24 * 60 * 60));
+  // seconds %= 30 * 24 * 60 * 60;
   const days = Math.floor(seconds / (24 * 60 * 60));
   seconds %= 24 * 60 * 60;
   const hours = Math.floor(seconds / 3600);
@@ -27,8 +27,8 @@ function calculateTimeLeft(seconds: number): {
   const secs = seconds % 60;
 
   return {
-    years: years !== 0 ? years : null,
-    months,
+    // years: years !== 0 ? years : null,
+    // months,
     days,
     hours,
     minutes,

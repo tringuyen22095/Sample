@@ -8,13 +8,13 @@ import moment from 'moment';
 import { Envs } from 'env';
 import './style.scss';
 
-const weddingDate = moment(Envs.WEDDING_DATE, 'dd-MM-yyyy HH:mm:ss');
+const weddingDate = moment(Envs.WEDDING_DATE, 'DD-MM-yyyy HH:mm:ss');
 
 export default function HomePage() {
     const [display, setDisplay] = useState('');
 
     function calculateTimeLeft() {
-        const difference = weddingDate.diff(moment.now(), 's', true);
+        const difference = weddingDate.diff(moment(), 's', true);
         return Math.max(0, Math.floor(difference));
     }
 

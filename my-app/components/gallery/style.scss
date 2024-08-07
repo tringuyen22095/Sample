@@ -127,7 +127,9 @@ $distance: 4rem;
                     justify-content: start;
                 }
 
-                &.img-6 {}
+                &.img-6 {
+                    align-items: end;
+                }
 
                 &.img-7 {
                     grid-column: 2/4;
@@ -247,6 +249,8 @@ $distance: 4rem;
                 }
 
                 &.img-6 {
+                    justify-content: end;
+                    align-items: end;
                 }
 
                 &.img-7 {
@@ -373,7 +377,8 @@ $distance: 4rem;
                 &.img-6 {
                     grid-column: 4;
                     grid-row: 1;
-                    justify-content: start;
+                    justify-content: end;
+                    align-items: end;
                 }
 
                 &.img-7 {

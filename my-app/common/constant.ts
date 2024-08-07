@@ -79,14 +79,14 @@ const ABOUT_US_TEMPLATE: {
     womanSummary: Profile
 } = {
     description: '',
-    menSrc: 'https://i.etsystatic.com/9193132/r/il/e4b433/1777078144/il_794xN.1777078144_g0ow.jpg',
+    menSrc: '/gallery/GIN00422.jpg',
     menSummary: {
         fullName: 'Nguyễn Thành Trí',
         dob: '22-09',
         zodiac: 'Virgo',
         slogan: 'From this day forward, you\'ll never walk alone.'
     },
-    womanSrc: 'https://i.etsystatic.com/9193132/r/il/082ee3/4089910818/il_1140xN.4089910818_3psa.jpg',
+    womanSrc: '/gallery/GIN02684.jpg',
     womanSummary: {
         fullName: 'Chu Thị Hải Anh',
         dob: '26-08',
@@ -113,13 +113,13 @@ const OUR_STORY_TEMPLATE: OurStoryItemType[] = [
     {
         imgSrc: '/firstMet.jpg',
         date: moment('14/04/2023', VN_DATETIME_FORMAT).toDate(),
-        description: 'First met</br>at Company Trip',
+        description: 'First met',
         type: 'portrait'
     },
     {
         imgSrc: '/firstTrip.JPG',
         date: moment('06/08/2023', VN_DATETIME_FORMAT).toDate(),
-        description: 'Our first trip</br>Phu Yen city',
+        description: 'First trip',
         type: 'portrait'
     },
     {
@@ -192,7 +192,7 @@ const GALLERY_TEMPLATE: GALLERY_TYPE[] = [
         display: true
     },
     {
-        src: '/gallery/GIN00422.jpg',
+        src: '/gallery/GIN01982.jpg',
         imgType: 'VERTICAL',
         objectFit: 'cover',
         display: true

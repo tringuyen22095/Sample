@@ -10,18 +10,14 @@ $numOfSlides: 5;
             align-items: center;
 
             .story {
-                width: 70vw;
+                width: 85vw;
                 align-items: center;
 
                 &.isOdd {
                     flex-direction: row-reverse;
 
                     .bg-image {
-                        justify-content: end;
-                    }
-
-                    .description {
-                        align-items: start;
+                        justify-content: center;
                     }
                 }
 
@@ -29,11 +25,7 @@ $numOfSlides: 5;
                     flex-direction: row;
 
                     .bg-image {
-                        justify-content: start;
-                    }
-
-                    .description {
-                        align-items: end;
+                        justify-content: center;
                     }
                 }
 
@@ -91,7 +83,6 @@ $numOfSlides: 5;
 
                     span {
                         &:nth-child(1) {
-                            text-align: center;
                             margin-bottom: 0.5rem;
                         }
                     }
