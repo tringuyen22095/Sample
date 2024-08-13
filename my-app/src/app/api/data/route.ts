@@ -1,34 +1,7 @@
 import { NextResponse } from 'next/server';
 import { guestBookSchema, GuestBookType } from 'models';
 import type { NextRequest } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-
-const temporaryData: GuestBookType[] = [];
-
-// export async function POST(request: Request): Promise<NextResponse<{ error?: string, message?: string }>> {
-//     const folderPath = path.join(process.cwd(), 'data');
-//     if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath, { recursive: true });
-
-//     try {
-//         const payload: GuestBookType = await request.json();
-//         guestBookSchema.parse(payload);
-//         const filePath = path.join(folderPath, 'data.txt');
-//         const finalizeData: GuestBookType[] = [];
-
-//         if (!fs.existsSync(filePath)) {
-//             finalizeData.push(payload);
-//         } else {
-//             const data: GuestBookType[] = JSON.parse(fs.readFileSync(filePath, 'utf8') || '[]');
-//             data.push(payload);
-//             finalizeData.push(...data);
-//         }
-//         fs.writeFileSync(filePath, JSON.stringify(finalizeData, null, 2), 'utf8');
-//         return NextResponse.json({ error: 'File written successfully' }, { status: 200 });
-//     } catch (err) {
-//         return NextResponse.json({ error: 'File written fail' }, { status: 500 });
-//     }
-// }
+import { sql } from "@vercel/postgres";
 
 export async function POST(request: NextRequest): Promise<NextResponse<{ error?: string, message?: string }>> {
     try {
@@ -37,7 +10,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<{ error?:
         }
         const payload: GuestBookType = await request.json();
         guestBookSchema.parse(payload);
-        temporaryData.push(payload);
+        await sql`INSERT INTO blessing ("createdBy", content, email)
+            VALUES (${payload.createdBy}, ${payload.content}, ${payload.email});`;
 
         return buildResponse(null, 200);
     } catch (err) {
@@ -47,7 +21,12 @@ export async function POST(request: NextRequest): Promise<NextResponse<{ error?:
 
 export async function GET(): Promise<NextResponse<GuestBookType[] | { error: string }>> {
     try {
-        return buildResponse(temporaryData, 200);
+        const { rows } = await sql`SELECT "createdBy", timezone('utc+7', "createdOn") AS "createdOn", content, email 
+        FROM blessing WHERE "isDeleted" = false 
+        ORDER BY "createdOn";`;
+        const test = await sql`SELECT now();`;
+        console.log(test.rows)
+        return buildResponse(rows, 200);
     } catch (err) {
         return buildResponse({ error: 'Failed to read file' }, 500);
     }

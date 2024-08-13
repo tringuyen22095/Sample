@@ -98,7 +98,6 @@ export default function GuestBook() {
 
     // Form
     const onSubmit = async (form: FormSchema) => {
-        form.createdOn = moment().format(VN_DATETIME_FORMAT);
         if (!isValid) return;
         form.content = form.content.replaceAll(/\r\n|\n/gm, '<br/>');
         saveData(form);
