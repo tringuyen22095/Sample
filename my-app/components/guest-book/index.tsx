@@ -291,6 +291,11 @@ export default function GuestBook() {
                     </div>
                 </div>
                 <div className='contentSection row'>
+                    <div className='col col-12 d-flex justify-content-center align-items-center fs-3 mb-4'>
+                        We respectfully invite you to join in the fun at our ceremony
+                    </div>
+                </div>
+                <div className='contentSection row'>
                     <div className='col col-xl-6 col-sm-12 col-12 mb-5 px-4 d-flex flex-column' ref={mapSquare}>
                         <span className='w-100 text-center mb-2 fs-4'>Wedding Place</span>
                         <div className='maps-container' ref={mapContainer}>
