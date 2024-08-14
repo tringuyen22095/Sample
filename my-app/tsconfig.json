@@ -40,6 +40,8 @@
       "hooks": ["../common/redux/hooks"],
       "dataReducer": ["../common/redux/reducers/dataReducer"],
       "env": ["../common/env"],
+      "image": ["../common/image"],
+      "public/*": ["../public/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

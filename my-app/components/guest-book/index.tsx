@@ -164,7 +164,8 @@ export default function GuestBook() {
                                         <div className='col-lg-6 col-md-6 mb-2 d-flex flex-row justify-content-center'>
                                             <FormControl error={!!errors.createdBy}
                                                 size='small'
-                                                fullWidth>
+                                                fullWidth
+                                                className='white-bg'>
                                                 <InputLabel htmlFor='txtFullname'>Fullname*</InputLabel>
                                                 <OutlinedInput {...register('createdBy')}
                                                     value={watch('createdBy', '')}
@@ -175,7 +176,8 @@ export default function GuestBook() {
                                         <div className='col-lg-6 col-md-6 mb-2 d-flex flex-row justify-content-center'>
                                             <FormControl error={!!errors.email}
                                                 size='small'
-                                                fullWidth>
+                                                fullWidth
+                                                className='white-bg'>
                                                 <InputLabel htmlFor='txtEmail'>Email</InputLabel>
                                                 <OutlinedInput {...register('email')}
                                                     value={watch('email', '')}
@@ -189,7 +191,8 @@ export default function GuestBook() {
                                             <Paper elevation={1} style={{ textAlign: 'right' }}>
                                                 <FormControl error={!!errors.content}
                                                     size='small'
-                                                    fullWidth>
+                                                    fullWidth
+                                                    className='white-bg'>
                                                     <InputLabel htmlFor='txtYourWishes'>Your Wishes*</InputLabel>
                                                     <OutlinedInput onChange={(e) => setValue('content', e.target.value)}
                                                         value={watch('content', '')}
@@ -290,7 +293,7 @@ export default function GuestBook() {
                     </div>
                 </div>
                 <div className='contentSection row'>
-                    <div className='col col-12 d-flex justify-content-center align-items-center fs-3 mb-4'>
+                    <div className='col col-12 d-flex justify-content-center align-items-center fs-3 mb-4 text-center px-2 custom-border'>
                         We respectfully invite you to join in the fun at our ceremony
                     </div>
                 </div>

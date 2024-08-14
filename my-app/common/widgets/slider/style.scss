@@ -24,23 +24,17 @@ $controlSize: 60px;
             border-radius: 50%;
             transition: clip-path 0s $slidingAT*0.7;
             clip-path: circle($controlSize/2 at 120vw 50%);
-        
-            &.s--prev {
-                clip-path: circle($controlSize/2 at 30vw 50%);
-            }
-        
+
             &.s--active {
                 z-index: 1;
                 transition: clip-path $slidingAT;
                 clip-path: circle(120vmax at 120vw 50%);
-        
+
                 &.s--active-prev {
                     clip-path: circle(120vmax at 30vw 50%);
                 }
             }
 
-
-        
             &__inner {
                 object-fit: cover;
                 object-position: center;
@@ -51,85 +45,6 @@ $controlSize: 60px;
                 top: 50%;
                 margin-left: -50vw;
                 margin-top: -50vh;
-                
-                &.img_slide2 {
-                    @media only screen and (max-device-width: 1024px) {
-                        object-position: left !important;
-                    }
-                }
-            }
-        }
-    }
-
-    &__control {
-        z-index: 2;
-        position: absolute;
-        top: 50%;
-        left: 5%;
-        width: $controlSize;
-        height: $controlSize;
-        margin-left: $controlSize/-2;
-        margin-top: $controlSize/-2;
-        border-radius: 50%;
-        background: #fff;
-        transition: background-color 0.3s;
-        cursor: pointer;
-
-        &--right {
-            left: 95%;
-        }
-
-        &:hover {
-            background-color: #2da6ff;
-        }
-
-        &-line {
-            position: absolute;
-            left: 23px;
-            top: 50%;
-            width: 3px;
-            height: 14px;
-            transform-origin: 50% 0;
-            transform: rotate(-45deg);
-
-            &:nth-child(2) {
-                transform: translateY(1px) rotate(-135deg);
-            }
-
-            .slider__control--right & {
-                left: 37px;
-                transform-origin: 1px 0;
-                transform: rotate(45deg);
-
-                &:nth-child(2) {
-                    transform: translateY(1px) rotate(135deg);
-                }
-            }
-
-            &:after {
-                content: "";
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: #e2e2e2;
-                transition: background-color 0.3s;
-            }
-
-            .slider__control:hover &:after {
-                background-color: #fff;
-            }
-
-            .slider__control.a--rotation & {
-
-                &:after {
-                    animation: arrowLineRotation 0.49s;
-                }
-
-                &:nth-child(1):after {
-                    animation: arrowLineRotationRev 0.49s;
-                }
             }
         }
     }

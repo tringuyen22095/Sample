@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <Fragment>
       <SpeedInsights />
-      <SnowFall snowElementCount={20} />
+      <SnowFall snowElementCount={50} />
       <Header></Header>
       <HomePage></HomePage>
       <AboutUs></AboutUs>

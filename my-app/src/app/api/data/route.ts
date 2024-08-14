@@ -24,8 +24,6 @@ export async function GET(): Promise<NextResponse<GuestBookType[] | { error: str
         const { rows } = await sql`SELECT "createdBy", timezone('utc+7', "createdOn") AS "createdOn", content, email 
         FROM blessing WHERE "isDeleted" = false 
         ORDER BY "createdOn";`;
-        const test = await sql`SELECT now();`;
-        console.log(test.rows)
         return buildResponse(rows, 200);
     } catch (err) {
         return buildResponse({ error: 'Failed to read file' }, 500);

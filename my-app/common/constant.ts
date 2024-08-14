@@ -1,4 +1,6 @@
 import moment from 'moment';
+import { GIN00021, GIN02339, GIN09835 } from 'image';
+import { StaticImageData } from 'next/image';
 
 // ------------------------------------------------------------------------------
 //
@@ -43,18 +45,18 @@ const HEADER_NAVIGATION_TEMPLATE: HEADER_NAVIGATION_TYPE[] = [
 // ------------------------------------------------------------------------------
 
 export type HOMEPAGE_IMAGE_SRC_TYPE = {
-    src: string
+    src: StaticImageData
 };
 
 const HOMEPAGE_IMAGE_SRC_TEMPLATE: HOMEPAGE_IMAGE_SRC_TYPE[] = [
     {
-        src: '/gallery/GIN00021.jpg'
+        src: GIN00021
     },
     {
-        src: '/gallery/GIN09835.jpg'
+        src: GIN09835
     },
     {
-        src: '/gallery/GIN02339.jpg'
+        src: GIN02339
     }
 ];
 

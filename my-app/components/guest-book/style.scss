@@ -6,7 +6,7 @@ $border-color: #c89d9c;
     padding: 2rem 0;
 
     .contentSection {
-        input {
+        .white-bg {
             background-color: #fff;
         }
 
@@ -122,6 +122,10 @@ $border-color: #c89d9c;
                 &:hover {
                     background-color: var(--champagne) !important;
                 }
+            }
+
+            &.custom-border {
+                background-color: var(--linen) !important;
             }
         }
     }
