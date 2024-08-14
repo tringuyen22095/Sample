@@ -25,7 +25,7 @@ const SliderGenerate = ({ children }: Props) => {
     const refs = useRef<(React.RefObject<HTMLInputElement> | null)[]>([]);
 
     const rolateIconTimeout: number = 1300;
-    const autoSlideTimeout: number = 1000;
+    const autoSlideTimeout: number = 15000;
 
     // execute as constructor
     useEffect(() => {
