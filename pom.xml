@@ -37,14 +37,16 @@
 		<jodatime.version>2.12.2</jodatime.version>
 		<commons.version>3.12.0</commons.version>
 		<commons.collections.version>4.4</commons.collections.version>
+		<commons.configuration.version>1.10</commons.configuration.version>
 		<lombok.version>1.18.28</lombok.version>
 		<flyway.version>8.2.2</flyway.version>
 		<jackson.version>2.15.4</jackson.version>
 
-		<spring-boot-dependencies.version>3.2.4</spring-boot-dependencies.version>
-		<spring-cloud-dependencies.version>2023.0.1</spring-cloud-dependencies.version>
+		<spring-boot-dependencies.version>3.2.5</spring-boot-dependencies.version>
+		<spring-cloud-dependencies.version>2023.0.4</spring-cloud-dependencies.version>
 		<springdoc-openapi-ui.version>1.6.7</springdoc-openapi-ui.version>
 		<mysql.version>8.0.30</mysql.version>
+		<lombok>1.18.32</lombok>
 	</properties>
 
 	<!-- Dependency version manage -->
@@ -106,6 +108,11 @@
 				<version>${commons.collections.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>commons-configuration</groupId>
+				<artifactId>commons-configuration</artifactId>
+				<version>${commons.configuration.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>${jodatime.version}</version>
@@ -126,6 +133,26 @@
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-core</artifactId>
 				<version>${jackson.version}</version>
+			</dependency>
+			
+			<!-- Testing -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>${spring-boot.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>5.10.1</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>5.10.1</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

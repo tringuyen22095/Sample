@@ -29,8 +29,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>
-						project.personal.social.network.GatewayApplication</mainClass>
+					<mainClass>project.personal.social.network.GatewayApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>
