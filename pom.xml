@@ -47,6 +47,8 @@
 		<springdoc-openapi-ui.version>1.6.7</springdoc-openapi-ui.version>
 		<mysql.version>8.0.30</mysql.version>
 		<lombok>1.18.32</lombok>
+		<junit.version>5.10.1</junit.version>
+		<micrometer.version>1.3.2</micrometer.version>
 	</properties>
 
 	<!-- Dependency version manage -->
@@ -134,6 +136,12 @@
 				<artifactId>jackson-core</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
+			
+			<dependency>
+			    <groupId>io.micrometer</groupId>
+			    <artifactId>micrometer-tracing-bridge-brave</artifactId>
+			    <version>micrometer.version</version>
+			</dependency> 
 			
 			<!-- Testing -->
 			<dependency>
